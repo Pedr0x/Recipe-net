@@ -44,7 +44,7 @@ class MainSearch extends React.Component {
 	  }
 	
 	
-	apiRequest(query = "salmon", howManyCalories = "", isAlcoholFree = "", isVegetarian = "", isLowFat = "", isGlutenFree = "", isHighProtein = "", isBalanced = "") {
+	apiRequest(query = "donut", howManyCalories = "", isAlcoholFree = "", isVegetarian = "", isLowFat = "", isGlutenFree = "", isHighProtein = "", isBalanced = "") {
 	
 	const appID = "8bc00f3b";
 	const appKey = "b1d9d15dadbddc109d83b189b71e533f";
@@ -169,7 +169,7 @@ componentDidUpdate(){
 	let checkboxContainer = {
 		    gridTemplateColumns:"repeat(auto-fit, minmax(100px, 1fr))",
 		display:"grid",
-		padding:"3% 5%"
+		padding:"1% 5%"
 	}
 	
 	let checkboxItem = {
@@ -183,11 +183,16 @@ flexDirection: "column"
 	
 	return (
 		<React.Fragment> 
-		<Box onClick={() => console.log(this.state)}className="search-form-container"> 
+		<div onClick={() => console.log(this.state)} className="search-form-containersuper"> 
 	<form  className="search-form"   noValidate autoComplete="off" style={mainSearchStyle}>
+ <div className="search-form-container">
+ <div className="search-form-main-panel">
  
-  <TextField fullWidth={true} inputRef={this.myRef } onChange={this.handleChange} className="search-input" id="filled-basic" variant="filled" label="Ex: Peanuts"/>
-  
+ <h1 className="main-search-title"> Search for a recipe!</h1>
+ 
+  <input placeholder="Donuts" className="query-input" onChange={this.handleChange}/>
+   </div>
+    </div>
   <div className="form-parameters">
   		  <div className="checkboxs-container-super"> 
 
@@ -201,13 +206,6 @@ flexDirection: "column"
 
   	</div>
   	
-  	
-  	
-  	
-  	
- 
-  	
-  
   	 	<div style={checkboxItem}  className="checkbox-item"> 
  	     <label> Vegetarian</label>
   	     <input name="vegetarian" onChange={this.checkboxChange} className="checkbox"type="checkbox" />
@@ -263,7 +261,7 @@ flexDirection: "column"
   </div>
 </form>
 	
-		</Box>
+		</div>
 		
 		<MainContainer data={this.state.recipes} getFavorite={this.getFavorite}/>
 		</React.Fragment>

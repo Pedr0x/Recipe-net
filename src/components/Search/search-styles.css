@@ -36,10 +36,86 @@ height: 50px;
 }
 
 .search-form{
-	background: linear-gradient(120deg,#dfe0e1,#c8cef2)
+		display:grid;
+	align-items: center;
+	justify-items:center;
+	grid-template-columns: 1fr 1fr;
+	background: #fdfdfd
 }
 
 .search-form label{
 	opacity: 0.8;
 	
+}
+
+.search-form-container {
+	width: 85%;
+	padding: 3%;
+	/* margin: 5%; */
+	/* background: black; */
+	height: 100%;
+	/* align-self: center; */
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+h1{
+	margin: 0;
+}
+
+.calories-input {
+	border: 0;
+	/* padding: 1%; */
+	font-size: 18px;
+	padding: 1%;
+	background: white;
+	/* border-bottom: 2px solid #3f51b5; */
+	background: linear-gradient(120deg, #18b2fdb0, #1968ffc4);
+	border-radius: 5px;
+	background: 0;
+	border-radius: 49px;
+	padding: 1% 2%;
+	background: #f7f7f7;
+	/* color: black !important; */
+	box-shadow: 0px 1px 3px #dbd8d8;
+}
+.main-search-title {
+	margin: 2% 0px;
+	font-weight: 600;
+color: #0c76d2;
+		
+	font-size: 24px;
+}
+
+.form-parameters {
+	width: 85%;
+	background: #ffffffe3;
+	padding: 1%;
+	align-self: center;
+	justify-self: center;
+	background: #f9f9f9e3;
+padding: 2%;
+}
+
+.checkbox-subtitle {
+	padding: 1%;
+	font-weight: 600;
+	color: #00c853;
+}
+
+.query-input{
+	width: 100%;
+	font-size: 32px;
+	padding: 1%;
+	/* border-radius: 26px; */
+	border-bottom: 3px solid #2b6fc6;
+	border: 0;
+	background: #fff;
+	background: #fff;
+	/* border: 3px solid white; */
+border-radius: 30px;
+
+padding: 1% 2%;
+
+box-shadow: 0px 1px 3px #dbd8d8;
 }

@@ -1,4 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Bellota+Text:wght@700&family=Yellowtail&display=swap');
 
+.main-search-container{
+	background: #fdfdfd;
+}
+
+.MuiCardHeader-title  {
+	font-family: "Bellota Text"
+}
+.MuiCardHeader-title a{
+	text-decoration: none;
+}
 .card-list-item-container{
 	display: flex;
 
