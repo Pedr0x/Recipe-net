@@ -20,6 +20,7 @@ class MainSearch extends React.Component {
 	  constructor(props) {
     super(props);
     this.state = {
+		recipeQueryValue: "",
 		recipes: [],
 		favorites:[],
 		alcoholFree:false,
@@ -34,13 +35,13 @@ class MainSearch extends React.Component {
 		
 	};
 	    this.handleChange = this.handleChange.bind(this);
-		  	    this.getFavorite = this.getFavorite.bind(this);
-		  		  	    this.caloriesChanger = this.caloriesChanger.bind(this);
-		  		  	    this.checkboxChange = this.checkboxChange.bind(this);
-
-		  		  		  	    this.apiRequest = this.apiRequest.bind(this);
-
-		  this.myRef = React.createRef()
+	    this.getFavorite = this.getFavorite.bind(this);
+	    this.caloriesChanger = this.caloriesChanger.bind(this);
+	    this.checkboxChange = this.checkboxChange.bind(this);
+	    this.apiRequest = this.apiRequest.bind(this);
+	    this.getQueryValue = this.getQueryValue.bind(this);
+		 this.myRef = React.createRef()
+		 
 	  }
 	
 	
@@ -62,17 +63,17 @@ let {	query, howManyCalories, isAlcoholFree, isVegetarian, isLowFat, isGlutenFre
 			
 			xhr.responseType = "json";
 			
-			xhr.onload =  () => {
+			xhr.onload = () => {
 				console.log(32);
 				var result = xhr.response.hits;
-	this.setState({
-		recipes: result
-	})
+				this.setState({
+					recipes: result
+				})
 
 			};
 				xhr.send();
 
-		
+		console.log(q)
 		}
 	
 	
@@ -94,7 +95,7 @@ let {	query, howManyCalories, isAlcoholFree, isVegetarian, isLowFat, isGlutenFre
 	
 	getFavorite(e){
 			//	console.log(e.target.name);
-e.stopPropagation()
+		e.stopPropagation()
 		 let name = e.target.name;
 //		let imgdata = e.target.imgdata;
 		let imgdata = e.target.dataset.image;
@@ -115,12 +116,19 @@ e.stopPropagation()
 		}
 	}
 
+	getQueryValue(e){
+		let value = e.target.value;
+		this.setState({recipeQueryValue: e.target.value});
+		console.log(this.state.recipeQueryValue)
+	}
+	
 handleChange = (e) => {
+	e.preventDefault();
 	//		this.setState({querssy: e.target.value})
 	//	console.log(this.state.query)
 	//this is probably wrong might need to fix later
-	let query = e.target.value;
-	let {alcoholFree,
+	let {recipeQueryValue,
+		 alcoholFree,
 		 vegetarian,
 		 lowFat,
 		 balanced,
@@ -142,7 +150,7 @@ handleChange = (e) => {
 		let isHighProtein = "";
 		
 	alcoholFree ? isAlcoholFree ="&health=alcohol-free" : isAlcoholFree = "";
-	vegetarian? isVegetarian ="&health=vegetarian" : isVegetarian = "";
+	vegetarian ? isVegetarian ="&health=vegetarian" : isVegetarian = "";
 	lowFat ? isLowFat="&diet=low-fat" : isLowFat= "";
 	balanced ? isBalanced= "&diet=balanced" : isBalanced = "";
 	highProtein ? isHighProtein= "&diet=high-protein" : isHighProtein = "";
@@ -155,6 +163,7 @@ handleChange = (e) => {
     constructor(query,howManyCalories,isAlcoholFree,isVegetarian,isLowFat,isGlutenFree,isHighProtein,isBalanced) {
         this.howManyCalories = howManyCalories;
 		this.query = query;
+		this.isVegetarian = isVegetarian
 		this.isAlcoholFree = isAlcoholFree;
 		this.isLowFat = isLowFat;
 		this.isGlutenFree = isGlutenFree;
@@ -163,7 +172,7 @@ handleChange = (e) => {
       }
       
     }
-	let queryObj = new QueryData(query,howManyCalories,isAlcoholFree,isVegetarian,isLowFat,isGlutenFree,isHighProtein,isBalanced)
+	let queryObj = new QueryData(recipeQueryValue,howManyCalories,isAlcoholFree,isVegetarian,isLowFat,isGlutenFree,isHighProtein,isBalanced)
 	
 	this.apiRequest(queryObj)
 }
@@ -216,8 +225,8 @@ flexDirection: "column"
  
  <h1 className="main-search-title"> Search for a recipe!</h1>
  <div className="input-container">
-  <input placeholder="Donuts" className="query-input" onChange={this.handleChange}/>
-  <button> <SearchIcon/> </button>
+  <input placeholder="Donuts" className="query-input" onChange={this.getQueryValue}/>
+  <button onClick={this.handleChange} className="search-button"> <SearchIcon/> </button>
    </div>
    </div>
     </div>
