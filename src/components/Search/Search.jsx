@@ -1,7 +1,7 @@
 import React from 'react'
 // import TextField from '@material-ui/core/TextField';
 //import Button from '@material-ui/core/Button';
-//import SearchIcon from '@material-ui/icons/Search';
+import SearchIcon from '@material-ui/icons/Search';
 // import Box from '@material-ui/core/Box';
 //import axios from "axios"
 import MainContainer from "../MainContainer/MainContainer";
@@ -44,11 +44,17 @@ class MainSearch extends React.Component {
 	  }
 	
 	
-	apiRequest(query = "donut", howManyCalories = "", isAlcoholFree = "", isVegetarian = "", isLowFat = "", isGlutenFree = "", isHighProtein = "", isBalanced = "") {
 	
-	const appID = "8bc00f3b";
+	apiRequest(queryObj) {
+		
+let {	query, howManyCalories, isAlcoholFree, isVegetarian, isLowFat, isGlutenFree, isHighProtein, isBalanced  } = queryObj;
+		
+		
+		
+		const appID = "8bc00f3b";
 	const appKey = "b1d9d15dadbddc109d83b189b71e533f";
-	
+
+		
 	var q = `https://cors-anywhere.herokuapp.com/https://api.edamam.com/search?q=${query}&app_id=${appID}&app_key=${appKey}${howManyCalories}${isAlcoholFree}${isVegetarian}${isLowFat}${isGlutenFree}${isHighProtein}${isBalanced}`;
 	
 		const xhr = new XMLHttpRequest();
@@ -69,9 +75,21 @@ class MainSearch extends React.Component {
 		
 		}
 	
-	  componentDidMount() {  
 	
-this.apiRequest()
+	
+	componentDidMount() {  
+		let sampleRequest = {
+			query:"donut",
+			howManyCalories:false,
+			isAlcoholFree:false,
+			isVegetarian:false,
+			isLowFat:false,
+			isGlutenFree:false,
+			isHighProtein:false,
+			isBalance:false	
+		}
+		this.apiRequest(sampleRequest)
+	
 	}
 	
 	getFavorite(e){
@@ -124,22 +142,30 @@ handleChange = (e) => {
 		let isHighProtein = "";
 		
 	alcoholFree ? isAlcoholFree ="&health=alcohol-free" : isAlcoholFree = "";
-	
 	vegetarian? isVegetarian ="&health=vegetarian" : isVegetarian = "";
-	
 	lowFat ? isLowFat="&diet=low-fat" : isLowFat= "";
-	
-	balanced ? isBalanced= "&diet=balanced" : isBalanced = ""
-	
-	highProtein ? isHighProtein= "&diet=high-protein" : isHighProtein = ""
-
-	glutenFree ? isGlutenFree= "&health=glutenFree" : isGlutenFree = ""
+	balanced ? isBalanced= "&diet=balanced" : isBalanced = "";
+	highProtein ? isHighProtein= "&diet=high-protein" : isHighProtein = "";
+	glutenFree ? isGlutenFree= "&health=glutenFree" : isGlutenFree = "";
 
 	if (caloriesMax !== null && caloriesMax > 1) {
 		howManyCalories = `&calories=0-${this.state.caloriesMax}`;
 	}
+		   class QueryData {
+    constructor(query,howManyCalories,isAlcoholFree,isVegetarian,isLowFat,isGlutenFree,isHighProtein,isBalanced) {
+        this.howManyCalories = howManyCalories;
+		this.query = query;
+		this.isAlcoholFree = isAlcoholFree;
+		this.isLowFat = isLowFat;
+		this.isGlutenFree = isGlutenFree;
+		this.isHighProtein = isHighProtein;
+		this.isBalanced = isBalanced;
+      }
+      
+    }
+	let queryObj = new QueryData(query,howManyCalories,isAlcoholFree,isVegetarian,isLowFat,isGlutenFree,isHighProtein,isBalanced)
 	
-	this.apiRequest(query,howManyCalories,isAlcoholFree,isVegetarian,isLowFat,isGlutenFree,isHighProtein,isBalanced)
+	this.apiRequest(queryObj)
 }
 
 checkboxChange(e){
@@ -189,8 +215,10 @@ flexDirection: "column"
  <div className="search-form-main-panel">
  
  <h1 className="main-search-title"> Search for a recipe!</h1>
- 
+ <div className="input-container">
   <input placeholder="Donuts" className="query-input" onChange={this.handleChange}/>
+  <button> <SearchIcon/> </button>
+   </div>
    </div>
     </div>
   <div className="form-parameters">
