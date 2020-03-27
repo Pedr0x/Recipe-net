@@ -48,7 +48,7 @@ class MainSearch extends React.Component {
 	
 	apiRequest(queryObj) {
 		
-let {	query, howManyCalories, isAlcoholFree, isVegetarian, isLowFat, isGlutenFree, isHighProtein, isBalanced  } = queryObj;
+let {	query, howManyCalories, isAlcoholFree, isVegetarian, isLowFat, isGlutenFree, isHighProtein, isBalanced } = queryObj;
 		
 		
 		
