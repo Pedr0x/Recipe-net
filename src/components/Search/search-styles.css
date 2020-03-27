@@ -75,7 +75,7 @@ h1{
 	background: 0;
 	border-radius: 49px;
 	padding: 1% 2%;
-	background: #f7f7f7;
+	background: #fff;
 	/* color: black !important; */
 	box-shadow: 0px 1px 3px #dbd8d8;
 }
@@ -83,7 +83,7 @@ h1{
 	margin: 2% 0px;
 	font-weight: 600;
 color: #0c76d2;
-		
+		font-family: "Bellota Text";
 	font-size: 24px;
 }
 
@@ -119,3 +119,12 @@ padding: 1% 2%;
 
 box-shadow: 0px 1px 3px #dbd8d8;
 }
+
+@media only screen and (max-width: 800px){
+	
+	.search-form{
+		grid-template-columns: 1fr ;
+	}
+}
+
+

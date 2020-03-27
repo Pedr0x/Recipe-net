@@ -1,8 +1,8 @@
 import React from 'react'
-import TextField from '@material-ui/core/TextField';
+// import TextField from '@material-ui/core/TextField';
 //import Button from '@material-ui/core/Button';
 //import SearchIcon from '@material-ui/icons/Search';
-import Box from '@material-ui/core/Box';
+// import Box from '@material-ui/core/Box';
 //import axios from "axios"
 import MainContainer from "../MainContainer/MainContainer";
 //import Checkbox from '@material-ui/core/Checkbox';
@@ -202,14 +202,14 @@ flexDirection: "column"
   	<div style={checkboxItem}  className="checkbox-item"> 
  	     <label> Alcohol Free</label>
   	     <input name="alcoholFree" onChange={this.checkboxChange} className="checkbox"type="checkbox"/>
-  	       	      	       	  {  this.state.alcoholFree ?	<CheckBoxIcon color={"primary"}/> : <CheckBoxOutlineBlankIcon/> }  
+  	       	      	       	  {  this.state.alcoholFree ?	<CheckBoxIcon color={"primary"}/> : <CheckBoxOutlineBlankIcon  color={"primary"}/> }  
 
   	</div>
   	
   	 	<div style={checkboxItem}  className="checkbox-item"> 
  	     <label> Vegetarian</label>
   	     <input name="vegetarian" onChange={this.checkboxChange} className="checkbox"type="checkbox" />
-  	       	       	     {  this.state.vegetarian ?	<CheckBoxIcon color={"primary"}/> : <CheckBoxOutlineBlankIcon/> }  
+  	       	       	     {  this.state.vegetarian ?	<CheckBoxIcon color={"primary"}/> : <CheckBoxOutlineBlankIcon  color={"primary"}/> }  
 
  	
   	</div>

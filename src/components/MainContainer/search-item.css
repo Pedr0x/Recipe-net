@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bellota+Text:wght@700&family=Yellowtail&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Bellota+Text:wght@700&display=swap');
 
 .main-search-container{
 	background: #fdfdfd;
@@ -62,3 +62,4 @@ grid-template-columns: repeat(auto-fill, minmax(125px, 1fr));
 .card-list-item-subtitle{
 padding: 3% 0;
 }
+
