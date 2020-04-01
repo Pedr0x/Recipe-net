@@ -1,0 +1,9 @@
+Things  i need to fix in the app
+
+--Turn XHR request into a promise
+-- Properly tab code
+-- Apply ternary operators right
+--Delete JavaScript Styles
+--Take unnecesary data from React´s state
+---Delete unnecesary variables
+--Properly use arrow functions and delete the unnecesary ones
