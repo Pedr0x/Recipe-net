@@ -6,14 +6,15 @@ var MainContainer = (props) => {
 	if ( props.receivedData === true && props.data.length === 0  ){
 		return <Spinner/>
 	}
+	
 	if (props.receivedData === false){
 		return (<h1> We couldn´t find that recipe</h1>)
 	}
+	
 	else {
 		return(
 			<div className="main-search-container">
-
-				{props.data.map(elem => 
+				{props.data.map( (elem) => 
 		  			<SearchItem 
 						title={elem.recipe.label}
 						image={elem.recipe.image}
@@ -29,7 +30,7 @@ var MainContainer = (props) => {
 						recipeYield={elem.recipe.yield}
 						url={elem.recipe.url}
 						getFavorite={props.getFavorite}
-							/> 
+						/> 
 				)
 								}
  			</div>	

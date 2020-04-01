@@ -74,9 +74,9 @@ justify-content: center;
 	flex-direction: column;
 	justify-content: center;
 }
-h1{
-	margin: 0;
-}
+	h1{
+		margin: 0;
+	}
 
 .calories-input {
 	border: 0;

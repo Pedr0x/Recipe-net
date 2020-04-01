@@ -1,12 +1,9 @@
 import React from 'react'
 //Material UI Components
-
 import SearchIcon from '@material-ui/icons/Search';
-import MainContainer from "../MainContainer/MainContainer";
-import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
-import CheckBoxIcon from '@material-ui/icons/CheckBox';
 
 import CheckBox from './CheckBox';
+import MainContainer from "../MainContainer/MainContainer";
 
 class MainSearch extends React.Component {
 	 constructor(props) {
@@ -15,196 +12,133 @@ class MainSearch extends React.Component {
 		recipeQueryValue: "",
 		recipes: [],
 		favorites:[],
-	
 		receivedData:true
 
 	};
-		
+		//this object contains both the query value and the parameters
+		// for the request
 		this.queryParameters = {
 			query:"donuts",
 			alcoholFree:false,
 			vegetarian:false,
-			lowFat:true,
+			lowFat:false,
 			gluten:false,
 			balanced:false,
 			highProtein:false,
 			caloriesMax:null,
 		};
+		 
 	    this.handleChange = this.handleChange.bind(this);
 	    this.getFavorite = this.getFavorite.bind(this);
 	    this.caloriesChanger = this.caloriesChanger.bind(this);
 	    this.checkboxChange = this.checkboxChange.bind(this);
 	    this.apiRequest = this.apiRequest.bind(this);
 	    this.getQueryValue = this.getQueryValue.bind(this);
-		this.toggle = this.toggle.bind(this);
- 
  		this.getCheckBoxData = this.getCheckBoxData.bind(this);
-
 	  }
 	
 	apiRequest(queryObj) {
 		
 		let {
 			query,
-			howManyCalories,
-			isAlcoholFree,
-			isLowFat,
-			isGlutenFree,
-			isHighProtein,
-			isBalanced
+			alcoholFree,
+			vegetarian,
+			lowFat,
+			gluten,
+			balanced,
+			highProtein,
+			caloriesMax
 		} = queryObj;		
 		
 		const appID = "8bc00f3b";
 		const appKey = "b1d9d15dadbddc109d83b189b71e533f";
-		var isVegetarian = true
-		let ManyCalories = "";
-		let vegetarian = isVegetarian  ? '&health=vegetarian' : '"';
-		let lowFat = "";
-		let alcoholFree = ""
-		let glutenFree =  "";
-		let balanced= "";
-		let highProtein = "";
+				
+		//conditional parameters
+		const ManyCalories = caloriesMax != false && caloriesMax > 1  
+			?  `&calories=0-${caloriesMax}` : "";
+		const isVegetarian = vegetarian  ? '&health=vegetarian' : "";
+		const isLowFat = lowFat ? "&diet=low-fat" : "";
+		const isAlcoholFree = alcoholFree ? "&health=alcohol-free" : "";
+		const isGlutenFree = gluten ? "&health=glutenFree" : "";
+		const isBalanced = balanced ? "&diet=balanced" : "";
+		const isHighProtein = highProtein ? "&diet=high-protein" : "";
 		
-		isAlcoholFree ? alcoholFree ="&health=alcohol-free" : alcoholFree = "";
-		isVegetarian ? vegetarian ="&health=vegetarian" : vegetarian = "";
-		isLowFat ? lowFat="&diet=low-fat" : lowFat= "";
-		isBalanced ? balanced = "&diet=balanced" : balanced = "";
-		isHighProtein ? highProtein= "&diet=high-protein" : highProtein = "";
-		isGlutenFree ? glutenFree= "&health=glutenFree" : glutenFree = "";
+		const urlRequest = `https://cors-anywhere.herokuapp.com/https://api.edamam.com/search?q=${query}&app_id=${appID}&app_key=${appKey}${ManyCalories}${isAlcoholFree}${isVegetarian}${isLowFat}${isGlutenFree}${isHighProtein}${isBalanced}`;
 
-		if (howManyCalories !== null && howManyCalories > 1) {
-				ManyCalories = `&calories=0-${this.state.caloriesMax}`;
-		}
-		
-		//const urlRequest = `https://cors-anywhere.herokuapp.com/https://api.edamam.com/search?q=${query}&app_id=${appID}&app_key=${appKey}${howManyCalories}${isAlcoholFree}${isVegetarian}${isLowFat}${isGlutenFree}${isHighProtein}${isBalanced}`;
+		const xhr = new XMLHttpRequest();
+				xhr.open("GET", urlRequest);
+				xhr.responseType = "json";
+				xhr.onload = () => {
+					let gotData;
+					xhr.response.hits.length > 0 ? gotData= true : gotData = false
+					this.setState({
+						recipes: xhr.response.hits,
+						receivedData: gotData
+					})
+				};
+				xhr.send();
+			}
 
-		const urlRequest = `https://cors-anywhere.herokuapp.com/https://api.edamam.com/search?q=${query}&app_id=${appID}&app_key=${appKey}`;
-
-	const xhr = new XMLHttpRequest();
-			xhr.open("GET", urlRequest);
-			xhr.responseType = "json";
-			xhr.onload = () => {
-				let gotData;
-				xhr.response.hits.length > 0 ? gotData= true : gotData = false
-				this.setState({
-					recipes: xhr.response.hits,
-					receivedData: gotData
-				})
-			};
-			xhr.send();
-		}
-	
 	componentDidMount() {  
-		/*let sampleRequest = {
-			query:"donut",
-			howManyCalories:false,
-			isAlcoholFree:false,
-			isVegetarian:false,
-			isLowFat:false,
-			isGlutenFree:false,
-			isHighProtein:false,
-			isBalance:false	
-		}*/
-				console.log(this.queryParameters)
-
-		this.apiRequest(this.queryParameters)
+		this.apiRequest(this.queryParameters);
 	}
-componentDidUpdate(){
-	console.log("upd")
-}
+
 	getFavorite(e){
+		//this function adds the targeted recipe value and image
+		//and adds it to an array in the state and local storage
 		e.stopPropagation()
 		const newFavorite = {
 			recipeName: e.target.name, 
 			image:	e.target.dataset.image
 		}
 
-		if (this.state.favorites.includes(e.target.name)){
+		if (this.state.favorites.includes(e.target.name)) {
 			console.log("already had that recipe")
 		} 
+		
 		else {
-	  this.setState(({
-      favorites:[  ...this.state.favorites,newFavorite]
-    	})) 
-	  
+	    	this.setState(({
+				favorites:[  ...this.state.favorites,newFavorite]
+    		}
+						  )
+						 ) 
 		let allFavorites = [...this.state.favorites, newFavorite]
 		localStorage.setItem("favorites", JSON.stringify(newFavorite))
 		console.log(allFavorites)
 		}
+				//this is for future use
 	}
 
 	getQueryValue(e){
-		let value = e.target.value;
-		this.setState({recipeQueryValue: e.target.value});
+		this.queryParameters.query = e.target.value;
 	}
 	
-	handleChange = (e) => {
+	handleChange(e){
 		e.preventDefault();
-
-		let {recipeQueryValue : query,
-			 alcoholFree : isAlcoholFree,
-			 vegetarian : isVegetarian,
-			 lowFat : isLowFat,
-			 balanced : isBalanced,
-			 highProtein : isHighProtein,
-			 glutenFree : isGlutenFree,
-			 caloriesMax : howManyCalories}  = this.state;
-
+		//Reset recipes 
 		this.setState({
 			recipes: []
-		})
-
-		class QueryData {
-			constructor(query,howManyCalories,isAlcoholFree,isVegetarian,isLowFat,isGlutenFree,isHighProtein,isBalanced) {
-				this.howManyCalories = howManyCalories;
-				this.query = query;
-				this.isVegetarian = isVegetarian
-				this.isAlcoholFree = isAlcoholFree;
-				this.isLowFat = isLowFat;
-				this.isGlutenFree = isGlutenFree;
-				this.isHighProtein = isHighProtein;
-				this.isBalanced = isBalanced;
-		  }
-		}
-		
-		//Make a new object with the data
-		let queryObj = new QueryData(query,howManyCalories,isAlcoholFree,isVegetarian,isLowFat,isGlutenFree,isHighProtein,isBalanced)
-		//Pass the object as a parameter to the request
-		this.apiRequest(this.queryParameters)
-		
+		});
+		this.apiRequest(this.queryParameters);
 	}
 	
-		checkboxChange(e){
+	checkboxChange(e){
 			{ this.queryParameters[e.target.name] = e.target.checked };	
-			console.log(e.target.name);
-			console.log(e.target.checked)
-
-	}
+		}
 
 	caloriesChanger(e){
-		this.setState({ [e.target.name] : e.target.value });	
-}
-
-toggle(e){
-//	e.target.checked = !e.target.checked;
-	console.log(this.queryParameters);
-
-}
-
-
+		this.queryParameters.caloriesMax = e.target.value; 
+	}
 
 	getCheckBoxData(checkBoxState,name){
-
-		//console.log(checkBoxState + "xz");
 		this.queryParameters[name] = checkBoxState;
-		console.log(this.queryParameters)
 	}
 
 	render(){
 		
 		return (
 			<React.Fragment> 
-				<div  className="search-form-containersuper" onClick={this.toggle}> 
+				<div  className="search-form-containersuper"> 
 					<form  className="search-form"   noValidate autoComplete="off">
 						 <div className="search-form-container">
 							 <div className="search-form-main-panel">
@@ -228,17 +162,14 @@ toggle(e){
 								</div>
 							</div>
 							
-							
 							<div className="checkboxs-container-super">
 							<h2 className="checkbox-subtitle"> Health restrictions </h2>								
 								<div className="checkboxes-container">
-
 								<CheckBox  callback={this.getCheckBoxData} label="Balanced" name="balanced"/>
 
 								<CheckBox  callback={this.getCheckBoxData} label="High Protein" name="highProtein"/>
 
 								<CheckBox  callback={this.getCheckBoxData} label="Low Fat" name="lowFat"/>
-
 						</div>
 					</div>
 						<div className="calories-max-container">
