@@ -7,8 +7,11 @@ import Spinner from "./Spinner";
 var MainContainer = (props) => {
 
 	
-	if (props.data === undefined || props.data.length < 2){
+	if ( props.receivedData === true && props.data.length === 0  ){
 		return <Spinner/>
+	}
+	if (props.receivedData === false){
+		return (<h1> We couldn´t find that recipe</h1>)
 	}
 	else {
 	return(

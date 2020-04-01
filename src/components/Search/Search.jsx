@@ -29,7 +29,8 @@ class MainSearch extends React.Component {
 		gluten:false,
 		balanced:false,
 		highProtein:false,
-		caloriesMax:null
+		caloriesMax:null,
+		receivedData:true
 		
 	
 		
@@ -40,7 +41,6 @@ class MainSearch extends React.Component {
 	    this.checkboxChange = this.checkboxChange.bind(this);
 	    this.apiRequest = this.apiRequest.bind(this);
 	    this.getQueryValue = this.getQueryValue.bind(this);
-		 this.myRef = React.createRef()
 		 
 	  }
 	
@@ -51,12 +51,28 @@ class MainSearch extends React.Component {
 let {	query, howManyCalories, isAlcoholFree, isVegetarian, isLowFat, isGlutenFree, isHighProtein, isBalanced } = queryObj;
 		
 		
-		
 		const appID = "8bc00f3b";
 	const appKey = "b1d9d15dadbddc109d83b189b71e533f";
 
+		let ManyCalories = "";
+		let vegetarian= "";
+		let lowFat = "";
+		let alcoholFree = ""
+		let glutenFree = "";
+		let balanced= "";
+		let highProtein = "";
 		
-	var q = `https://cors-anywhere.herokuapp.com/https://api.edamam.com/search?q=${query}&app_id=${appID}&app_key=${appKey}${howManyCalories}${isAlcoholFree}${isVegetarian}${isLowFat}${isGlutenFree}${isHighProtein}${isBalanced}`;
+	isAlcoholFree ? alcoholFree ="&health=alcohol-free" : alcoholFree = "";
+	isVegetarian ? vegetarian ="&health=vegetarian" : vegetarian = "";
+	isLowFat ? lowFat="&diet=low-fat" : lowFat= "";
+	isBalanced ? balanced = "&diet=balanced" : balanced = "";
+	isHighProtein ? highProtein= "&diet=high-protein" : highProtein = "";
+	isGlutenFree ? glutenFree= "&health=glutenFree" : glutenFree = "";
+
+	if (howManyCalories !== null && howManyCalories > 1) {
+		ManyCalories = `&calories=0-${this.state.caloriesMax}`;
+	}
+	var q = `https://cors-anywhere.herokuapp.com/https://api.edamam.com/search?q=${query}&app_id=${appID}&app_key=${appKey}${ManyCalories}${alcoholFree}${vegetarian}${glutenFree}${highProtein}${lowFat}${balanced}`;
 	
 		const xhr = new XMLHttpRequest();
 			xhr.open("GET", q);
@@ -64,16 +80,18 @@ let {	query, howManyCalories, isAlcoholFree, isVegetarian, isLowFat, isGlutenFre
 			xhr.responseType = "json";
 			
 			xhr.onload = () => {
-				console.log(32);
 				var result = xhr.response.hits;
+		 var gotData;
+		result.length > 0 ? gotData= true : gotData = false
+
 				this.setState({
-					recipes: result
+					recipes: result,
+					receivedData: gotData
 				})
 
 			};
 				xhr.send();
 
-		console.log(q)
 		}
 	
 	
@@ -119,7 +137,6 @@ let {	query, howManyCalories, isAlcoholFree, isVegetarian, isLowFat, isGlutenFre
 	getQueryValue(e){
 		let value = e.target.value;
 		this.setState({recipeQueryValue: e.target.value});
-		console.log(this.state.recipeQueryValue)
 	}
 	
 handleChange = (e) => {
@@ -127,38 +144,21 @@ handleChange = (e) => {
 	//		this.setState({querssy: e.target.value})
 	//	console.log(this.state.query)
 	//this is probably wrong might need to fix later
-	let {recipeQueryValue,
-		 alcoholFree,
-		 vegetarian,
-		 lowFat,
-		 balanced,
-		 highProtein,
-		 glutenFree,
-		 caloriesMax} = this.state;
+	let {recipeQueryValue : query,
+		 alcoholFree : isAlcoholFree,
+		 vegetarian : isVegetarian,
+		 lowFat : isLowFat,
+		 balanced : isBalanced,
+		 highProtein : isHighProtein,
+		 glutenFree : isGlutenFree,
+		 caloriesMax : howManyCalories}  = this.state;
 	
 	this.setState({
 		recipes: []
 	})
 
 
-		let howManyCalories = "";
-		let isVegetarian= "";
-		let isLowFat = "";
-		let isAlcoholFree = ""
-		let isGlutenFree = "";
-		let isBalanced= "";
-		let isHighProtein = "";
 		
-	alcoholFree ? isAlcoholFree ="&health=alcohol-free" : isAlcoholFree = "";
-	vegetarian ? isVegetarian ="&health=vegetarian" : isVegetarian = "";
-	lowFat ? isLowFat="&diet=low-fat" : isLowFat= "";
-	balanced ? isBalanced= "&diet=balanced" : isBalanced = "";
-	highProtein ? isHighProtein= "&diet=high-protein" : isHighProtein = "";
-	glutenFree ? isGlutenFree= "&health=glutenFree" : isGlutenFree = "";
-
-	if (caloriesMax !== null && caloriesMax > 1) {
-		howManyCalories = `&calories=0-${this.state.caloriesMax}`;
-	}
 		   class QueryData {
     constructor(query,howManyCalories,isAlcoholFree,isVegetarian,isLowFat,isGlutenFree,isHighProtein,isBalanced) {
         this.howManyCalories = howManyCalories;
@@ -172,14 +172,13 @@ handleChange = (e) => {
       }
       
     }
-	let queryObj = new QueryData(recipeQueryValue,howManyCalories,isAlcoholFree,isVegetarian,isLowFat,isGlutenFree,isHighProtein,isBalanced)
+	let queryObj = new QueryData(query,howManyCalories,isAlcoholFree,isVegetarian,isLowFat,isGlutenFree,isHighProtein,isBalanced)
 	
 	this.apiRequest(queryObj)
 }
 
 checkboxChange(e){
-		console.log(e.target.checked);
-		console.log(e.target.name)
+
 
 this.setState({ [e.target.name] : e.target.checked });	
 	
@@ -190,9 +189,7 @@ caloriesChanger(e){
 	this.setState({ [e.target.name] : e.target.value });	
 
 }
-componentDidUpdate(){
-	console.log("compo updated");
-}
+
 
 	render(){
 		
@@ -218,7 +215,7 @@ flexDirection: "column"
 	
 	return (
 		<React.Fragment> 
-		<div onClick={() => console.log(this.state)} className="search-form-containersuper"> 
+		<div  className="search-form-containersuper"> 
 	<form  className="search-form"   noValidate autoComplete="off" style={mainSearchStyle}>
  <div className="search-form-container">
  <div className="search-form-main-panel">
@@ -300,7 +297,7 @@ flexDirection: "column"
 	
 		</div>
 		
-		<MainContainer data={this.state.recipes} getFavorite={this.getFavorite}/>
+		<MainContainer receivedData={this.state.receivedData} data={this.state.recipes} getFavorite={this.getFavorite}/>
 		</React.Fragment>
 		
 )

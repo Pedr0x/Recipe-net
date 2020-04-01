@@ -49,7 +49,7 @@ height: 50px;
 }
 
 .search-form-container {
-	width: 85%;
+/*	width: 85%; */
 	padding: 3%;
 	/* margin: 5%; */
 	/* background: black; */
@@ -94,11 +94,12 @@ color: #0c76d2;
 	align-self: center;
 	justify-self: center;
 	background: #f9f9f9e3;
-padding: 2%;
+	padding: 2%;
+	box-shadow: 0px 1px 1px 1px #d5d5d54f;
 }
 
-.checkbox-subtitle {
-	padding: 1%;
+.checkbox-subtitle,.card-list-item-subtitle  {
+	padding: 2% 0;
 	font-weight: 600;
 	color: #00c853;
 }
@@ -137,9 +138,29 @@ box-shadow: 0px 1px 3px #dbd8d8;
 	.form-parameters{
 		padding: 3%;
 	}
+	.checkboxs-container-super {
+	padding: 2% 0;
+}
 	
 	.search-form{
 		grid-template-columns: 1fr ;
 	}
 }
+
+@media only screen and (max-width: 500px){
+	
+	.input-container{
+		font-size: 24px;
+	}
+}
+
+
+@media only screen and (max-width: 395px){
+	
+	.input-container{
+		font-size: 16px;
+	}
+}
+
+
 /*jr23543757*/
