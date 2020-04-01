@@ -220,57 +220,22 @@ toggle(e){
 								<h2 className="checkbox-subtitle"> Dietary Restrictions  </h2>
 
 								 <div className="checkboxes-container">
-										<div className="checkbox-item"> 
-											<label> Alcohol Free</label>
-											<input name="alcoholFree" 
-												onChange={this.checkboxChange} 
-												className="checkbox" type="checkbox"/>
-												{  this.queryParameters.alcoholFree ?	<CheckBoxIcon color={"primary"} /> : <CheckBoxOutlineBlankIcon  color={"primary"}/> }  
+									<CheckBox  callback={this.getCheckBoxData} label="Alcohol Free" name="alcoholFree"/>
 
-										</div>
+									<CheckBox  callback={this.getCheckBoxData} label="Vegetarian" name="vegetarian"/>
 
-										<div  className="checkbox-item"> 
-											<label> Vegetarian</label>
-											<input
-												name="vegetarian" 
-												onChange={this.checkboxChange} 
-												className="checkbox"type="checkbox" />
-												{ this.state.vegetarian ?	<CheckBoxIcon color={"primary"}/> : <CheckBoxOutlineBlankIcon  color={"primary"}/> }  
-											</div>
-
-										<div className="checkbox-item"> 
-											<label> Gluten</label>
-											<input 
-												name="gluten"
-												onChange={this.checkboxChange}
-												className="checkbox" 
-												type="checkbox" />
-												{  this.state.gluten ?	<CheckBoxIcon color={"primary"}/> : <CheckBoxOutlineBlankIcon color={"primary"}/> }  
-										</div>
+									<CheckBox  callback={this.getCheckBoxData} label="Gluten" name="gluten"/>
 								</div>
 							</div>
+							
+							
 							<div className="checkboxs-container-super">
-								<h2 className="checkbox-subtitle"> Health restrictions </h2>
+							<h2 className="checkbox-subtitle"> Health restrictions </h2>								
 								<div className="checkboxes-container">
 
-									<div  className="checkbox-item"> 
-										<label onClick={this.apiRequest}> Balanced</label>
-										  <input
-										   name="balanced"
-										   onChange={this.checkboxChange}
-										   className="checkbox"type="checkbox" />
-										   {  this.state.balanced ?	<CheckBoxIcon color={"primary"}/> : <CheckBoxOutlineBlankIcon color={"primary"}/> }  
-									</div>
+								<CheckBox  callback={this.getCheckBoxData} label="Balanced" name="balanced"/>
 
-									<div className="checkbox-item"> 
-										<label> High-Protein</label>
-										<input
-										 name="highProtein"
-										 onChange={this.checkboxChange}
-										 className="checkbox"
-										 type="checkbox" />
-										{  this.state.highProtein ?	<CheckBoxIcon color={"primary"}/> : <CheckBoxOutlineBlankIcon color={"primary"}/> }  
-									</div>
+								<CheckBox  callback={this.getCheckBoxData} label="High Protein" name="highProtein"/>
 
 								<CheckBox  callback={this.getCheckBoxData} label="Low Fat" name="lowFat"/>
 
