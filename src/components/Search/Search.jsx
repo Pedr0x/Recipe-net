@@ -6,6 +6,8 @@ import MainContainer from "../MainContainer/MainContainer";
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 
+import CheckBox from './CheckBox';
+
 class MainSearch extends React.Component {
 	 constructor(props) {
     super(props);
@@ -22,12 +24,12 @@ class MainSearch extends React.Component {
 			query:"donuts",
 			alcoholFree:false,
 			vegetarian:false,
-			lowFat:false,
+			lowFat:true,
 			gluten:false,
 			balanced:false,
 			highProtein:false,
 			caloriesMax:null,
-		};	 
+		};
 	    this.handleChange = this.handleChange.bind(this);
 	    this.getFavorite = this.getFavorite.bind(this);
 	    this.caloriesChanger = this.caloriesChanger.bind(this);
@@ -36,6 +38,8 @@ class MainSearch extends React.Component {
 	    this.getQueryValue = this.getQueryValue.bind(this);
 		this.toggle = this.toggle.bind(this);
  
+ 		this.getCheckBoxData = this.getCheckBoxData.bind(this);
+
 	  }
 	
 	apiRequest(queryObj) {
@@ -105,7 +109,9 @@ class MainSearch extends React.Component {
 
 		this.apiRequest(this.queryParameters)
 	}
-	
+componentDidUpdate(){
+	console.log("upd")
+}
 	getFavorite(e){
 		e.stopPropagation()
 		const newFavorite = {
@@ -167,11 +173,11 @@ class MainSearch extends React.Component {
 		this.apiRequest(this.queryParameters)
 		
 	}
-queryParameters
-	checkboxChange(e){
-		{ this.queryParameters[e.target.name] = e.target.checked };	
-		console.log(e.target.name);
-		console.log(e.target.checked)
+	
+		checkboxChange(e){
+			{ this.queryParameters[e.target.name] = e.target.checked };	
+			console.log(e.target.name);
+			console.log(e.target.checked)
 
 	}
 
@@ -179,10 +185,20 @@ queryParameters
 		this.setState({ [e.target.name] : e.target.value });	
 }
 
-toggle(){
-	this.name = !this.name;
-	console.log(this.name);
+toggle(e){
+//	e.target.checked = !e.target.checked;
+	console.log(this.queryParameters);
+
 }
+
+
+
+	getCheckBoxData(checkBoxState,name){
+
+		//console.log(checkBoxState + "xz");
+		this.queryParameters[name] = checkBoxState;
+		console.log(this.queryParameters)
+	}
 
 	render(){
 		
@@ -256,15 +272,7 @@ toggle(){
 										{  this.state.highProtein ?	<CheckBoxIcon color={"primary"}/> : <CheckBoxOutlineBlankIcon color={"primary"}/> }  
 									</div>
 
-								<div className="checkbox-item"> 
-									<label> Low-Fat</label>
-									<input
-										name="lowFat"
-										onChange={this.checkboxChange}
-										className="checkbox"
-										type="checkbox"/>
-										 {  this.state.lowFat ?	<CheckBoxIcon color={"primary"}/> : <CheckBoxOutlineBlankIcon color={"primary"}/> }  
-								</div>
+								<CheckBox  callback={this.getCheckBoxData} label="Low Fat" name="lowFat"/>
 
 						</div>
 					</div>
