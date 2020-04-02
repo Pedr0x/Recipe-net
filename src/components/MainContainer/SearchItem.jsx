@@ -19,7 +19,7 @@ var _ = require('lodash');
 		setValue(newValue);
 	  };
 	
-
+	//this is the TabPanal Component from Material UI
 	function TabPanel(props) {
 		const { children, value, index, ...other } = props;
 

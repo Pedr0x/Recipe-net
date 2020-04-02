@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 //Material UI Components
 import SearchIcon from '@material-ui/icons/Search';
 
@@ -31,7 +31,6 @@ class MainSearch extends React.Component {
 	    this.handleChange = this.handleChange.bind(this);
 	    this.getFavorite = this.getFavorite.bind(this);
 	    this.caloriesChanger = this.caloriesChanger.bind(this);
-	    this.checkboxChange = this.checkboxChange.bind(this);
 	    this.apiRequest = this.apiRequest.bind(this);
 	    this.getQueryValue = this.getQueryValue.bind(this);
  		this.getCheckBoxData = this.getCheckBoxData.bind(this);
@@ -50,11 +49,9 @@ class MainSearch extends React.Component {
 			caloriesMax
 		} = queryObj;		
 		
-		const appID = "8bc00f3b";
-		const appKey = "b1d9d15dadbddc109d83b189b71e533f";
-				
+		
 		//conditional parameters
-		const ManyCalories = caloriesMax != false && caloriesMax > 1  
+		const ManyCalories = caloriesMax !== false && caloriesMax > 1  
 			?  `&calories=0-${caloriesMax}` : "";
 		const isVegetarian = vegetarian  ? '&health=vegetarian' : "";
 		const isLowFat = lowFat ? "&diet=low-fat" : "";
@@ -63,26 +60,57 @@ class MainSearch extends React.Component {
 		const isBalanced = balanced ? "&diet=balanced" : "";
 		const isHighProtein = highProtein ? "&diet=high-protein" : "";
 		
-		const urlRequest = `https://cors-anywhere.herokuapp.com/https://api.edamam.com/search?q=${query}&app_id=${appID}&app_key=${appKey}${ManyCalories}${isAlcoholFree}${isVegetarian}${isLowFat}${isGlutenFree}${isHighProtein}${isBalanced}`;
+				const urlRequest = `https://cors-anywhere.herokuapp.com/https://api.edamam.com/search?q=${query}&app_id=8bc00f3b&app_key=b1d9d15dadbddc109d83b189b71e533f${ManyCalories}${isAlcoholFree}${isVegetarian}${isLowFat}${isGlutenFree}${isHighProtein}${isBalanced}`;
 
-		const xhr = new XMLHttpRequest();
+		let getPromise = new Promise((resolve,reject) => {
+			const xhr = new XMLHttpRequest();
 				xhr.open("GET", urlRequest);
 				xhr.responseType = "json";
 				xhr.onload = () => {
-					let gotData;
-					xhr.response.hits.length > 0 ? gotData= true : gotData = false
-					this.setState({
-						recipes: xhr.response.hits,
-						receivedData: gotData
+					if(xhr.status === 200){
+						if(xhr.response.hits.length > 0)	
+							this.setState({
+							recipes: xhr.response.hits,
+							receivedData: true
+						})
+							
+						else{
+							//the request was succesful but didn´t return data
+							this.setState({
+								receivedData: false
 					})
+						}
+						resolve(xhr.response)
+					}
+					//status code not 200
+					else{
+						this.setState({
+							receivedData:false
+						})
+						reject("Status code wasn´t 200")
+					}
+					//connection problems
+					xhr.onerror = () => {
+						this.setState({
+							receivedData:false
+						})
+						reject("request did not load because of connection problems")
+			}
 				};
+			
 				xhr.send();
+		}
+									)
+		getPromise
+			.then(res => console.log(res))
+			.catch(err => console.log(err))
+		
 			}
 
 	componentDidMount() {  
 		this.apiRequest(this.queryParameters);
 	}
-
+	
 	getFavorite(e){
 		//this function adds the targeted recipe value and image
 		//and adds it to an array in the state and local storage
@@ -101,7 +129,8 @@ class MainSearch extends React.Component {
 				favorites:[  ...this.state.favorites,newFavorite]
     		}
 						  )
-			) 
+			)
+			
 		let allFavorites = [...this.state.favorites, newFavorite]
 		localStorage.setItem("favorites", JSON.stringify(newFavorite))
 		console.log(allFavorites)
@@ -122,10 +151,6 @@ class MainSearch extends React.Component {
 		this.apiRequest(this.queryParameters);
 	}
 	
-	checkboxChange(e){
-			{ this.queryParameters[e.target.name] = e.target.checked };	
-	}
-
 	caloriesChanger(e){
 		this.queryParameters.caloriesMax = e.target.value; 
 	}
@@ -138,8 +163,8 @@ class MainSearch extends React.Component {
 		
 		return (
 			<React.Fragment> 
-				<div  className="search-form-containersuper"> 
-					<form  className="search-form"   noValidate autoComplete="off">
+				<div  className="search-form-container-super"> 
+					<form  className="search-form"  noValidate autoComplete="off">
 						 <div className="search-form-container">
 							 <div className="search-form-main-panel">
 								 <h1 className="main-search-title"> Search for a recipe!</h1>

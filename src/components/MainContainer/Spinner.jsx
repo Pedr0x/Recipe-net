@@ -3,7 +3,7 @@ import spinner from "./spinner1.gif"
 var Spinner = () => {
 	
 	return(
-<div>
+<div className="spinner-container">
 	<img src={spinner}
 	alt="Loading..."
 	style={{

@@ -4,7 +4,10 @@ import Spinner from "./Spinner";
 
 var MainContainer = (props) => {
 	if ( props.receivedData === true && props.data.length === 0  ){
-		return <Spinner/>
+		return (
+			<div className="main-search-container">
+				<Spinner/> 
+			</div>) 
 	}
 	
 	if (props.receivedData === false){
