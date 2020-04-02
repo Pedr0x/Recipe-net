@@ -13,7 +13,7 @@ import IconButton from '@material-ui/core/IconButton';
 //Lodash for creating unique key IDs
 var _ = require('lodash');
 
-	const SearchItem = (props) => {
+const SearchItem = (props) => {
 		const [value, setValue] = React.useState(0);
 		const handleChange = (event, newValue) => {
 		setValue(newValue);

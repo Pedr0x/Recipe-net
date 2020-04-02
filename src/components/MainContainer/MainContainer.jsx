@@ -36,6 +36,9 @@ var MainContainer = (props) => {
 						/> 
 				)
 								}
+								<div> 
+								<button onClick={props.showMoreResults}className="btn btn_render-more"> Render More</button>
+								</div>
  			</div>	
 		)
 	}

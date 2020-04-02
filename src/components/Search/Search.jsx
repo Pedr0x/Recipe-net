@@ -12,7 +12,10 @@ class MainSearch extends React.Component {
 		recipeQueryValue: "",
 		recipes: [],
 		favorites:[],
-		receivedData:true
+		receivedData:true,
+		moreResults:false,
+		renderMoreResults:false,
+		page:1
 
 	};
 		//this object contains both the query value and the parameters
@@ -26,6 +29,7 @@ class MainSearch extends React.Component {
 			balanced:false,
 			highProtein:false,
 			caloriesMax:null,
+			pageQ: 3
 		};
 		 
 	    this.handleChange = this.handleChange.bind(this);
@@ -34,11 +38,13 @@ class MainSearch extends React.Component {
 	    this.apiRequest = this.apiRequest.bind(this);
 	    this.getQueryValue = this.getQueryValue.bind(this);
  		this.getCheckBoxData = this.getCheckBoxData.bind(this);
+		 this.showMoreResults = this.showMoreResults.bind(this);
+
 	  }
 	
 	apiRequest(queryObj) {
 		
-		let {
+		const {
 			query,
 			alcoholFree,
 			vegetarian,
@@ -46,9 +52,9 @@ class MainSearch extends React.Component {
 			gluten,
 			balanced,
 			highProtein,
-			caloriesMax
+			caloriesMax,
+			pageQ
 		} = queryObj;		
-		
 		
 		//conditional parameters
 		const ManyCalories = caloriesMax !== false && caloriesMax > 1  
@@ -60,7 +66,7 @@ class MainSearch extends React.Component {
 		const isBalanced = balanced ? "&diet=balanced" : "";
 		const isHighProtein = highProtein ? "&diet=high-protein" : "";
 		
-				const urlRequest = `https://cors-anywhere.herokuapp.com/https://api.edamam.com/search?q=${query}&app_id=8bc00f3b&app_key=b1d9d15dadbddc109d83b189b71e533f${ManyCalories}${isAlcoholFree}${isVegetarian}${isLowFat}${isGlutenFree}${isHighProtein}${isBalanced}`;
+				const urlRequest = `https://cors-anywhere.herokuapp.com/https://api.edamam.com/search?q=${query}&app_id=8bc00f3b&app_key=b1d9d15dadbddc109d83b189b71e533f&from=0&to=${pageQ}${ManyCalories}${isAlcoholFree}${isVegetarian}${isLowFat}${isGlutenFree}${isHighProtein}${isBalanced}`;
 
 		let getPromise = new Promise((resolve,reject) => {
 			const xhr = new XMLHttpRequest();
@@ -72,28 +78,33 @@ class MainSearch extends React.Component {
 							this.setState({
 							recipes: xhr.response.hits,
 							receivedData: true
-						})
-							
+						});
+							if(xhr.response.more == true){
+								console.log("xz");
+								this.setState({
+									moreResults:true
+								});
+							}
 						else{
 							//the request was succesful but didn´t return data
 							this.setState({
 								receivedData: false
-					})
+					});
 						}
-						resolve(xhr.response)
+						resolve(xhr.response);
 					}
 					//status code not 200
 					else{
 						this.setState({
 							receivedData:false
 						})
-						reject("Status code wasn´t 200")
+						reject("Status code wasn´t 200");
 					}
 					//connection problems
 					xhr.onerror = () => {
 						this.setState({
 							receivedData:false
-						})
+						});
 						reject("request did not load because of connection problems")
 			}
 				};
@@ -110,6 +121,7 @@ class MainSearch extends React.Component {
 	componentDidMount() {  
 		this.apiRequest(this.queryParameters);
 	}
+	
 	
 	getFavorite(e){
 		//this function adds the targeted recipe value and image
@@ -158,6 +170,16 @@ class MainSearch extends React.Component {
 	getCheckBoxData(checkBoxState,name){
 		this.queryParameters[name] = checkBoxState;
 	}
+	
+	showMoreResults(){
+		
+		this.setState({
+			showMoreResults:true
+		})
+		this.queryParameters.pageQ += 1; 
+		console.log(this.queryParameters)
+		this.apiRequest(this.queryParameters)
+	}
 
 	render(){
 		
@@ -205,7 +227,7 @@ class MainSearch extends React.Component {
 					</form>
 				</div>
 
-				<MainContainer receivedData={this.state.receivedData} data={this.state.recipes} getFavorite={this.getFavorite}/>
+				<MainContainer receivedData={this.state.receivedData} data={this.state.recipes} getFavorite={this.getFavorite} showMoreResults={this.showMoreResults}/> 
 			</React.Fragment>
 				)	
 				}
