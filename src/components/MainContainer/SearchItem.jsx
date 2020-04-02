@@ -13,15 +13,13 @@ import IconButton from '@material-ui/core/IconButton';
 //Lodash for creating unique key IDs
 var _ = require('lodash');
 
-const SearchItem = (props) => {
-	const [value, setValue] = React.useState(0);
-  	const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-	var searchItemStyles = {
-		margin:"2%"
-	}
+	const SearchItem = (props) => {
+		const [value, setValue] = React.useState(0);
+		const handleChange = (event, newValue) => {
+		setValue(newValue);
+	  };
 	
+
 	function TabPanel(props) {
 		const { children, value, index, ...other } = props;
 
@@ -37,7 +35,8 @@ const SearchItem = (props) => {
       		{value === index && <Box p={3}>{children}</Box>}
     		</Typography>
   );
-}
+	}
+		
 	var {
 		title,
 		image,
@@ -56,7 +55,7 @@ const SearchItem = (props) => {
 	
 	return(
 		
-		<Paper style={searchItemStyles}  className="search-item" square>
+		<Paper  className="search-item" square>
 	     	<CardMedia
 				  component="img"
 				  alt={title}
@@ -67,7 +66,11 @@ const SearchItem = (props) => {
         	</CardMedia>
              <CardHeader
         		action={
-					<IconButton name={title} data-image={image} onClick={getFavorite} aria-label="favorite">
+					<IconButton
+						 name={title} 
+						 data-image={image} 
+						 onClick={getFavorite}
+						 aria-label="favorite">
             		<FavoriteIcon/>
           			</IconButton>
         		}
@@ -96,12 +99,17 @@ const SearchItem = (props) => {
 				<TabPanel value={value} index={1}>
  					<Typography className="card-list-item-subtitle"> Health Labels </Typography>  
  					<ul className="card-list-item-container"> 
-  							{healthLabels.map(elem => <li key={ _.uniqueId()}  className="card-list-item card-list-item_health"> {elem}</li> )}
+  						{healthLabels.map(elem => 
+							<li key={ _.uniqueId()}  className="card-list-item card-list-item_health"> {elem}</li> )}
   					</ul>
+  					
   					<Typography className="card-list-item-subtitle"> Cautions </Typography>
   					<ul className="card-list-item-container">
-  						{cautions.map(elem => <li key= { _.uniqueId()} className="card-list-item card-list-item_caution">{elem} </li>)}
+  						{cautions.map(elem => 
+									  <li key= { _.uniqueId()} className="card-list-item card-list-item_caution">{elem} </li>)
+									  }
   					</ul>
+  					
 				</TabPanel>
 				
 				<TabPanel value={value} index={2}>

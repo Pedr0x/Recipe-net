@@ -26,6 +26,10 @@ align-items: center;
 	font-size: 12px;
 }
 
+.search-item{
+	margin: 2%;
+}
+
 .card-list-item_health {
 color: white;
 	background: #00c853;

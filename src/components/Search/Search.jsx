@@ -101,7 +101,7 @@ class MainSearch extends React.Component {
 				favorites:[  ...this.state.favorites,newFavorite]
     		}
 						  )
-						 ) 
+			) 
 		let allFavorites = [...this.state.favorites, newFavorite]
 		localStorage.setItem("favorites", JSON.stringify(newFavorite))
 		console.log(allFavorites)
@@ -124,7 +124,7 @@ class MainSearch extends React.Component {
 	
 	checkboxChange(e){
 			{ this.queryParameters[e.target.name] = e.target.checked };	
-		}
+	}
 
 	caloriesChanger(e){
 		this.queryParameters.caloriesMax = e.target.value; 
