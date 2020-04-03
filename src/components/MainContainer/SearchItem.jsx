@@ -9,6 +9,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CardHeader from '@material-ui/core/CardHeader';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import IconButton from '@material-ui/core/IconButton';
+import {MyContext} from "../../App";
 
 //Lodash for creating unique key IDs
 var _ = require('lodash');
@@ -64,19 +65,23 @@ const SearchItem = (props) => {
 				  title={title}
 				>
         	</CardMedia>
+            <MyContext.Consumer> 
+		{(context) => (
              <CardHeader
         		action={
+					
 					<IconButton
 						 name={title} 
 						 data-image={image} 
-						 onClick={getFavorite}
+						 onClick={context.getFavorite}
 						 aria-label="favorite">
             		<FavoriteIcon/>
           			</IconButton>
         		}
         		title={<a href={url}>  {title}</a>}
         		subheader={`${parseInt(calories)} cal - ${parseInt(weight)}g  - For ${recipeYield}`}
-     		 />
+     		 /> )}
+			</MyContext.Consumer> 
      		 
 			<Tabs
 				value={value}
@@ -123,7 +128,8 @@ const SearchItem = (props) => {
 					</ul>
 				</TabPanel>
 	</Paper>
-	)
-}
+		)}
+	
+
 
 export  default SearchItem 

@@ -33,13 +33,20 @@ class MainSearch extends React.Component {
 			moreResultsAvailable:false
 		};
 		 
+		 this.options = {
+  			root: null, /* or `null` for page as root */
+  			threshold: 0.1 // Only observe when the entire box is in view
+		 }
+		 this.observer = new IntersectionObserver(this.callback, this.options);
+		 
 	    this.handleChange = this.handleChange.bind(this);
-	    this.getFavorite = this.getFavorite.bind(this);
 	    this.caloriesChanger = this.caloriesChanger.bind(this);
 	    this.apiRequest = this.apiRequest.bind(this);
 	    this.getQueryValue = this.getQueryValue.bind(this);
  		this.getCheckBoxData = this.getCheckBoxData.bind(this);
 		this.showMoreResults = this.showMoreResults.bind(this);
+		this.scrolla = this.scrolla.bind(this);
+		this.callback = this.callback.bind(this);
 
 	  }
 	
@@ -132,36 +139,8 @@ class MainSearch extends React.Component {
 
 	componentDidMount() {  
 		this.apiRequest(this.queryParameters);
-	}
+	}	
 	
-	
-	getFavorite(e){
-		//this function adds the targeted recipe value and image
-		//and adds it to an array in the state and local storage
-		e.stopPropagation()
-		const newFavorite = {
-			recipeName: e.target.name, 
-			image:	e.target.dataset.image
-		}
-
-		if (this.state.favorites.includes(e.target.name)) {
-			console.log("already had that recipe")
-		} 
-		
-		else {
-	    	this.setState(({
-				favorites:[  ...this.state.favorites,newFavorite]
-    		}
-						  )
-			)
-			
-		let allFavorites = [...this.state.favorites, newFavorite]
-		localStorage.setItem("favorites", JSON.stringify(newFavorite))
-		console.log(allFavorites)
-		}
-				//this is for future use
-	}
-
 	getQueryValue(e){
 		this.queryParameters.query = e.target.value;
 	}
@@ -195,6 +174,16 @@ class MainSearch extends React.Component {
 		this.apiRequest(this.queryParameters)
 	}
 
+
+	callback(){
+		console.log("scroll works")
+	}
+
+scrolla(e){
+	console.log(1)
+	this.observer.observe(e.target);
+
+}
 	render(){
 		
 		return (
@@ -241,7 +230,9 @@ class MainSearch extends React.Component {
 					</form>
 				</div>
 
-				<MainContainer receivedData={this.state.receivedData} data={this.state.recipes} getFavorite={this.getFavorite} moreResultsAvailable={this.state.moreResults} showMoreResults={this.showMoreResults}/> 
+				<MainContainer receivedData={this.state.receivedData} data={this.state.recipes} moreResultsAvailable={this.state.moreResults} showMoreResults={this.showMoreResults}
+								event={this.scrolla}
+									/> 
 			</React.Fragment>
 				)	
 				}

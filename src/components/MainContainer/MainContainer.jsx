@@ -1,8 +1,21 @@
 import React from 'react'
 import SearchItem from "./SearchItem";
 import Spinner from "./Spinner";
+import VizSensor from 'react-visibility-sensor';
 
 var MainContainer = (props) => {
+	
+	function handleScroll(e)  {
+    const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
+    console.log(bottom);
+		
+  }
+	function isBottom(el) {
+  //console.log(e.getBoundingClientRect().bottom <= window.innerHeight);
+		  return el.getBoundingClientRect().bottom <= window.innerHeight;
+		    console.log(23);
+
+}
 	if ( props.receivedData === true && props.data.length === 0  ){
 		return (
 			<div className="main-search-container">
@@ -16,7 +29,7 @@ var MainContainer = (props) => {
 	
 	else {
 		return(
-			<div className="main-search-container">
+			<div className="main-search-container" onScroll={isBottom}>
 				{props.data.map( (elem) => 
 		  			<SearchItem 
 						title={elem.recipe.label}
@@ -32,14 +45,14 @@ var MainContainer = (props) => {
 						key={elem.recipe.url}
 						recipeYield={elem.recipe.yield}
 						url={elem.recipe.url}
-						getFavorite={props.getFavorite}
 						/> 
 				)
 								}
-							{props.moreResultsAvailable ?  <div> 
-								<button onClick={props.showMoreResults}className="btn btn_render-more"> Render More</button>
+							{props.moreResultsAvailable ? 
+					<div className="ex"> 
+								<button onClick={props.showMoreResults} className="btn btn_render-more"> Render More</button>
 								</div> : <h1> No more results</h1>}
-
+{isBottom ? <h1> as</h1> : <h1>no</h1>}
  			</div>	
 		)
 	}

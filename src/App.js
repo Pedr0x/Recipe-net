@@ -74,15 +74,62 @@ return(
 
 };
 	*/
+export let MyContext = React.createContext();
+
+
+class MyProvider extends React.Component {
+	state = {
+		favoriteRecipes:[]
+	}
+	
+	render(){
+		
+		return(
+		<MyContext.Provider value={{
+			state:this.state,
+			getFavorite:  (e) =>{
+		//this function adds the targeted recipe value and image
+		//and adds it to an array in the state and local storage
+		//need to bind this
+		e.stopPropagation()
+		const newFavorite = {
+			recipeName: e.target.name, 
+			image:	e.target.dataset.image
+		}
+
+		if (this.state.favoriteRecipes.includes(e.target.name)) {
+			console.log("already had that recipe")
+		} 
+		
+		else {
+	    	this.setState(({
+				favoriteRecipes:[  ...this.state.favoriteRecipes,newFavorite]
+    		}
+						  )
+			)
+			
+		let allFavorites = [...this.state.favoriteRecipes, newFavorite]
+		localStorage.setItem("favorites", JSON.stringify(newFavorite))
+		console.log(allFavorites)
+		}
+				//this is for future use
+	}}}
+			>
+		
+		{this.props.children}
+		</MyContext.Provider>
+		)
+	}
+}
 
 var App = () => {
 	return(
 	
-<div>		
+<MyProvider>		
 		<NavBar/> 
 				<MainSearch/>
 
-</div>
+</MyProvider>
 	)
 	
 }
