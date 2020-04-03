@@ -38,7 +38,7 @@ class MainSearch extends React.Component {
 	    this.apiRequest = this.apiRequest.bind(this);
 	    this.getQueryValue = this.getQueryValue.bind(this);
  		this.getCheckBoxData = this.getCheckBoxData.bind(this);
-		 this.showMoreResults = this.showMoreResults.bind(this);
+		this.showMoreResults = this.showMoreResults.bind(this);
 
 	  }
 	
@@ -64,9 +64,11 @@ class MainSearch extends React.Component {
 		const isAlcoholFree = alcoholFree ? "&health=alcohol-free" : "";
 		const isGlutenFree = gluten ? "&health=glutenFree" : "";
 		const isBalanced = balanced ? "&diet=balanced" : "";
-		const isHighProtein = highProtein ? "&diet=high-protein" : "";
+		const isHighProtein = highProtein ? "&diet=high-protein" : "" ;
+		const pagesToFetch = pageQ * 3;
+
 		
-				const urlRequest = `https://cors-anywhere.herokuapp.com/https://api.edamam.com/search?q=${query}&app_id=8bc00f3b&app_key=b1d9d15dadbddc109d83b189b71e533f&from=0&to=${pageQ}${ManyCalories}${isAlcoholFree}${isVegetarian}${isLowFat}${isGlutenFree}${isHighProtein}${isBalanced}`;
+				const urlRequest = `https://cors-anywhere.herokuapp.com/https://api.edamam.com/search?q=${query}&app_id=8bc00f3b&app_key=b1d9d15dadbddc109d83b189b71e533f&from=0&to=${pagesToFetch}${ManyCalories}${isAlcoholFree}${isVegetarian}${isLowFat}${isGlutenFree}${isHighProtein}${isBalanced}`;
 
 		let getPromise = new Promise((resolve,reject) => {
 			const xhr = new XMLHttpRequest();
@@ -74,17 +76,23 @@ class MainSearch extends React.Component {
 				xhr.responseType = "json";
 				xhr.onload = () => {
 					if(xhr.status === 200){
-						if(xhr.response.hits.length > 0)	
+						if(xhr.response.hits.length > 0){	
 							this.setState({
 							recipes: xhr.response.hits,
 							receivedData: true
-						});
+						})
 							if(xhr.response.more == true){
-								console.log("xz");
+								console.log("more results available");
 								this.setState({
 									moreResults:true
 								});
+							} else {
+								console.log("the arent more results available")
+								this.setState({
+									moreResults:false
+								});
 							}
+						}
 						else{
 							//the request was succesful but didn´t return data
 							this.setState({
@@ -227,7 +235,7 @@ class MainSearch extends React.Component {
 					</form>
 				</div>
 
-				<MainContainer receivedData={this.state.receivedData} data={this.state.recipes} getFavorite={this.getFavorite} showMoreResults={this.showMoreResults}/> 
+				<MainContainer receivedData={this.state.receivedData} data={this.state.recipes} getFavorite={this.getFavorite} moreResultsAvailable={this.state.moreResults} showMoreResults={this.showMoreResults}/> 
 			</React.Fragment>
 				)	
 				}
