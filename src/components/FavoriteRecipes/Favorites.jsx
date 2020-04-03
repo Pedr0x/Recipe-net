@@ -10,7 +10,7 @@ class Favorites extends React.Component {
 		<div className="favorite-recipes">
 			
 			<div>
-			
+			<h1>these are your favorite recipes</h1>
 				
 			</div>
 		</div>
