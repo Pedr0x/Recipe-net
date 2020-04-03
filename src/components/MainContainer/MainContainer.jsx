@@ -36,7 +36,7 @@ var MainContainer = (props) => {
 						/> 
 				)
 								}
-							{props.moreResults ?  		<div> 
+							{props.moreResultsAvailable ?  <div> 
 								<button onClick={props.showMoreResults}className="btn btn_render-more"> Render More</button>
 								</div> : <h1> No more results</h1>}
 

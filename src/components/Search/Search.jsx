@@ -14,7 +14,7 @@ class MainSearch extends React.Component {
 		favorites:[],
 		receivedData:true,
 		moreResults:false,
-		renderMoreResults:false,
+		//renderMoreResults:false,
 		page:1
 
 	};
@@ -29,7 +29,8 @@ class MainSearch extends React.Component {
 			balanced:false,
 			highProtein:false,
 			caloriesMax:null,
-			pageQ: 3
+			pageQ: 3,
+			moreResultsAvailable:false
 		};
 		 
 	    this.handleChange = this.handleChange.bind(this);
@@ -65,7 +66,7 @@ class MainSearch extends React.Component {
 		const isGlutenFree = gluten ? "&health=glutenFree" : "";
 		const isBalanced = balanced ? "&diet=balanced" : "";
 		const isHighProtein = highProtein ? "&diet=high-protein" : "" ;
-		const pagesToFetch = pageQ * 3;
+		const pagesToFetch = pageQ * 2;
 
 		
 				const urlRequest = `https://cors-anywhere.herokuapp.com/https://api.edamam.com/search?q=${query}&app_id=8bc00f3b&app_key=b1d9d15dadbddc109d83b189b71e533f&from=0&to=${pagesToFetch}${ManyCalories}${isAlcoholFree}${isVegetarian}${isLowFat}${isGlutenFree}${isHighProtein}${isBalanced}`;
@@ -86,11 +87,14 @@ class MainSearch extends React.Component {
 								this.setState({
 									moreResults:true
 								});
+								this.queryParameters.moreResultsAvailable = true;
 							} else {
 								console.log("the arent more results available")
 								this.setState({
 									moreResults:false
 								});
+																this.queryParameters.moreResultsAvailable = false;
+
 							}
 						}
 						else{
@@ -168,6 +172,8 @@ class MainSearch extends React.Component {
 		this.setState({
 			recipes: []
 		});
+		//reset the pages request
+		this.queryParameters.pageQ = 3;
 		this.apiRequest(this.queryParameters);
 	}
 	
@@ -181,9 +187,9 @@ class MainSearch extends React.Component {
 	
 	showMoreResults(){
 		
-		this.setState({
+		/*this.setState({
 			showMoreResults:true
-		})
+		})*/
 		this.queryParameters.pageQ += 1; 
 		console.log(this.queryParameters)
 		this.apiRequest(this.queryParameters)
@@ -197,7 +203,7 @@ class MainSearch extends React.Component {
 					<form  className="search-form"  noValidate autoComplete="off">
 						 <div className="search-form-container">
 							 <div className="search-form-main-panel">
-								 <h1 className="main-search-title"> Search for a recipe!</h1>
+								 <h1 className="main-search-title" onClick={() => console.log(this.state)}> Search for a recipe!</h1>
 								 <div className="input-container">
 									<input placeholder="Donuts" className="query-input" onChange={this.getQueryValue}/>
 									<button onClick={this.handleChange} className="search-button"> <SearchIcon/> </button>
