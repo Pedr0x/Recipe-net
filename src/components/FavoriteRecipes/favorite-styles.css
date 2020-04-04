@@ -1,5 +1,33 @@
 .favorite-recipes{
-	height: 100vh;
-	background: gold;
-	width: 50vw;
+	
+}
+
+.favorite-recipes-super-container{
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+}
+
+.favorite-recipes-item-title {
+	font-size: 26px;
+	background: #ffffff75;
+	color: white;
+	padding: 2% 2%;
+	display: flex;
+	align-items: center;
+}
+
+.favorite-recipes-item {
+	/* background: purple; */
+	display: grid;
+	min-height: 210px;
+	grid-template-rows: 2fr 1fr;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+.favorite-item-delete-icon {
+	justify-self: end;
+	padding: 3%;
+	color: white;
 }

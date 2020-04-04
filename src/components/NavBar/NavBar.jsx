@@ -14,11 +14,11 @@ var NavBar = () => {
 	
 	return(
 
-	<AppBar color="primary" position="static"> 
-		<Typography variant="h5" align="left" fontWeight={600}> 
-		
-		RecipeFinder   </Typography> 
-	
+	<AppBar color="primary" position="static"> 	
+		   	<div className="navbar">
+			   <Link className="navbar-title navbar-title_main" to="/">RecipeFinder</Link>
+              <Link className="navbar-title" to="/favorites">Favorites</Link>
+               </div>
 		</AppBar>
 
 	)

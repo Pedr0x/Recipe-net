@@ -6,6 +6,7 @@ import './components/MainContainer/main-container.css';
 import './components/MainContainer/search-item.css';
 import './components/Search/search-styles.css';
 import './components/FavoriteRecipes/favorite-styles.css';
+import './components/NavBar/navbar-styles.css';
 
 
 import {
@@ -28,6 +29,15 @@ class MyProvider extends React.Component {
 		favoriteRecipes:[]
 	}
 	
+	componentDidMount(){
+		if (localStorage.favorites.length !== 0) {
+			this.setState({
+				favoriteRecipes:[...JSON.parse(localStorage.favorites)]
+			})
+		}
+	console.log(this.state.favoriteRecipes);
+
+	}
 	render(){
 		
 		return(
@@ -40,13 +50,13 @@ class MyProvider extends React.Component {
 		e.stopPropagation()
 		const newFavorite = {
 			recipeName: e.target.name, 
-			image:	e.target.dataset.image
+			image:	e.target.dataset.image,
+			url:e.target.dataset.url
 		}
 
 		if (this.state.favoriteRecipes.includes(e.target.name)) {
 			console.log("already had that recipe")
 		} 
-		
 		else {
 	    	this.setState(({
 				favoriteRecipes:[  ...this.state.favoriteRecipes,newFavorite]
@@ -55,11 +65,13 @@ class MyProvider extends React.Component {
 			)
 			
 		let allFavorites = [...this.state.favoriteRecipes, newFavorite]
-		localStorage.setItem("favorites", JSON.stringify(newFavorite))
+		localStorage.setItem("favorites", JSON.stringify(allFavorites))
 		console.log(allFavorites)
 		}
 				//this is for future use
-	}}}
+	}	
+	
+	}}
 			>
 		
 		{this.props.children}
@@ -77,7 +89,6 @@ var App = () => {
 		<Switch> 
 		<Route path="/Favorites" component={Favorites}/>
 		<Route path="/" exact component={MainSearch}/>
-
 		</Switch>
 </Router>
 </MyProvider>

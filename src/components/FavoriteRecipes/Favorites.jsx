@@ -1,19 +1,25 @@
 import React from "react";
-
+import {MyContext} from "../../App";
+import FavoriteItemsContainer from "./FavoriteItemsContainer";
+import FavoriteItems from "./FavoriteItems";
 
 class Favorites extends React.Component {
 
 	render(props){
 		
-		
 		return(
-		<div className="favorite-recipes">
-			
-			<div>
-			<h1>these are your favorite recipes</h1>
-				
-			</div>
-		</div>
+		<div className="favorite-recipes-super-container">
+			<h1> favorites</h1>
+			<MyContext.Consumer>
+			{(context) =>(
+					<React.Fragment> 
+					<FavoriteItemsContainer data={context.state.favoriteRecipes}/>												  
+						 </React.Fragment>
+													  )
+													  }
+			</MyContext.Consumer>
+				</div>
+
 		)
 	}
 

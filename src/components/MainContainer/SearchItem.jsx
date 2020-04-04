@@ -74,6 +74,7 @@ const SearchItem = (props) => {
 						 name={title} 
 						 data-image={image} 
 						 onClick={context.getFavorite}
+						 data-url={url}
 						 aria-label="favorite">
             		<FavoriteIcon/>
           			</IconButton>
