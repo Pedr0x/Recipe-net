@@ -63,7 +63,7 @@ class MyProvider extends React.Component {
 			url:e.target.dataset.url,
 			date:`${day}/${month}`
 		}
-
+		//check if the state already has that recipe
 		if (this.state.favoriteRecipes.some(elem => elem.recipeName == e.target.name  )) {
 			console.log("already had that recipe")
 		} 

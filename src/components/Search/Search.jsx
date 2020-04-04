@@ -4,6 +4,11 @@ import SearchIcon from '@material-ui/icons/Search';
 
 import CheckBox from './CheckBox';
 import MainContainer from "../MainContainer/MainContainer";
+import InputRange from './InputRange';
+import ToggleItem from './Toggle';
+
+
+import  './input-range.css';
 
 class MainSearch extends React.Component {
 	 constructor(props) {
@@ -30,7 +35,8 @@ class MainSearch extends React.Component {
 			highProtein:false,
 			caloriesMax:null,
 			pageQ: 3,
-			moreResultsAvailable:false
+			moreResultsAvailable:false,
+			inSpanish:false
 		};
 		 
 		 this.options = {
@@ -47,6 +53,7 @@ class MainSearch extends React.Component {
 		this.showMoreResults = this.showMoreResults.bind(this);
 		this.scrolla = this.scrolla.bind(this);
 		this.callback = this.callback.bind(this);
+		this.toggleLang = this.toggleLang.bind(this);
 
 	  }
 	
@@ -61,7 +68,8 @@ class MainSearch extends React.Component {
 			balanced,
 			highProtein,
 			caloriesMax,
-			pageQ
+			pageQ,
+			inSpanish
 		} = queryObj;		
 		
 		//conditional parameters
@@ -74,9 +82,9 @@ class MainSearch extends React.Component {
 		const isBalanced = balanced ? "&diet=balanced" : "";
 		const isHighProtein = highProtein ? "&diet=high-protein" : "" ;
 		const pagesToFetch = pageQ * 2;
-
+		const requestLang = inSpanish ? "https://test-es.edamam.com/search" : "https://api.edamam.com/search";
 		
-				const urlRequest = `https://cors-anywhere.herokuapp.com/https://api.edamam.com/search?q=${query}&app_id=8bc00f3b&app_key=b1d9d15dadbddc109d83b189b71e533f&from=0&to=${pagesToFetch}${ManyCalories}${isAlcoholFree}${isVegetarian}${isLowFat}${isGlutenFree}${isHighProtein}${isBalanced}`;
+				const urlRequest = `https://cors-anywhere.herokuapp.com/${requestLang}?q=${query}&app_id=8bc00f3b&app_key=b1d9d15dadbddc109d83b189b71e533f&from=0&to=${pagesToFetch}${ManyCalories}${isAlcoholFree}${isVegetarian}${isLowFat}${isGlutenFree}${isHighProtein}${isBalanced}`;
 
 		let getPromise = new Promise((resolve,reject) => {
 			const xhr = new XMLHttpRequest();
@@ -174,7 +182,6 @@ class MainSearch extends React.Component {
 		this.apiRequest(this.queryParameters)
 	}
 
-
 	callback(){
 		console.log("scroll works")
 	}
@@ -184,6 +191,13 @@ scrolla(e){
 	this.observer.observe(e.target);
 
 }
+	toggleLang(e){
+		this.queryParameters.inSpanish = !this.queryParameters.inSpanish;
+		console.log(this.queryParameters.inSpanish)
+		
+	}
+	
+	
 	render(){
 		
 		return (
@@ -222,10 +236,11 @@ scrolla(e){
 								<CheckBox  callback={this.getCheckBoxData} label="Low Fat" name="lowFat"/>
 						</div>
 					</div>
-						<div className="calories-max-container">
-							<h2 className="checkbox-subtitle"> Max Calories</h2>
-							<input className="calories-input" onChange={this.caloriesChanger} name="caloriesMax" type="number"  min="1" max="30000"/>
-						 </div>
+					<div className="inputs-container">
+						
+						 <InputRange  callback={this.caloriesChanger} labelText="Max Calories" name="caloriesMax"/>
+						  </div>
+						  <ToggleItem labelText="change query lang" callback={this.toggleLang}/>
 						</div>
 					</form>
 				</div>
