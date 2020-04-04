@@ -65,7 +65,10 @@ class MyProvider extends React.Component {
 		}
 		//check if the state already has that recipe
 		if (this.state.favoriteRecipes.some(elem => elem.recipeName == e.target.name  )) {
-			console.log("already had that recipe")
+			this.setState({
+				favoriteRecipes: this.state.favoriteRecipes.filter(elem => elem.recipeName !== e.target.name)
+			}, () =>  localStorage.setItem("favorites", JSON.stringify(this.state.favoriteRecipes)))
+			//Update local storage with the deleted item
 		} 
 		else {
 	    	this.setState(({
