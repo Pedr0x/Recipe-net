@@ -30,10 +30,14 @@ class MyProvider extends React.Component {
 	}
 	
 	componentDidMount(){
-		if (localStorage.favorites.length !== 0) {
+		if (localStorage.favorites != undefined) {
 			this.setState({
 				favoriteRecipes:[...JSON.parse(localStorage.favorites)]
 			})
+			
+		}
+		else{
+			return
 		}
 	console.log(this.state.favoriteRecipes);
 
@@ -69,8 +73,16 @@ class MyProvider extends React.Component {
 		console.log(allFavorites)
 		}
 				//this is for future use
-	}	
-	
+	},	
+	deleteFavorite: (param) => {
+		console.log(param)
+		this.setState({
+			favoriteRecipes: this.state.favoriteRecipes.filter(recipe => recipe.recipeName != param)
+		})
+		localStorage.setItem("favorites", JSON.stringify(this.state.favoriteRecipes))
+		
+		console.log(this.state)
+	}
 	}}
 			>
 		
