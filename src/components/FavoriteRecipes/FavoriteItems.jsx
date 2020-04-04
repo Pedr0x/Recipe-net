@@ -23,7 +23,8 @@ const FavoriteItems = (props) => {
 						 </MyContext.Consumer>
 		<div  className="favorite-recipes-item-title"> 
 
-		<a href={props.url}>{props.title} {itemData.title} </a>
+		<a href={props.url} className="favorites-item-link">{props.title} </a>
+		<a  className="favorites-item-date"> Added on: </a>
 		</div>		
 			</div>
 
@@ -31,3 +32,4 @@ const FavoriteItems = (props) => {
 	}
 
 export default FavoriteItems
+

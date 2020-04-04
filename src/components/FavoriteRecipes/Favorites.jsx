@@ -9,7 +9,7 @@ class Favorites extends React.Component {
 		
 		return(
 		<div className="favorite-recipes-super-container">
-			<h1> favorites</h1>
+			<h1 className="favorites-main-title">  favorites</h1>
 			<MyContext.Consumer>
 			{(context) =>(
 					<React.Fragment> 

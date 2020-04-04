@@ -7,6 +7,7 @@ import './components/MainContainer/search-item.css';
 import './components/Search/search-styles.css';
 import './components/FavoriteRecipes/favorite-styles.css';
 import './components/NavBar/navbar-styles.css';
+import './components/alert/alert-styles.css';
 
 
 import {
@@ -58,7 +59,7 @@ class MyProvider extends React.Component {
 			url:e.target.dataset.url
 		}
 
-		if (this.state.favoriteRecipes.includes(e.target.name)) {
+		if (this.state.favoriteRecipes.some(e.target.name)) {
 			console.log("already had that recipe")
 		} 
 		else {
@@ -66,9 +67,10 @@ class MyProvider extends React.Component {
 				favoriteRecipes:[  ...this.state.favoriteRecipes,newFavorite]
     		}
 						  )
+						  
 			)
-			
-		let allFavorites = [...this.state.favoriteRecipes, newFavorite]
+			let allFavorites = [...this.state.favoriteRecipes, newFavorite]
+
 		localStorage.setItem("favorites", JSON.stringify(allFavorites))
 		console.log(allFavorites)
 		}
@@ -97,7 +99,7 @@ var App = () => {
 	
 <MyProvider>
 		<Router>
-		<NavBar/> 
+		<NavBar/>
 		<Switch> 
 		<Route path="/Favorites" component={Favorites}/>
 		<Route path="/" exact component={MainSearch}/>

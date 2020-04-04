@@ -1,6 +1,8 @@
 import React from 'react'
 import SearchItem from "./SearchItem";
 import Spinner from "./Spinner";
+import Alert from "./Alert";
+
 import VizSensor from 'react-visibility-sensor';
 
 var MainContainer = (props) => {
@@ -48,11 +50,11 @@ var MainContainer = (props) => {
 						/> 
 				)
 								}
-							{props.moreResultsAvailable ? 
+					{props.moreResultsAvailable ? 
 					<div className="ex"> 
 								<button onClick={props.showMoreResults} className="btn btn_render-more"> Render More</button>
 								</div> : <h1> No more results</h1>}
-{isBottom ? <h1> as</h1> : <h1>no</h1>}
+
  			</div>	
 		)
 	}
