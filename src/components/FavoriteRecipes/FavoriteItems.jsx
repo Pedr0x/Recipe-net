@@ -24,7 +24,7 @@ const FavoriteItems = (props) => {
 		<div  className="favorite-recipes-item-title"> 
 
 		<a href={props.url} className="favorites-item-link">{props.title} </a>
-		<a  className="favorites-item-date"> Added on: </a>
+		<a  className="favorites-item-date"> Added on: {props.date} </a>
 		</div>		
 			</div>
 
@@ -32,4 +32,3 @@ const FavoriteItems = (props) => {
 	}
 
 export default FavoriteItems
-

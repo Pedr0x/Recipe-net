@@ -18,7 +18,7 @@ var FavoriteItemsContainer = (props) => {
 					  url={elem.url}
 					title={elem.recipeName}
 				  	key={_.uniqueId()}		
-					  
+					 date={elem.date}
 					  />			  
 						  
 						  )

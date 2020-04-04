@@ -53,13 +53,18 @@ class MyProvider extends React.Component {
 		//and adds it to an array in the state and local storage
 		//need to bind this
 		e.stopPropagation()
+		const now = new Date;
+		const day = now.getDate();
+		const month = now.getDate();
+
 		const newFavorite = {
 			recipeName: e.target.name, 
 			image:	e.target.dataset.image,
-			url:e.target.dataset.url
+			url:e.target.dataset.url,
+			date:`${day}/${month}`
 		}
 
-		if (this.state.favoriteRecipes.some(e.target.name)) {
+		if (this.state.favoriteRecipes.some(elem => elem.recipeName == e.target.name  )) {
 			console.log("already had that recipe")
 		} 
 		else {
