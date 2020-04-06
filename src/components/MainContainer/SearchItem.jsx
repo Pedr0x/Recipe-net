@@ -9,11 +9,12 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CardHeader from '@material-ui/core/CardHeader';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import IconButton from '@material-ui/core/IconButton';
+import {MyContext} from "../../App";
 
 //Lodash for creating unique key IDs
 var _ = require('lodash');
 
-	const SearchItem = (props) => {
+const SearchItem = (props) => {
 		const [value, setValue] = React.useState(0);
 		const handleChange = (event, newValue) => {
 		setValue(newValue);
@@ -48,7 +49,6 @@ var _ = require('lodash');
 		//dietLabels,
 		cautions,
 		totalNutrients,
-		getFavorite,
 		url,
 		recipeYield,
 	} = props;
@@ -64,19 +64,25 @@ var _ = require('lodash');
 				  title={title}
 				>
         	</CardMedia>
+            <MyContext.Consumer> 
+		{(context) => (
              <CardHeader
-        		action={
+        		action={ 
+					
 					<IconButton
 						 name={title} 
 						 data-image={image} 
-						 onClick={getFavorite}
+						 onClick={context.getFavorite}
+						 data-url={url}
 						 aria-label="favorite">
-            		<FavoriteIcon/>
+						{context.state.favoriteRecipes.some(elem => elem.recipeName === title) 
+									? <FavoriteIcon color="secondary"/> : <FavoriteIcon/> }
           			</IconButton>
         		}
         		title={<a href={url}>  {title}</a>}
         		subheader={`${parseInt(calories)} cal - ${parseInt(weight)}g  - For ${recipeYield}`}
-     		 />
+     		 /> )}
+			</MyContext.Consumer> 
      		 
 			<Tabs
 				value={value}
@@ -123,7 +129,8 @@ var _ = require('lodash');
 					</ul>
 				</TabPanel>
 	</Paper>
-	)
-}
+		)}
+	
+
 
 export  default SearchItem 
