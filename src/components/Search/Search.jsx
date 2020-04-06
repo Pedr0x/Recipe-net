@@ -40,27 +40,18 @@ class MainSearch extends React.Component {
 			cuisineType:"",
 			excluded:""
 		};
-		 
-		 this.options = {
-  			root: null, /* or `null` for page as root */
-  			threshold: 0.1 // Only observe when the entire box is in view
-		 }
-		 
-		this.observer = new IntersectionObserver(this.callback, this.options);
+		
 	    this.handleChange = this.handleChange.bind(this);
 	    this.apiRequest = this.apiRequest.bind(this);
 	    this.getQueryValue = this.getQueryValue.bind(this);
  		this.getCheckBoxData = this.getCheckBoxData.bind(this);
 		this.showMoreResults = this.showMoreResults.bind(this);
-		this.scrolla = this.scrolla.bind(this);
-		this.callback = this.callback.bind(this);
 		this.toggleLang = this.toggleLang.bind(this);
 		this.getValue = this.getValue.bind(this);
 		 
 	  }
 	
 	apiRequest(queryObj) {
-		
 		const {
 			query,
 			alcoholFree,
@@ -110,13 +101,11 @@ class MainSearch extends React.Component {
 								this.setState({
 									moreResults:true
 								});
-								this.queryParameters.moreResultsAvailable = true;
 							} else {
-									console.log("there arent more results available")
+									//no more recipes available
 									this.setState({
 										moreResults:false
 									});
-									this.queryParameters.moreResultsAvailable = false;
 							}
 						}
 						else{
@@ -142,10 +131,9 @@ class MainSearch extends React.Component {
 						reject("request did not load because of connection problems")
 			}
 				};
-			
 				xhr.send();
 		}
-									)
+		)
 		getPromise
 			.then(res => console.log(res))
 			.catch(err => console.log(err))
@@ -184,15 +172,6 @@ class MainSearch extends React.Component {
 		console.log(this.queryParameters)
 		this.apiRequest(this.queryParameters)
 	}
-
-	callback(){
-		console.log("scroll works")
-	}
-
-	scrolla(e){
-		console.log(1)
-		this.observer.observe(e.target);
-	}
 	
 	toggleLang(e){
 		this.queryParameters.inSpanish = !this.queryParameters.inSpanish;
@@ -216,7 +195,7 @@ class MainSearch extends React.Component {
 									<input name="query" placeholder="Donuts" className="query-input" onChange={this.getValue}/>
 									<button onClick={this.handleChange} className="search-button"> <SearchIcon/> </button>
 								 </div>
-								   <ToggleItem labelText="change query lang" callback={this.toggleLang}/>
+								   <ToggleItem labelText="Buscar en español" callback={this.getCheckBoxData} name="inSpanish"/>
 								</div>
 							 </div>
 						<div className="form-parameters">
@@ -253,7 +232,6 @@ class MainSearch extends React.Component {
 				</div>
 
 				<MainContainer receivedData={this.state.receivedData} data={this.state.recipes} moreResultsAvailable={this.state.moreResults} showMoreResults={this.showMoreResults}
-								event={this.scrolla}
 									/> 
 			</React.Fragment>
 				)	

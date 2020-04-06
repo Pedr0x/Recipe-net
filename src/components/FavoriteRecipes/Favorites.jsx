@@ -1,10 +1,8 @@
 import React from "react";
 import {MyContext} from "../../App";
 import FavoriteItemsContainer from "./FavoriteItemsContainer";
-import FavoriteItems from "./FavoriteItems";
 
 class Favorites extends React.Component {
-
 	render(props){
 		
 		return(
@@ -13,16 +11,14 @@ class Favorites extends React.Component {
 			<MyContext.Consumer>
 			{(context) =>(
 					<React.Fragment> 
-					<FavoriteItemsContainer data={context.state.favoriteRecipes}/>												  
-						 </React.Fragment>
-													  )
-													  }
+						<FavoriteItemsContainer data={context.state.favoriteRecipes}/>												  
+					</React.Fragment>
+								)
+			}
 			</MyContext.Consumer>
 				</div>
-
 		)
 	}
-
 	}
 
 export default Favorites

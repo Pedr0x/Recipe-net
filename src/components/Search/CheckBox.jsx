@@ -7,13 +7,10 @@ class Checkbox extends React.Component{
 		super(props)
 		this.state = {
 			checked:false
-		}
-				
-		this.toggle = this.toggle.bind(this)	
+		};
+		this.toggle = this.toggle.bind(this);	
 	}
 		toggle(){
-
-		const {name,callback} = this.props;
 		const {checked} = this.state;
 		console.log(checked + "start")
 			this.setState({
@@ -25,9 +22,7 @@ class Checkbox extends React.Component{
 		//started having bugs returning the untoggled 
 		//value so i´ll start calling the callback here
 		const {name,callback} = this.props;
-		const {checked} = this.state;
-		callback(checked,name)
-	
+		callback(this.state.checked,name)
 	}
 	
 	render(){

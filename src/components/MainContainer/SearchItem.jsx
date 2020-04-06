@@ -49,7 +49,6 @@ const SearchItem = (props) => {
 		//dietLabels,
 		cautions,
 		totalNutrients,
-		getFavorite,
 		url,
 		recipeYield,
 	} = props;
@@ -76,7 +75,8 @@ const SearchItem = (props) => {
 						 onClick={context.getFavorite}
 						 data-url={url}
 						 aria-label="favorite">
-{context.state.favoriteRecipes.some(elem => elem.recipeName == title) ? <FavoriteIcon color="secondary"/> : <FavoriteIcon/> }
+						{context.state.favoriteRecipes.some(elem => elem.recipeName === title) 
+									? <FavoriteIcon color="secondary"/> : <FavoriteIcon/> }
           			</IconButton>
         		}
         		title={<a href={url}>  {title}</a>}

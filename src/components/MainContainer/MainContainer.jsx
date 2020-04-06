@@ -1,12 +1,7 @@
 import React, { useRef } from 'react'
 import { useInView } from 'react-intersection-observer'
-
 import SearchItem from "./SearchItem";
 import Spinner from "./Spinner";
-import Alert from "./Alert";
-
-import VizSensor from 'react-visibility-sensor';
-
 const MainContainer = (props) => {
 	
 	 const [ref, inView, entry] = useInView({
@@ -14,7 +9,6 @@ const MainContainer = (props) => {
     threshold: 0,
   })
 	 if(inView){
-		 console.log("viewww");
 		 props.showMoreResults();
 	 }
 	
@@ -51,7 +45,7 @@ const MainContainer = (props) => {
 				)
 								}
 					{props.moreResultsAvailable ? 
-					<div className="" ref={ref}> 
+					<div className="spinner-container" ref={ref}> 
 								<Spinner/> 
 								</div> : <h1> No more results</h1>}
 

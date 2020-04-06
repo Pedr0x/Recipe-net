@@ -9,3 +9,7 @@ padding: 1%;
 font-size: 18px;
 box-shadow: 0px 1px 3px #dbd8d8;
 }
+
+.select-container{
+	display: none;
+}

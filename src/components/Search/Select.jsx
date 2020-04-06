@@ -9,11 +9,9 @@ class Select extends  React.Component{
     this.state = {
 		active:false
 	}}
-	
 	render(){
-		
 		return(
-		<div onChange={this.props.callback}>
+		<div onChange={this.props.callback} className="select-container">
 		<label>Cuisine Type</label>
 			<select name={this.props.name} onChange={this.props.callback}>
 				<option value="">Select:</option>
@@ -21,7 +19,6 @@ class Select extends  React.Component{
 				<option value="italian">italian</option>				
 			</select>
 		</div>
-		
 		)
 	}
 }
