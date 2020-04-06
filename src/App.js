@@ -24,7 +24,6 @@ import Favorites from './components/FavoriteRecipes/Favorites';
 
 export let MyContext = React.createContext();
 
-
 class MyProvider extends React.Component {
 	state = {
 		favoriteRecipes:[]
@@ -104,18 +103,16 @@ class MyProvider extends React.Component {
 
 var App = () => {
 	return(
-	
-<MyProvider>
-		<Router>
-		<NavBar/>
-		<Switch> 
-		<Route path="/Favorites" component={Favorites}/>
-		<Route path="/" exact component={MainSearch}/>
-		</Switch>
-</Router>
-</MyProvider>
+		<MyProvider>
+				<Router>
+				<NavBar/>
+				<Switch> 
+					<Route path="/Favorites" component={Favorites}/>
+					<Route path="/" exact component={MainSearch}/>
+				</Switch>
+				</Router>
+		</MyProvider>
 	)
-	
 }
 
 export  default App;

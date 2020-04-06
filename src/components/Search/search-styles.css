@@ -29,8 +29,8 @@ checkbox-item label{
 
 .input_range{
 	border-radius: 25px;
-	padding: 1% 2%;
 	background: #fff;
+	padding: 2%;
 	font-size: 18px;
 	box-shadow: 0px 1px 3px #dbd8d8;
 	}
@@ -127,6 +127,13 @@ color: #0c76d2;
 	color: #00c853;
 }
 
+.inputs-container {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	padding: 3% 0;
+}
+
+
 .input-container{
 	width: 100%;
 	font-size: 32px;
@@ -155,6 +162,14 @@ color: #0c76d2;
 	background: 0;
 	border: 0;
 }
+
+.toggle-item-container {
+	display: flex;
+	align-items: center;
+	justify-content: end;
+	padding: 2% 0;
+}
+
 
 @media only screen and (max-width: 800px){
 	

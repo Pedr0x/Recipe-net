@@ -28,7 +28,7 @@ class ToggleItem extends React.Component{
 		 <div className="toggle-item-container" onClick={this.toggle}>
 						  <label className="card-list-item-subtitle"> {this.props.labelText} </label>
 						  
-			{this.state.active ? <ToggleOnIcon color="primary" fontSize="big" /> : <ToggleOffIcon fontSize="big"/> }
+			{this.state.active ? <ToggleOnIcon color="primary" fontSize="large" /> : <ToggleOffIcon fontSize="big"/> }
 						  	
 						  </div>
 		

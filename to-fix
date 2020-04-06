@@ -1,4 +1,4 @@
-Things  i need to fix in the app
+Stuff  I need to fix
 
 --Turn XHR request into a promise
 -- Properly tab code
@@ -7,3 +7,8 @@ Things  i need to fix in the app
 --Take unnecesary data from React´s state
 ---Delete unnecesary variables
 --Properly use arrow functions and delete the unnecesary ones
+
+
+Stuff I need to app
+--Preload search
+--Infinite scrolling

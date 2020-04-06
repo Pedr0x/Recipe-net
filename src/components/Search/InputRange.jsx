@@ -1,18 +1,28 @@
 import React from "react";
 
-const InputRange = (props) => {
+const Input = (props) => {
 	
+	
+	if(props.type === "number"){
 	return(
 		<div className="input-range-container">
 			<label className="card-list-item-subtitle "> {props.labelText}</label>
-			<input className="input-range" onChange={props.callback} name={props.name} type="number"  min="1" max="30000" type="number"/> 
+			<input className="input-range" onChange={props.callback} name={props.name}  placeholder={props.placeholder}  min="1" max="30000" type="number"/> 
 		</div>
-	
 	)
-	
+} else {
+	return (
+	<div className="input-range-container">
+			<label className="card-list-item-subtitle "> {props.labelText}</label>
+			<input className="input-range" onChange={props.callback} name={props.name}  placeholder={props.placeholder} /> 
+		</div>
+	)
 }
 
-export default InputRange
+
+}
+
+export default Input
 
 
 /*<div className="calories-max-container">

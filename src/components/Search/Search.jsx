@@ -4,9 +4,9 @@ import SearchIcon from '@material-ui/icons/Search';
 
 import CheckBox from './CheckBox';
 import MainContainer from "../MainContainer/MainContainer";
-import InputRange from './InputRange';
+import Input from './InputRange';
 import ToggleItem from './Toggle';
-
+import Select from './Select';
 
 import  './input-range.css';
 
@@ -36,17 +36,18 @@ class MainSearch extends React.Component {
 			caloriesMax:null,
 			pageQ: 3,
 			moreResultsAvailable:false,
-			inSpanish:false
+			inSpanish:false,
+			cuisineType:"",
+			excluded:""
 		};
 		 
 		 this.options = {
   			root: null, /* or `null` for page as root */
   			threshold: 0.1 // Only observe when the entire box is in view
 		 }
-		 this.observer = new IntersectionObserver(this.callback, this.options);
 		 
+		this.observer = new IntersectionObserver(this.callback, this.options);
 	    this.handleChange = this.handleChange.bind(this);
-	    this.caloriesChanger = this.caloriesChanger.bind(this);
 	    this.apiRequest = this.apiRequest.bind(this);
 	    this.getQueryValue = this.getQueryValue.bind(this);
  		this.getCheckBoxData = this.getCheckBoxData.bind(this);
@@ -54,7 +55,8 @@ class MainSearch extends React.Component {
 		this.scrolla = this.scrolla.bind(this);
 		this.callback = this.callback.bind(this);
 		this.toggleLang = this.toggleLang.bind(this);
-
+		this.getValue = this.getValue.bind(this);
+		 
 	  }
 	
 	apiRequest(queryObj) {
@@ -69,7 +71,9 @@ class MainSearch extends React.Component {
 			highProtein,
 			caloriesMax,
 			pageQ,
-			inSpanish
+			inSpanish,
+			cuisineType,
+			excluded
 		} = queryObj;		
 		
 		//conditional parameters
@@ -83,8 +87,10 @@ class MainSearch extends React.Component {
 		const isHighProtein = highProtein ? "&diet=high-protein" : "" ;
 		const pagesToFetch = pageQ * 2;
 		const requestLang = inSpanish ? "https://test-es.edamam.com/search" : "https://api.edamam.com/search";
+		const cuisine = cuisineType ? `&cuisineType=${cuisineType}`: "";
+		const excludedIngredients = excluded ? ("&" + excluded.split(",").map(elem=>  `excluded=${elem}`).join("&")) : "" ;
 		
-				const urlRequest = `https://cors-anywhere.herokuapp.com/${requestLang}?q=${query}&app_id=8bc00f3b&app_key=b1d9d15dadbddc109d83b189b71e533f&from=0&to=${pagesToFetch}${ManyCalories}${isAlcoholFree}${isVegetarian}${isLowFat}${isGlutenFree}${isHighProtein}${isBalanced}`;
+		const urlRequest = `https://cors-anywhere.herokuapp.com/${requestLang}?q=${query}&app_id=8bc00f3b&app_key=b1d9d15dadbddc109d83b189b71e533f&from=0&to=${pagesToFetch}${ManyCalories}${isAlcoholFree}${isVegetarian}${isLowFat}${isGlutenFree}${isHighProtein}${isBalanced}${cuisine}${excludedIngredients}`;
 
 		let getPromise = new Promise((resolve,reject) => {
 			const xhr = new XMLHttpRequest();
@@ -92,11 +98,13 @@ class MainSearch extends React.Component {
 				xhr.responseType = "json";
 				xhr.onload = () => {
 					if(xhr.status === 200){
+						//check if query found any recipes
 						if(xhr.response.hits.length > 0){	
 							this.setState({
 							recipes: xhr.response.hits,
 							receivedData: true
 						})
+							//check if there are more recipes
 							if(xhr.response.more == true){
 								console.log("more results available");
 								this.setState({
@@ -104,12 +112,11 @@ class MainSearch extends React.Component {
 								});
 								this.queryParameters.moreResultsAvailable = true;
 							} else {
-								console.log("the arent more results available")
-								this.setState({
-									moreResults:false
-								});
-																this.queryParameters.moreResultsAvailable = false;
-
+									console.log("there arent more results available")
+									this.setState({
+										moreResults:false
+									});
+									this.queryParameters.moreResultsAvailable = false;
 							}
 						}
 						else{
@@ -142,10 +149,10 @@ class MainSearch extends React.Component {
 		getPromise
 			.then(res => console.log(res))
 			.catch(err => console.log(err))
-		
 			}
 
 	componentDidMount() {  
+		//make initial request with sample parameters
 		this.apiRequest(this.queryParameters);
 	}	
 	
@@ -164,10 +171,6 @@ class MainSearch extends React.Component {
 		this.apiRequest(this.queryParameters);
 	}
 	
-	caloriesChanger(e){
-		this.queryParameters.caloriesMax = e.target.value; 
-	}
-
 	getCheckBoxData(checkBoxState,name){
 		this.queryParameters[name] = checkBoxState;
 	}
@@ -186,17 +189,20 @@ class MainSearch extends React.Component {
 		console.log("scroll works")
 	}
 
-scrolla(e){
-	console.log(1)
-	this.observer.observe(e.target);
-
-}
-	toggleLang(e){
-		this.queryParameters.inSpanish = !this.queryParameters.inSpanish;
-		console.log(this.queryParameters.inSpanish)
-		
+	scrolla(e){
+		console.log(1)
+		this.observer.observe(e.target);
 	}
 	
+	toggleLang(e){
+		this.queryParameters.inSpanish = !this.queryParameters.inSpanish;
+		console.log(this.queryParameters.inSpanish);
+	}
+	
+	getValue(e){
+		this.queryParameters[e.target.name] = e.target.value;
+		console.log(this.queryParameters)
+	}
 	
 	render(){
 		
@@ -205,12 +211,13 @@ scrolla(e){
 				<div  className="search-form-container-super"> 
 					<form  className="search-form"  noValidate autoComplete="off">
 						 <div className="search-form-container">
-							 <div className="search-form-main-panel">
+							 <div className="search-form-main-panel" onClick={() => console.log(this.queryParameters)}>
 								 <h1 className="main-search-title" onClick={() => console.log(this.state)}> Search for a recipe!</h1>
 								 <div className="input-container">
-									<input placeholder="Donuts" className="query-input" onChange={this.getQueryValue}/>
+									<input name="query" placeholder="Donuts" className="query-input" onChange={this.getValue}/>
 									<button onClick={this.handleChange} className="search-button"> <SearchIcon/> </button>
 								 </div>
+								   <ToggleItem labelText="change query lang" callback={this.toggleLang}/>
 								</div>
 							 </div>
 						<div className="form-parameters">
@@ -238,9 +245,10 @@ scrolla(e){
 					</div>
 					<div className="inputs-container">
 						
-						 <InputRange  callback={this.caloriesChanger} labelText="Max Calories" name="caloriesMax"/>
+						 <Input  callback={this.getValue} type="number" labelText="Max Calories" name="caloriesMax"/>
+							<Input callback={this.getValue} labelText="Excluded Ingredients" name="excluded" placeholder="Eg: Pizza, peas"/> 
 						  </div>
-						  <ToggleItem labelText="change query lang" callback={this.toggleLang}/>
+						  <Select  name="cuisineType" callback={this.getValue}/>
 						</div>
 					</form>
 				</div>
