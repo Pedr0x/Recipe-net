@@ -1,23 +1,23 @@
-import React from 'react'
+import React, { useRef } from 'react'
+import { useInView } from 'react-intersection-observer'
+
 import SearchItem from "./SearchItem";
 import Spinner from "./Spinner";
 import Alert from "./Alert";
 
 import VizSensor from 'react-visibility-sensor';
 
-var MainContainer = (props) => {
+const MainContainer = (props) => {
 	
-	function handleScroll(e)  {
-    const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
-    console.log(bottom);
-		
-  }
-	function isBottom(el) {
-  //console.log(e.getBoundingClientRect().bottom <= window.innerHeight);
-		  return el.getBoundingClientRect().bottom <= window.innerHeight;
-		    console.log(23);
-
-}
+	 const [ref, inView, entry] = useInView({
+    /* Optional options */
+    threshold: 0,
+  })
+	 if(inView){
+		 console.log("viewww");
+		 props.showMoreResults();
+	 }
+	
 	if ( props.receivedData === true && props.data.length === 0  ){
 		return (
 			<div className="main-search-container">
@@ -31,7 +31,7 @@ var MainContainer = (props) => {
 	
 	else {
 		return(
-			<div className="main-search-container" onScroll={isBottom}>
+			<div className="main-search-container" onClick={console.log(inView)}>
 				{props.data.map( (elem) => 
 		  			<SearchItem 
 						title={elem.recipe.label}
@@ -51,8 +51,8 @@ var MainContainer = (props) => {
 				)
 								}
 					{props.moreResultsAvailable ? 
-					<div className="ex"> 
-								<button onClick={props.showMoreResults} className="btn btn_render-more"> Render More</button>
+					<div className="" ref={ref}> 
+								<Spinner/> 
 								</div> : <h1> No more results</h1>}
 
  			</div>	

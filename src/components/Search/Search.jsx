@@ -173,7 +173,6 @@ class MainSearch extends React.Component {
 	
 	getCheckBoxData(checkBoxState,name){
 		this.queryParameters[name] = checkBoxState;
-		console.log(name + " is " + checkBoxState)
 	}
 	
 	showMoreResults(){

@@ -127,6 +127,10 @@ color: #0c76d2;
 	color: #00c853;
 }
 
+.card-list-item-subtitle_small{
+	font-size: 12px;
+}
+
 .inputs-container {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
