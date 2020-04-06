@@ -12,13 +12,23 @@ class Checkbox extends React.Component{
 		this.toggle = this.toggle.bind(this)	
 	}
 		toggle(){
+
 		const {name,callback} = this.props;
 		const {checked} = this.state;
+		console.log(checked + "start")
 			this.setState({
 				checked: !checked
-			}	
-, 			(function () {callback(checked,name)}))
+			})
 		}
+	componentDidUpdate(){
+		//for some reason, the set state callback
+		//started having bugs returning the untoggled 
+		//value so i´ll start calling the callback here
+		const {name,callback} = this.props;
+		const {checked} = this.state;
+		callback(checked,name)
+	
+	}
 	
 	render(){
 		return(

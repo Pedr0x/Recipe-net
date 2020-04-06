@@ -16,7 +16,7 @@ class Select extends  React.Component{
 		<div onChange={this.props.callback}>
 		<label>Cuisine Type</label>
 			<select name={this.props.name} onChange={this.props.callback}>
-				<option value="0">Select:</option>
+				<option value="">Select:</option>
 				<option value="indian">Indian</option>
 				<option value="italian">italian</option>				
 			</select>

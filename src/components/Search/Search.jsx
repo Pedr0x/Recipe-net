@@ -173,6 +173,7 @@ class MainSearch extends React.Component {
 	
 	getCheckBoxData(checkBoxState,name){
 		this.queryParameters[name] = checkBoxState;
+		console.log(name + " is " + checkBoxState)
 	}
 	
 	showMoreResults(){
@@ -201,7 +202,6 @@ class MainSearch extends React.Component {
 	
 	getValue(e){
 		this.queryParameters[e.target.name] = e.target.value;
-		console.log(this.queryParameters)
 	}
 	
 	render(){
@@ -211,8 +211,8 @@ class MainSearch extends React.Component {
 				<div  className="search-form-container-super"> 
 					<form  className="search-form"  noValidate autoComplete="off">
 						 <div className="search-form-container">
-							 <div className="search-form-main-panel" onClick={() => console.log(this.queryParameters)}>
-								 <h1 className="main-search-title" onClick={() => console.log(this.state)}> Search for a recipe!</h1>
+							 <div className="search-form-main-panel">
+								 <h1 className="main-search-title" onClick={() => console.log(this.queryParameters)}> Search for a recipe!</h1>
 								 <div className="input-container">
 									<input name="query" placeholder="Donuts" className="query-input" onChange={this.getValue}/>
 									<button onClick={this.handleChange} className="search-button"> <SearchIcon/> </button>
