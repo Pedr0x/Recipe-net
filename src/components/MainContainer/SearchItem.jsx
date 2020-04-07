@@ -12,6 +12,10 @@ import IconButton from '@material-ui/core/IconButton';
 import {MyContext} from "../../App";
 
 import SearchItemList from "./SearchItemList"
+import SearchItemListMeasures from "./SearchItemListMeasures"
+import SearchItemGrid from "./SearchItemGrid"
+
+
 //Lodash for creating unique key IDs
 var _ = require('lodash');
 
@@ -75,10 +79,7 @@ const SearchItem = (props) => {
 					action={ 
 
 						<IconButton
-							 name={title} 
-							 data-image={image} 
 							 onClick={context.getFavorite}
-							 data-url={url}
 							 aria-label="favorite">
 							{context.state.favoriteRecipes.some(elem => elem.recipeName === title) 
 										? <FavoriteIcon color="secondary"/> : <FavoriteIcon/> }
@@ -100,27 +101,17 @@ const SearchItem = (props) => {
 					<Tab label="Labels" />
 					 <Tab label="Nutrition" />
 				</Tabs>
-
 					<TabPanel value={value} index={0}>
-						<ul> 
-							{ingredients.map(elem => <li key={ _.uniqueId()} > {elem.text}  {parseInt(elem.weight)}g</li>)}
-						</ul>
+						<SearchItemListMeasures data={ingredients}/>
 					</TabPanel>
 
 					<TabPanel value={value} index={1}>
 						<SearchItemList type="health" data={healthLabels} labelText=" Health Labels"/>
-						<SearchItemList type="caution" data={cautions} labelText="cautions"/>
+						<SearchItemList type="caution" data={cautions} labelText="Cautions"/>
 					</TabPanel>
 
 					<TabPanel value={value} index={2}>
-						Total Nutrients
-						<ul className="card-list-item-total-nutrients-container"> 
-							{ Object.entries(totalNutrients).map( 
-								elem =>  
-									<li key= { _.uniqueId()} > {elem[1].label} {parseInt(elem[1].quantity)}{elem[1].unit} </li>
-							)
-								}
-						</ul>
+						<SearchItemGrid labelText={"Total Nutrients"} data={Object.entries(totalNutrients)}/>
 					</TabPanel>
 		</Paper>
 		)}

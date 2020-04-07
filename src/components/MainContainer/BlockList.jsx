@@ -1,10 +1,10 @@
 import React from 'react';
 var _ = require('lodash');
 
-const SearchItemList = (props) => {
+const BlockList = (props) => {
 	if (props.data != false){
 	return(
-		<React.Fragment> 
+		<ul> 
 		<h3 className="card-list-item-subtitle"> {props.labelText}</h3>
 		<ul className="card-list-item-container"> 
 		{props.data.map(elem => 
@@ -13,16 +13,6 @@ const SearchItemList = (props) => {
 				   </li>
 					   )}
 		</ul>
-		</React.Fragment>
 		)}
-	else{
-		return(
-			<div>
-		<h4> This item doesn´t have any {props.type} labels</h4>
-		 </div>
-			)
-	}
-}
-
-export  default SearchItemList;
-
+		}
+export  default BlockList;
