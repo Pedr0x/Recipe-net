@@ -26,8 +26,14 @@ align-items: center;
 	font-size: 12px;
 }
 
+/*
 .search-item-super{
 	padding: 2%;
+}
+*/
+.search-item{
+	/* FIX THIS*/
+	margin: 2%;
 }
 
 .card-list-item_health {

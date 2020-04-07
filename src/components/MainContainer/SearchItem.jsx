@@ -61,7 +61,7 @@ const SearchItem = (props) => {
 	}
 		
 	return(
-		<div className="search-item-super" onClick={() => console.log(searchItemData)}> 
+		
 			<Paper  className="search-item" square>
 				<CardMedia
 					  component="img"
@@ -136,7 +136,6 @@ const SearchItem = (props) => {
 						</ul>
 					</TabPanel>
 		</Paper>
-	</div>
 		)}
 	
 
