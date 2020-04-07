@@ -169,7 +169,6 @@ class MainSearch extends React.Component {
 			showMoreResults:true
 		})*/
 		this.queryParameters.pageQ += 1; 
-		console.log(this.queryParameters)
 		this.apiRequest(this.queryParameters)
 	}
 	
@@ -181,7 +180,6 @@ class MainSearch extends React.Component {
 	getValue(e){
 		this.queryParameters[e.target.name] = e.target.value;
 	}
-	
 	render(){
 		
 		return (
