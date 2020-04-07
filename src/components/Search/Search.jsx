@@ -151,14 +151,15 @@ class MainSearch extends React.Component {
 	componentDidMount() {  
 		//make initial request with sample parameters
 		this.apiRequest(this.queryParameters);
-	}	
+	}
+	
 	
 	getQueryValue(e){
 		this.queryParameters.query = e.target.value;
 	}
 	
 	componentDidUpdate(){
-		console.count()
+		console.count();
 	}
 	
 	handleChange(e){
@@ -177,7 +178,6 @@ class MainSearch extends React.Component {
 	}
 	
 	showMoreResults(){
-		console.log("xx")
 		this.queryParameters.pageQ += 1; 
 		this.apiRequest(this.queryParameters);
 	}

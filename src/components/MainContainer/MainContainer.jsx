@@ -8,17 +8,13 @@ const MainContainer = (props) => {
     threshold: 0.33,
   })
 	// const [isMakingRequest,setRequest] = useState(false)
-	  let isMakingRequest = true;
+	 //let isMakingRequest = true;
 	 
-	 if(inView){
+	 if(inView && props.isMakingRequest === false){
 		 //The spinner makes another request on view
-		if(props.isMakingRequest){
-			console.log("already making req")
-		} else{
-			console.log("req ready to go");
+		//	console.log("req ready to go");
 			 props.showMoreResults();
 		}
-	 }
 	
 	if ( props.receivedData === true && props.data.length === 0  ){
 		//Query is loading
