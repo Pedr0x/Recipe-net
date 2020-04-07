@@ -12,7 +12,6 @@ class Checkbox extends React.Component{
 	}
 		toggle(){
 		const {checked} = this.state;
-		console.log(checked + "start")
 			this.setState({
 				checked: !checked
 			})
@@ -28,18 +27,16 @@ class Checkbox extends React.Component{
 	render(){
 		return(
 			<div className="checkbox-item">
-			 <label> {this.props.label} </label>
-				<input 
-					name={this.props.name}
-					className="checkbox"
-					type="checkbox"
-					onClick={this.toggle}
-					/>
+				 <label> {this.props.label} </label>
+					<input 
+						name={this.props.name}
+						className="checkbox"
+						type="checkbox"
+						onClick={this.toggle}
+						/>
 
-				{ this.state.checked ?	<CheckBoxIcon color={"primary"}/> : <CheckBoxOutlineBlankIcon  color={"primary"}/> }  
-				
+					{ this.state.checked ?	<CheckBoxIcon color={"primary"}/> : <CheckBoxOutlineBlankIcon  color={"primary"}/> }  
 			</div>
-		
 		)
 	}
 }

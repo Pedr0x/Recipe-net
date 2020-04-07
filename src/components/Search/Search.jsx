@@ -44,12 +44,10 @@ class MainSearch extends React.Component {
 		 //methods
 	    this.handleChange = this.handleChange.bind(this);
 	    this.apiRequest = this.apiRequest.bind(this);
-	    this.getQueryValue = this.getQueryValue.bind(this);
  		this.getCheckBoxData = this.getCheckBoxData.bind(this);
 		this.showMoreResults = this.showMoreResults.bind(this);
 		this.toggleLang = this.toggleLang.bind(this);
 		this.getValue = this.getValue.bind(this);
-		 
 	  }
 	
 	apiRequest(queryObj) {
@@ -99,7 +97,7 @@ class MainSearch extends React.Component {
 							this.setState({
 							recipes: xhr.response.hits,
 							receivedData: true,
-								error:false
+							error:false
 						})
 							//check if there are more recipes
 							if(xhr.response.more == true){
@@ -114,11 +112,11 @@ class MainSearch extends React.Component {
 									});
 							}
 						}
-						else{
+						else {
 							//the request was succesful but didn´t return data
 							this.setState({
 								receivedData: false
-					});
+							});
 						}
 						resolve(xhr.response);
 					}
@@ -126,7 +124,7 @@ class MainSearch extends React.Component {
 					else{
 						this.setState({ 
 							error: true
-						})
+						});
 						reject("Status code wasn´t 200: " + xhr.status);
 					}
 					//connection problems
@@ -134,11 +132,12 @@ class MainSearch extends React.Component {
 						this.setState({
 							receivedData:false
 						});
-						reject("request did not load because of connection problems")
+						reject("request did not load because of connection problems");
 			}
+				//end of request
 				this.setState({
 						isMakingRequest:false
-					})
+					});
 				};
 				xhr.send();
 		}
@@ -152,12 +151,7 @@ class MainSearch extends React.Component {
 		//make initial request with sample parameters
 		this.apiRequest(this.queryParameters);
 	}
-	
-	
-	getQueryValue(e){
-		this.queryParameters.query = e.target.value;
-	}
-	
+		
 	componentDidUpdate(){
 		console.count();
 	}
@@ -206,42 +200,41 @@ class MainSearch extends React.Component {
 								   <ToggleItem labelText="Buscar en español" callback={this.getCheckBoxData} name="inSpanish"/>
 								</div>
 							 </div>
+							 
 						<div className="form-parameters">
 							<div className="checkboxs-container-super"> 
 								<h2 className="checkbox-subtitle"> Dietary Restrictions  </h2>
-
 								 <div className="checkboxes-container">
 									<CheckBox  callback={this.getCheckBoxData} label="Alcohol Free" name="alcoholFree"/>
-
 									<CheckBox  callback={this.getCheckBoxData} label="Vegetarian" name="vegetarian"/>
-
 									<CheckBox  callback={this.getCheckBoxData} label="Gluten" name="gluten"/>
 								</div>
 							</div>
 							
 							<div className="checkboxs-container-super">
-							<h2 className="checkbox-subtitle"> Health restrictions </h2>								
+								<h2 className="checkbox-subtitle"> Health restrictions </h2>								
 								<div className="checkboxes-container">
-								<CheckBox  callback={this.getCheckBoxData} label="Balanced" name="balanced"/>
-
-								<CheckBox  callback={this.getCheckBoxData} label="High Protein" name="highProtein"/>
-
-								<CheckBox  callback={this.getCheckBoxData} label="Low Fat" name="lowFat"/>
+									<CheckBox  callback={this.getCheckBoxData} label="Balanced" name="balanced"/>
+									<CheckBox  callback={this.getCheckBoxData} label="High Protein" name="highProtein"/>
+									<CheckBox  callback={this.getCheckBoxData} label="Low Fat" name="lowFat"/>
+								</div>
+							</div>
+						<div className="inputs-container">
+							<Input  callback={this.getValue} type="number" labelText="Max Calories" name="caloriesMax"/>
+							<Input callback={this.getValue} labelText="Excluded Ingredients" name="excluded" placeholder="Eg: Pizza"/> 
 						</div>
-					</div>
-					<div className="inputs-container">
-						
-						 <Input  callback={this.getValue} type="number" labelText="Max Calories" name="caloriesMax"/>
-							<Input callback={this.getValue} labelText="Excluded Ingredients" name="excluded" placeholder="Eg: Pizza, peas"/> 
-						  </div>
-						  <Select  name="cuisineType" callback={this.getValue}/>
+							<Select  name="cuisineType" callback={this.getValue}/>
 						</div>
 					</form>
 				</div>
 
-				<MainContainer receivedData={this.state.receivedData} data={this.state.recipes} moreResultsAvailable={this.state.moreResults} showMoreResults={this.showMoreResults}
-								error={this.state.error} isMakingRequest={this.state.isMakingRequest}
-									/> 
+				<MainContainer 
+					receivedData={this.state.receivedData}
+					data={this.state.recipes}
+					moreResultsAvailable={this.state.moreResults} 
+					showMoreResults={this.showMoreResults}
+					error={this.state.error} isMakingRequest={this.state.isMakingRequest}
+					/> 
 			</React.Fragment>
 				)	
 				}

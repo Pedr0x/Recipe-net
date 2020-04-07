@@ -73,7 +73,6 @@ class MyProvider extends React.Component {
 			localStorage.setItem("favorites", JSON.stringify(allFavorites));
 			console.log(allFavorites);
 		}
-				//this is for future use
 	},	
 	deleteFavorite: (param) => {
 		this.setState({

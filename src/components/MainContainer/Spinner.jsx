@@ -3,15 +3,11 @@ import spinner from "./spinner1.gif"
 var Spinner = () => {
 	
 	return(
-<div className="spinner-container">
-	<img src={spinner}
-	alt="Loading..."
-	style={{
-	width:"200px",
-	margin:"40px auto",
-	display:"block"
-	
-	}}/>
+		<div className="spinner-container">
+			<img 
+				className="spinner" src={spinner}
+				alt="Loading..."
+				/>
 </div>
 	)
 }

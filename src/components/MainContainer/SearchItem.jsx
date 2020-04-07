@@ -20,11 +20,9 @@ const SearchItem = (props) => {
 		setValue(newValue);
 	  };
 	
-	
 	//this is the TabPanal Component from Material UI
 	function TabPanel(props) {
 		const { children, value, index, ...other } = props;
-
   		return (
     		<Typography
 			  component="div"
@@ -61,7 +59,6 @@ const SearchItem = (props) => {
 	}
 		
 	return(
-		
 			<Paper  className="search-item" square>
 				<CardMedia
 					  component="img"
@@ -138,6 +135,4 @@ const SearchItem = (props) => {
 		</Paper>
 		)}
 	
-
-
 export  default SearchItem 

@@ -2,6 +2,7 @@ import React, { useRef,useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import SearchItem from "./SearchItem";
 import Spinner from "./Spinner";
+
 const MainContainer = (props) => {
 	 const [ref, inView, entry] = useInView({
     /* Optional options */
@@ -12,7 +13,7 @@ const MainContainer = (props) => {
 	 
 	 if(inView && props.isMakingRequest === false){
 		 //The spinner makes another request on view
-		//	console.log("req ready to go");
+		//	so it checks if is already doing a request
 			 props.showMoreResults();
 		}
 	
@@ -58,7 +59,6 @@ const MainContainer = (props) => {
 						<button className="btn btn_reload" onClick={props.showMoreResults}> reload</button>
 					</div>
  			</div>	
-		
 		)
 	}
 	
