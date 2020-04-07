@@ -11,6 +11,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import IconButton from '@material-ui/core/IconButton';
 import {MyContext} from "../../App";
 
+import SearchItemList from "./SearchItemList"
 //Lodash for creating unique key IDs
 var _ = require('lodash');
 
@@ -107,19 +108,8 @@ const SearchItem = (props) => {
 					</TabPanel>
 
 					<TabPanel value={value} index={1}>
-						<Typography className="card-list-item-subtitle"> Health Labels </Typography>  
-						<ul className="card-list-item-container"> 
-							{healthLabels.map(elem => 
-								<li key={ _.uniqueId()}  className="card-list-item card-list-item_health"> {elem}</li> )}
-						</ul>
-
-						<Typography className="card-list-item-subtitle"> Cautions </Typography>
-						<ul className="card-list-item-container">
-							{cautions.map(elem => 
-										  <li key= { _.uniqueId()} className="card-list-item card-list-item_caution">{elem} </li>)
-										  }
-						</ul>
-
+						<SearchItemList type="health" data={healthLabels} labelText=" Health Labels"/>
+						<SearchItemList type="caution" data={cautions} labelText="cautions"/>
 					</TabPanel>
 
 					<TabPanel value={value} index={2}>

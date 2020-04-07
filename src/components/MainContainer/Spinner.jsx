@@ -1,6 +1,6 @@
 import React from 'react';
 import spinner from "./spinner1.gif"
-var Spinner = () => {
+const Spinner = () => {
 	
 	return(
 		<div className="spinner-container">
