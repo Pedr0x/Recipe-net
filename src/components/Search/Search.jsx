@@ -16,11 +16,10 @@ class MainSearch extends React.Component {
     this.state = {
 		recipeQueryValue: "",
 		recipes: [],
-		favorites:[],
 		receivedData:true,
 		moreResults:false,
-		//renderMoreResults:false,
-		page:1
+		error:""
+
 
 	};
 		//this object contains both the query value and the parameters
@@ -93,7 +92,8 @@ class MainSearch extends React.Component {
 						if(xhr.response.hits.length > 0){	
 							this.setState({
 							recipes: xhr.response.hits,
-							receivedData: true
+							receivedData: true,
+								error:false
 						})
 							//check if there are more recipes
 							if(xhr.response.more == true){
@@ -118,8 +118,8 @@ class MainSearch extends React.Component {
 					}
 					//status code not 200
 					else{
-						this.setState({
-							receivedData:false
+						this.setState({ 
+							error:true //Adasd
 						})
 						reject("Status code wasn´t 200");
 					}
@@ -230,6 +230,7 @@ class MainSearch extends React.Component {
 				</div>
 
 				<MainContainer receivedData={this.state.receivedData} data={this.state.recipes} moreResultsAvailable={this.state.moreResults} showMoreResults={this.showMoreResults}
+								error={this.state.error}
 									/> 
 			</React.Fragment>
 				)	

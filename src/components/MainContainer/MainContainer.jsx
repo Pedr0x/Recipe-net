@@ -3,29 +3,33 @@ import { useInView } from 'react-intersection-observer'
 import SearchItem from "./SearchItem";
 import Spinner from "./Spinner";
 const MainContainer = (props) => {
-	
 	 const [ref, inView, entry] = useInView({
     /* Optional options */
     threshold: 0,
   })
 	 if(inView){
+		 //The spinner makes another request on view
 		 props.showMoreResults();
 	 }
 	
 	if ( props.receivedData === true && props.data.length === 0  ){
+		//Query is loading
 		return (
 			<div className="main-search-container">
 				<Spinner/> 
 			</div>) 
 	}
 	
-	if (props.receivedData === false){
+	if (props.receivedData === false ){
+		// Query didn´t return any recipe
 		return (<h1> We couldn´t find that recipe</h1>)
 	}
 	
-	else {
-		return(
-			<div className="main-search-container" onClick={console.log(inView)}>
+	if (props.data.length >= 1 && props.error == true){
+		//Query already had returned recipes but encountered
+		//an error. Probably 429
+		return( 
+			<div className="main-search-container">
 				{props.data.map( (elem) => 
 		  			<SearchItem 
 						title={elem.recipe.label}
@@ -44,11 +48,43 @@ const MainContainer = (props) => {
 						/> 
 				)
 								}
+					<div className="connection-problems-info"> 
+						<h1>  Connection problems. Click here after a minute to keep loading recipes</h1>
+						<button className="btn btn_reload" onClick={props.showMoreResults}> reload</button>
+					</div>
+ 			</div>	
+		
+		)
+	}
+	
+	else {
+		return(
+			//regular return. XHR code = 200
+			<div className="main-search-container">
+				{props.data.map( (elem) => 
+		  			<SearchItem 
+						title={elem.recipe.label}
+						image={elem.recipe.image}
+						calories={elem.recipe.calories}
+						ingredients={elem.recipe.ingredients}
+						healthLabels={elem.recipe.healthLabels}
+						weight={elem.recipe.totalWeight}
+						time={elem.recipe.time}
+						dietLabels={elem.recipe.dietLabels}
+						cautions={elem.recipe.cautions}
+						totalNutrients={elem.recipe.totalNutrients}
+						key={elem.recipe.url}
+						recipeYield={elem.recipe.yield}
+						url={elem.recipe.url}
+						/> 
+				)
+								}
+					
 					{props.moreResultsAvailable ? 
-					<div className="spinner-container" ref={ref}> 
-								<Spinner/> 
-								</div> : <h1> No more results</h1>}
-
+					//Check if the response has more data under the same query
+						<div className="spinner-container" ref={ref}> 
+							<Spinner/> 
+						</div> : <h1> No more results</h1>}
  			</div>	
 		)
 	}
