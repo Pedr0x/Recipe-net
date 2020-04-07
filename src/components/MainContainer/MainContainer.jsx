@@ -1,15 +1,23 @@
-import React, { useRef } from 'react'
+import React, { useRef,useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import SearchItem from "./SearchItem";
 import Spinner from "./Spinner";
 const MainContainer = (props) => {
 	 const [ref, inView, entry] = useInView({
     /* Optional options */
-    threshold: 0,
+    threshold: 0.33,
   })
+	// const [isMakingRequest,setRequest] = useState(false)
+	  let isMakingRequest = true;
+	 
 	 if(inView){
 		 //The spinner makes another request on view
-		 props.showMoreResults();
+		if(props.isMakingRequest){
+			console.log("already making req")
+		} else{
+			console.log("req ready to go");
+			 props.showMoreResults();
+		}
 	 }
 	
 	if ( props.receivedData === true && props.data.length === 0  ){
@@ -50,6 +58,7 @@ const MainContainer = (props) => {
 								}
 					<div className="connection-problems-info"> 
 						<h1>  Connection problems. Click here after a minute to keep loading recipes</h1>
+						<p> code:{props.error}</p>
 						<button className="btn btn_reload" onClick={props.showMoreResults}> reload</button>
 					</div>
  			</div>	

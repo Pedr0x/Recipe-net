@@ -18,8 +18,8 @@ class MainSearch extends React.Component {
 		recipes: [],
 		receivedData:true,
 		moreResults:false,
-		error:""
-
+		error:"",
+		isMakingRequest:false
 
 	};
 		//this object contains both the query value and the parameters
@@ -39,7 +39,9 @@ class MainSearch extends React.Component {
 			cuisineType:"",
 			excluded:""
 		};
-		
+		this.isMakingRequest = false;
+		 
+		 //methods
 	    this.handleChange = this.handleChange.bind(this);
 	    this.apiRequest = this.apiRequest.bind(this);
 	    this.getQueryValue = this.getQueryValue.bind(this);
@@ -87,6 +89,10 @@ class MainSearch extends React.Component {
 				xhr.open("GET", urlRequest);
 				xhr.responseType = "json";
 				xhr.onload = () => {
+					this.setState({
+						isMakingRequest:true
+					});
+					
 					if(xhr.status === 200){
 						//check if query found any recipes
 						if(xhr.response.hits.length > 0){	
@@ -119,9 +125,9 @@ class MainSearch extends React.Component {
 					//status code not 200
 					else{
 						this.setState({ 
-							error:true //Adasd
+							error: true
 						})
-						reject("Status code wasn´t 200");
+						reject("Status code wasn´t 200: " + xhr.status);
 					}
 					//connection problems
 					xhr.onerror = () => {
@@ -130,6 +136,9 @@ class MainSearch extends React.Component {
 						});
 						reject("request did not load because of connection problems")
 			}
+				this.setState({
+						isMakingRequest:false
+					})
 				};
 				xhr.send();
 		}
@@ -148,6 +157,10 @@ class MainSearch extends React.Component {
 		this.queryParameters.query = e.target.value;
 	}
 	
+	componentDidUpdate(){
+		console.count()
+	}
+	
 	handleChange(e){
 		e.preventDefault();
 		//Reset recipes 
@@ -164,12 +177,9 @@ class MainSearch extends React.Component {
 	}
 	
 	showMoreResults(){
-		
-		/*this.setState({
-			showMoreResults:true
-		})*/
+		console.log("xx")
 		this.queryParameters.pageQ += 1; 
-		this.apiRequest(this.queryParameters)
+		this.apiRequest(this.queryParameters);
 	}
 	
 	toggleLang(e){
@@ -180,8 +190,8 @@ class MainSearch extends React.Component {
 	getValue(e){
 		this.queryParameters[e.target.name] = e.target.value;
 	}
+	
 	render(){
-		
 		return (
 			<React.Fragment> 
 				<div  className="search-form-container-super"> 
@@ -230,7 +240,7 @@ class MainSearch extends React.Component {
 				</div>
 
 				<MainContainer receivedData={this.state.receivedData} data={this.state.recipes} moreResultsAvailable={this.state.moreResults} showMoreResults={this.showMoreResults}
-								error={this.state.error}
+								error={this.state.error} isMakingRequest={this.state.isMakingRequest}
 									/> 
 			</React.Fragment>
 				)	

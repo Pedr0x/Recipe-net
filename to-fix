@@ -11,3 +11,15 @@ Stuff  I need to fix
 
 Stuff I need to add
 --Infinite scrolling 
+
+ if(isMakingRequest == false){
+		 	isMakingRequest = true;
+			 props.showMoreResults();
+			 setTimeout(() => {isMakingRequest = false; console.log("timeout ended")}, 2550);
+		 }
+		 else if (isMakingRequest == true) {
+				console.log("already making req")
+			}
+			
+			
+14 updates
