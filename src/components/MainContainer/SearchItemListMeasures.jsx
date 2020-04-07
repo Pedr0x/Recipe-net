@@ -5,11 +5,11 @@ const SearchItemListMeasures = (props) => {
 	if (props.data != false){
 	return(
 		<ul className="block-list"> 
-		{props.data.map(elem => 
-			<li key={ _.uniqueId()} className="block-list-item"> 
-				  {elem.text} {parseInt(elem.weight)}g
-			</li>
-					   )}
+			{props.data.map(elem => 
+				<li key={ _.uniqueId()} className="block-list-item"> 
+					  {elem.text} {parseInt(elem.weight)}g
+				</li>
+			)}
 		</ul>
 		)}
 else{

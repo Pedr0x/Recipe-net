@@ -77,9 +77,8 @@ const SearchItem = (props) => {
 			{(context) => (
 				 <CardHeader
 					action={ 
-
 						<IconButton
-							 onClick={context.getFavorite}
+							 onClick={() => context.getFavorite(searchItemData)}
 							 aria-label="favorite">
 							{context.state.favoriteRecipes.some(elem => elem.recipeName === title) 
 										? <FavoriteIcon color="secondary"/> : <FavoriteIcon/> }
