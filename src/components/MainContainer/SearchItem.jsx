@@ -15,7 +15,8 @@ import SearchItemList from "./SearchItemList"
 import SearchItemListMeasures from "./SearchItemListMeasures"
 import SearchItemGrid from "./SearchItemGrid"
 
-const SearchItem = (props) => {
+
+const SearchItem = React.memo((props) => {
 		const [value, setValue] = React.useState(0);
 		const handleChange = (event, newValue) => {
 		setValue(newValue);
@@ -110,7 +111,7 @@ const SearchItem = (props) => {
 					</TabPanel>
 		</Paper>
 		</div>
-		)}
+		)})
 	
 export  default SearchItem
 
