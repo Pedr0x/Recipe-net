@@ -33,7 +33,10 @@ class MainSearch extends React.Component {
 			balanced:false,
 			highProtein:false,
 			caloriesMax:null,
-			pageQ: 3,
+				pageQ: {
+				from:0,
+				to:10
+				},
 			moreResultsAvailable:false,
 			inSpanish:false,
 			cuisineType:"",
@@ -75,12 +78,12 @@ class MainSearch extends React.Component {
 		const isGlutenFree = gluten ? "&health=glutenFree" : "";
 		const isBalanced = balanced ? "&diet=balanced" : "";
 		const isHighProtein = highProtein ? "&diet=high-protein" : "" ;
-		const pagesToFetch = pageQ * 2;
+		const pagesToFetch =  `&from=${pageQ.from}&to=${pageQ.to}`;
 		const requestLang = inSpanish ? "https://test-es.edamam.com/search" : "https://api.edamam.com/search";
 		const cuisine = cuisineType ? `&cuisineType=${cuisineType}`: "";
 		const excludedIngredients = excluded ? ("&" + excluded.split(",").map(elem=>  `excluded=${elem}`).join("&")) : "" ;
 		
-		const urlRequest = `https://cors-anywhere.herokuapp.com/${requestLang}?q=${query}&app_id=8bc00f3b&app_key=b1d9d15dadbddc109d83b189b71e533f&from=0&to=${pagesToFetch}${ManyCalories}${isAlcoholFree}${isVegetarian}${isLowFat}${isGlutenFree}${isHighProtein}${isBalanced}${cuisine}${excludedIngredients}`;
+		const urlRequest = `https://cors-anywhere.herokuapp.com/${requestLang}?q=${query}&app_id=8bc00f3b&app_key=b1d9d15dadbddc109d83b189b71e533f${pagesToFetch}${ManyCalories}${isAlcoholFree}${isVegetarian}${isLowFat}${isGlutenFree}${isHighProtein}${isBalanced}${cuisine}${excludedIngredients}`;
 
 	let getPromise = new Promise((resolve,reject) => {
 				const xhr = new XMLHttpRequest();
@@ -91,53 +94,58 @@ class MainSearch extends React.Component {
 							isMakingRequest:true
 						});
 
-						if(xhr.status === 200){
-							//check if query found any recipes
-							if(xhr.response.hits.length > 0){	
-								this.setState({
-								recipes: xhr.response.hits,
-								receivedData: true,
-								error:false
-							})
-								//check if there are more recipes
-								if(xhr.response.more == true){
-									console.log("more results available");
-									this.setState({
-										moreResults:true
-									});
-								} else {
-										//no more recipes available
-										this.setState({
-											moreResults:false
-										});
-								}
-							}
-							else {
-								//the request was succesful but didn´t return data
-								this.setState({
-									receivedData: false
-								});
-							}
-							resolve(xhr.response);
+						
+	let responseData = {
+		recipes:[],
+		receivedData:undefined,
+		error:undefined,
+		moreResults:true
+}
+	var { moreResults,error, receivedData, recipes} = responseData;
+
+	if(xhr.status === 200){
+					//check if query found any recipes
+					if (xhr.response.hits.length > 0) {
+						receivedData = true
+						error = false
+						if (this.state.recipes.lenght !== 0) {
+							recipes = [...this.state.recipes, ...xhr.response.hits]
+						} else {
+							recipes = xhr.response.hits
 						}
-						//status code not 200
-						else{
-							this.setState({ 
-								error: true
-							});
-							reject("Status code wasn´t 200: " + xhr.status);
+						//check if there are more recipes
+						if (xhr.response.more == true) {
+							moreResults = true
+						} else {
+							//no more recipes available
+							moreResults = false
 						}
+						resolve(xhr.response);
+					} else {
+						//the request was succesful but didn´t return data
+						receivedData = false;
+						resolve(xhr.response);
+					}
+					}
+					//status code not 200
+					else {
+						this.setState({
+							error:true
+						})
+						reject("Status code wasn´t 200: " + xhr.status);
+					}
 						//connection problems
 						xhr.onerror = () => {
 							this.setState({
-								receivedData:false
-							});
+							error:true
+						})
 							reject("request did not load because of connection problems");
 				}
 					//end of request
-					this.setState({
-							isMakingRequest:false
-						});
+						this.setState({
+						moreResults, error, receivedData, recipes,
+						isMakingRequest: false
+					})	
 					};
 					xhr.send();
 			}
@@ -153,7 +161,7 @@ class MainSearch extends React.Component {
 	}
 		
 	componentDidUpdate(){
-		//console.count();
+		console.count();
 		//the component updates 4 times every render
 	}
 	
@@ -164,7 +172,9 @@ class MainSearch extends React.Component {
 			recipes: []
 		});
 		//reset the pages request
-		this.queryParameters.pageQ = 3;
+		this.queryParameters.pageQ.from = 0;
+		this.queryParameters.pageQ.to = 5;
+
 		this.apiRequest(this.queryParameters);
 	}
 	
@@ -173,8 +183,8 @@ class MainSearch extends React.Component {
 	}
 	
 	showMoreResults(){
-		this.queryParameters.pageQ += 1; 
-		this.apiRequest(this.queryParameters);
+		this.queryParameters.pageQ.from +=10;
+		this.queryParameters.pageQ.to += 10;	this.apiRequest(this.queryParameters);
 	}
 	
 	toggleLang(e){
