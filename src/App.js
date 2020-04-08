@@ -29,8 +29,8 @@ var App = () => {
 				<Router>
 				<NavBar/>
 				<Switch> 
-					<Route path="/Favorites" component={Favorites}/>
 					<Route path="/" exact component={MainSearch}/>
+					<Route path="/Favorites" component={Favorites}/>
 				</Switch>
 				</Router>
 		</MyProvider>

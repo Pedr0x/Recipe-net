@@ -1,26 +1,18 @@
 import React from 'react';
 import {MyContext} from "./App"
+
+
 class MyProvider extends React.Component {
-	state = {
+	constructor(props){
+	super(props);
+	this.state = {
 		favoriteRecipes:[]
+	};
+		this.getFavorite = this.getFavorite.bind(this);
+		this.deleteFavorite = this.deleteFavorite.bind(this);
 	}
 	
-	componentDidMount(){
-		if (localStorage.favorites !== undefined) {
-			this.setState({
-				favoriteRecipes:[...JSON.parse(localStorage.favorites)]
-			})
-		}
-		else{
-			return
-		}
-	console.log(this.state.favoriteRecipes);
-	}
-	render(){
-		return(
-		<MyContext.Provider value={{
-			state:this.state,
-			getFavorite:  (itemValues) =>{
+	getFavorite(itemValues)  {
 				//this function adds the targeted recipe value and image
 				//and adds it to an array in the state and local storage
 				//need to bind this
@@ -47,14 +39,37 @@ class MyProvider extends React.Component {
 						localStorage.setItem("favorites", JSON.stringify(allFavorites));
 						console.log(allFavorites);
 					}
-	},	
-			deleteFavorite: (param) => {
-				this.setState({
-					favoriteRecipes: this.state.favoriteRecipes.filter(recipe => recipe.recipeName !== param)
-				});
-				localStorage.setItem("favorites", JSON.stringify(this.state.favoriteRecipes))
-				}
-	}}>
+	}
+	
+	deleteFavorite(param) {
+		this.setState({
+			favoriteRecipes: this.state.favoriteRecipes.filter(recipe => recipe.recipeName !== param)
+			}, () => localStorage.setItem("favorites", JSON.stringify(this.state.favoriteRecipes)))
+			}
+	
+	
+	componentDidMount(){
+	if(localStorage.favorites !== undefined){
+		this.setState({
+			favoriteRecipes:JSON.parse(localStorage.favorites)
+		})
+	}
+		console.log(this.state.favoriteRecipes);
+	}
+	
+	componentDidUpdate(){
+		console.log(this.state.favoriteRecipes);
+		//localStorage.setItem("favorites", JSON.stringify(this.state.favoriteRecipes));
+	}
+	
+	render(){
+		return(
+		<MyContext.Provider value={{
+			state:this.state,
+			getFavorite:this.getFavorite,
+			deleteFavorite:this.deleteFavorite
+	
+			}}>
 		{this.props.children}
 		</MyContext.Provider>
 		)
