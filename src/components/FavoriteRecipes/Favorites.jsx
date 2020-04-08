@@ -6,7 +6,6 @@ class Favorites extends React.Component {
 	render(props){
 		return(
 		<div className="favorite-recipes-super-container">
-			<h1 className="favorites-main-title">  favorites</h1>
 			<MyContext.Consumer>
 			{(context) =>(
 					<React.Fragment> 

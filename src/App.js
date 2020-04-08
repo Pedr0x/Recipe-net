@@ -8,6 +8,8 @@ import './components/MainContainer/search-item.css';
 import './components/Search/search-styles.css';
 import './components/FavoriteRecipes/favorite-styles.css';
 import './components/NavBar/navbar-styles.css';
+import './components/NoMatch/no-match-styles.css';
+
 //React Router
 import {
   BrowserRouter as Router,
@@ -21,6 +23,8 @@ import MyProvider from "./MyProvider"
 import NavBar from "./components/NavBar/NavBar"
 import MainSearch from "./components/Search/Search"
 import Favorites from './components/FavoriteRecipes/Favorites';
+import NoMatch from "./components/NoMatch/NoMatch";
+
 export let MyContext = React.createContext();
 
 var App = () => {
@@ -31,6 +35,7 @@ var App = () => {
 				<Switch> 
 					<Route path="/" exact component={MainSearch}/>
 					<Route path="/Favorites" component={Favorites}/>
+					<Route component={NoMatch}/>
 				</Switch>
 				</Router>
 		</MyProvider>

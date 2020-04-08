@@ -1,6 +1,6 @@
 import React from 'react';
-import {MyContext} from "./App"
-
+import {MyContext} from "./App";
+import moment from "moment";
 
 class MyProvider extends React.Component {
 	constructor(props){
@@ -15,13 +15,9 @@ class MyProvider extends React.Component {
 	getFavorite(itemValues)  {
 				//this function adds the targeted recipe value and image
 				//and adds it to an array in the state and local storage
-				//need to bind this
+				console.log(moment().format('MMMM Do YYYY, h:mm:ss a'));
 				console.log(itemValues)
-				const now = new Date();
-				const day = now.getDate();
-				const month = now.getMonth() + 1; 
-				const newFavorite = {...itemValues, date: `${day}/${month}`}
-
+				const newFavorite = {...itemValues, date: moment().format('MMMM Do')};
 				//check if the state already has that recipe
 				if (this.state.favoriteRecipes.some
 					(elem => elem.recipeName === newFavorite.recipeName)){
@@ -49,17 +45,13 @@ class MyProvider extends React.Component {
 	
 	
 	componentDidMount(){
-	if(localStorage.favorites !== undefined){
-		this.setState({
-			favoriteRecipes:JSON.parse(localStorage.favorites)
-		})
-	}
+		//check if the user already has favorites in local storage
+		if(localStorage.favorites !== undefined){
+			this.setState({
+				favoriteRecipes:JSON.parse(localStorage.favorites)
+			})
+		}
 		console.log(this.state.favoriteRecipes);
-	}
-	
-	componentDidUpdate(){
-		console.log(this.state.favoriteRecipes);
-		//localStorage.setItem("favorites", JSON.stringify(this.state.favoriteRecipes));
 	}
 	
 	render(){

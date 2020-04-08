@@ -58,7 +58,6 @@ const SearchItem = (props) => {
 		recipeName:title,
 		url
 	}
-		
 	return(
 			<Paper  className="search-item" square>
 				<CardMedia

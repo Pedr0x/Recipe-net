@@ -4,11 +4,17 @@
 
 .favorite-recipes-super-container{
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
+grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
+}
+
+.favorites-title_no-items {
+	padding: 5%;
+	text-align: center;
+	color: #7d7d7d;
 }
 
 .favorite-recipes-item-title {
-	background: #ffffff75;
+	background: #ffffffd6;
 	color: white;
 	padding: 2% 2%;
 	display: flex;
@@ -59,5 +65,5 @@ flex-direction: column;
 .favorites-item-date {
 	display: block;
 	font-size: 16px;
-	color: #3f51b5;
+	color: #1b73d0;
 }
