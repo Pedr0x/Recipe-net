@@ -35,7 +35,7 @@ class MainSearch extends React.Component {
 			caloriesMax:null,
 				pageQ: {
 				from:0,
-				to:10
+				to:5
 				},
 			moreResultsAvailable:false,
 			inSpanish:false,
@@ -96,12 +96,12 @@ class MainSearch extends React.Component {
 
 						
 	let responseData = {
-		recipes:[],
-		receivedData:undefined,
-		error:undefined,
-		moreResults:true
+		recipes:this.state.recipes,
+		receivedData:this.state.recipes,
+		error:this.state.error,
+		moreResults:this.state.moreResults
 }
-	var { moreResults,error, receivedData, recipes} = responseData;
+	let { moreResults,error, receivedData, recipes} = responseData;
 
 	if(xhr.status === 200){
 					//check if query found any recipes
@@ -130,23 +130,26 @@ class MainSearch extends React.Component {
 					//status code not 200
 					else {
 						this.setState({
-							error:true
+							error: true
 						})
+						error = true;
 						reject("Status code wasn´t 200: " + xhr.status);
 					}
 						//connection problems
 						xhr.onerror = () => {
 							this.setState({
-							error:true
+							receivedData:false
 						})
-							reject("request did not load because of connection problems");
+						error = true;
+						reject("request did not load because of connection problems");
 				}
 					//end of request
+						//this can be optimized
 						this.setState({
-						moreResults, error, receivedData, recipes,
+						moreResults,receivedData,error, recipes,
 						isMakingRequest: false
 					})	
-					};
+					}					
 					xhr.send();
 			}
 			)
@@ -183,15 +186,18 @@ class MainSearch extends React.Component {
 	}
 	
 	showMoreResults(){
-		this.queryParameters.pageQ.from +=10;
-		this.queryParameters.pageQ.to += 10;	this.apiRequest(this.queryParameters);
+		this.queryParameters.pageQ.from +=25;
+		this.queryParameters.pageQ.to += 25;	
+		//api will receive stop returning data at 100 hits
+		//I have been testing and I dont think the user will see
+		this.apiRequest(this.queryParameters);
 	}
 	
 	toggleLang(e){
 		this.queryParameters.inSpanish = !this.queryParameters.inSpanish;
 		console.log(this.queryParameters.inSpanish);
 	}
-	
+
 	getValue(e){
 		this.queryParameters[e.target.name] = e.target.value;
 	}

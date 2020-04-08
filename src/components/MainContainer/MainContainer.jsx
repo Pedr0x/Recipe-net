@@ -2,6 +2,7 @@ import React, { useRef,useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import SearchItem from "./SearchItem";
 import Spinner from "./Spinner";
+var _ = require('lodash');
 
 const MainContainer = (props) => {
 	 const [ref, inView, entry] = useInView({
@@ -47,7 +48,7 @@ const MainContainer = (props) => {
 						dietLabels={elem.recipe.dietLabels}
 						cautions={elem.recipe.cautions}
 						totalNutrients={elem.recipe.totalNutrients}
-						key={elem.recipe.url}
+						key={_.uniqueId()}
 						recipeYield={elem.recipe.yield}
 						url={elem.recipe.url}
 						/> 
