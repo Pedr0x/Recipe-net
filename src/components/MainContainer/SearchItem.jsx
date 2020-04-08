@@ -59,6 +59,7 @@ const SearchItem = (props) => {
 		url
 	}
 	return(
+		<div className="search-item-container"> 
 			<Paper  className="search-item" square>
 				<CardMedia
 					  component="img"
@@ -108,6 +109,7 @@ const SearchItem = (props) => {
 						<SearchItemGrid labelText={"Total Nutrients"} data={Object.entries(totalNutrients)}/>
 					</TabPanel>
 		</Paper>
+		</div>
 		)}
 	
 export  default SearchItem

@@ -31,9 +31,12 @@ align-items: center;
 	padding: 2%;
 }
 */
-.search-item{
-	/* FIX THIS*/
-	margin: 2%;
+.search-item-container{
+	padding: 2%;
+}
+.search-item {
+	/* margin: 2%; */
+	height: 100%;
 }
 
 .card-list-item_health {
