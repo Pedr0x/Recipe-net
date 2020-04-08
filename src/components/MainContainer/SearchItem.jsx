@@ -15,10 +15,6 @@ import SearchItemList from "./SearchItemList"
 import SearchItemListMeasures from "./SearchItemListMeasures"
 import SearchItemGrid from "./SearchItemGrid"
 
-
-//Lodash for creating unique key IDs
-var _ = require('lodash');
-
 const SearchItem = (props) => {
 		const [value, setValue] = React.useState(0);
 		const handleChange = (event, newValue) => {
@@ -115,4 +111,5 @@ const SearchItem = (props) => {
 		</Paper>
 		)}
 	
-export  default SearchItem 
+export  default SearchItem
+

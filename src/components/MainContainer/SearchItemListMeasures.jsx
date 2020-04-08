@@ -12,9 +12,10 @@ const SearchItemListMeasures = (props) => {
 			)}
 		</ul>
 		)}
-else{
-	return(<h1> no data</h1>)
+	else {
+		return(<h1> no data</h1>)
+	}
 }
-		}
+
 export  default SearchItemListMeasures;
 

@@ -82,70 +82,70 @@ class MainSearch extends React.Component {
 		
 		const urlRequest = `https://cors-anywhere.herokuapp.com/${requestLang}?q=${query}&app_id=8bc00f3b&app_key=b1d9d15dadbddc109d83b189b71e533f&from=0&to=${pagesToFetch}${ManyCalories}${isAlcoholFree}${isVegetarian}${isLowFat}${isGlutenFree}${isHighProtein}${isBalanced}${cuisine}${excludedIngredients}`;
 
-		let getPromise = new Promise((resolve,reject) => {
-			const xhr = new XMLHttpRequest();
-				xhr.open("GET", urlRequest);
-				xhr.responseType = "json";
-				xhr.onload = () => {
-					this.setState({
-						isMakingRequest:true
-					});
-					
-					if(xhr.status === 200){
-						//check if query found any recipes
-						if(xhr.response.hits.length > 0){	
-							this.setState({
-							recipes: xhr.response.hits,
-							receivedData: true,
-							error:false
-						})
-							//check if there are more recipes
-							if(xhr.response.more == true){
-								console.log("more results available");
-								this.setState({
-									moreResults:true
-								});
-							} else {
-									//no more recipes available
-									this.setState({
-										moreResults:false
-									});
-							}
-						}
-						else {
-							//the request was succesful but didn´t return data
-							this.setState({
-								receivedData: false
-							});
-						}
-						resolve(xhr.response);
-					}
-					//status code not 200
-					else{
-						this.setState({ 
-							error: true
-						});
-						reject("Status code wasn´t 200: " + xhr.status);
-					}
-					//connection problems
-					xhr.onerror = () => {
+	let getPromise = new Promise((resolve,reject) => {
+				const xhr = new XMLHttpRequest();
+					xhr.open("GET", urlRequest);
+					xhr.responseType = "json";
+					xhr.onload = () => {
 						this.setState({
-							receivedData:false
+							isMakingRequest:true
 						});
-						reject("request did not load because of connection problems");
+
+						if(xhr.status === 200){
+							//check if query found any recipes
+							if(xhr.response.hits.length > 0){	
+								this.setState({
+								recipes: xhr.response.hits,
+								receivedData: true,
+								error:false
+							})
+								//check if there are more recipes
+								if(xhr.response.more == true){
+									console.log("more results available");
+									this.setState({
+										moreResults:true
+									});
+								} else {
+										//no more recipes available
+										this.setState({
+											moreResults:false
+										});
+								}
+							}
+							else {
+								//the request was succesful but didn´t return data
+								this.setState({
+									receivedData: false
+								});
+							}
+							resolve(xhr.response);
+						}
+						//status code not 200
+						else{
+							this.setState({ 
+								error: true
+							});
+							reject("Status code wasn´t 200: " + xhr.status);
+						}
+						//connection problems
+						xhr.onerror = () => {
+							this.setState({
+								receivedData:false
+							});
+							reject("request did not load because of connection problems");
+				}
+					//end of request
+					this.setState({
+							isMakingRequest:false
+						});
+					};
+					xhr.send();
 			}
-				//end of request
-				this.setState({
-						isMakingRequest:false
-					});
-				};
-				xhr.send();
-		}
-		)
-		getPromise
-			.then(res => console.log(res))
-			.catch(err => console.log(err))
-			}
+			)
+			getPromise
+				.then(res => console.log(res))
+				.catch(err => console.log(err))
+				}
 
 	componentDidMount() {  
 		//make initial request with sample parameters
@@ -153,7 +153,8 @@ class MainSearch extends React.Component {
 	}
 		
 	componentDidUpdate(){
-		console.count();
+		//console.count();
+		//the component updates 4 times every render
 	}
 	
 	handleChange(e){

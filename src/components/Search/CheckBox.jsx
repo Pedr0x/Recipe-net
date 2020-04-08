@@ -35,7 +35,9 @@ class Checkbox extends React.Component{
 						onClick={this.toggle}
 						/>
 
-					{ this.state.checked ?	<CheckBoxIcon color={"primary"}/> : <CheckBoxOutlineBlankIcon  color={"primary"}/> }  
+					{ this.state.checked 
+						?	<CheckBoxIcon color={"primary"}/> 
+						: <CheckBoxOutlineBlankIcon  color={"primary"}/> }  
 			</div>
 		)
 	}

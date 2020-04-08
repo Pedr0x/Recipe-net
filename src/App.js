@@ -8,7 +8,6 @@ import './components/MainContainer/search-item.css';
 import './components/Search/search-styles.css';
 import './components/FavoriteRecipes/favorite-styles.css';
 import './components/NavBar/navbar-styles.css';
-import './components/alert/alert-styles.css';
 //React Router
 import {
   BrowserRouter as Router,
