@@ -207,7 +207,7 @@ class MainSearch extends React.Component {
 								 <div className="checkboxes-container">
 									<CheckBox  callback={this.getCheckBoxData} label="Alcohol Free" name="alcoholFree"/>
 									<CheckBox  callback={this.getCheckBoxData} label="Vegetarian" name="vegetarian"/>
-									<CheckBox  callback={this.getCheckBoxData} label="Gluten" name="gluten"/>
+									<CheckBox  callback={this.getCheckBoxData} label="Gluten" name="gluten-free"/>
 								</div>
 							</div>
 							
