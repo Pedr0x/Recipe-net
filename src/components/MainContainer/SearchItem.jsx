@@ -85,7 +85,6 @@ const SearchItem = React.memo((props) => {
 					subheader={`${parseInt(calories)} cal - ${parseInt(weight)}g  - For ${recipeYield}`}
 				 /> )}
 				</MyContext.Consumer> 
-
 				<Tabs
 					value={value}
 					indicatorColor="primary"
@@ -100,12 +99,10 @@ const SearchItem = React.memo((props) => {
 					<TabPanel value={value} index={0}>
 						<SearchItemListMeasures data={ingredients}/>
 					</TabPanel>
-
 					<TabPanel value={value} index={1}>
 						<SearchItemList type="health" data={healthLabels} labelText=" Health Labels"/>
 						<SearchItemList type="caution" data={cautions} labelText="Cautions"/>
 					</TabPanel>
-
 					<TabPanel value={value} index={2}>
 						<SearchItemGrid labelText={"Total Nutrients"} data={Object.entries(totalNutrients)}/>
 					</TabPanel>

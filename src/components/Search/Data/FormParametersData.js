@@ -1,4 +1,19 @@
 const formParametersData = {
+	
+			inputData : {
+				calories : {
+					type:"number",
+					labelText:"Max Calories",
+					name:"caloriesMax",
+					placeholder:""
+				},
+				excludedIngredients : {
+						type:"",
+					labelText:"Excluded Ingredients",
+					name:"excluded",
+					placeholder:"Eg: Pizza"
+				}
+			},
 			 checkboxData : {
 				 checkboxDataHealth :{
 					 mainData: [

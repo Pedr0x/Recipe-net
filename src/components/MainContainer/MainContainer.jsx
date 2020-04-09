@@ -32,7 +32,7 @@ const MainContainer = (props) => {
 	}
 	
 	if (props.data.length >= 1 && props.error == true){
-		//Query already had returned recipes but encountered
+		//Query already had  recipes but encountered
 		//an error. Probably 429
 		return( 
 			<div className="main-search-container">

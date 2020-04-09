@@ -203,13 +203,19 @@ class MainSearch extends React.Component {
 	render(){
 		return (
 			<React.Fragment> 
-				<SearchForm getCheckBoxData={this.getCheckBoxData} getValue={this.getValue} handleChange={this.handleChange} />
+				<SearchForm 
+					getCheckBoxData={this.getCheckBoxData} 
+					getValue={this.getValue} 
+					handleChange={this.handleChange} 
+					/>
+					
 				<MainContainer 
 					receivedData={this.state.receivedData}
 					data={this.state.recipes}
 					moreResultsAvailable={this.state.moreResults} 
 					showMoreResults={this.showMoreResults}
-					error={this.state.error} isMakingRequest={this.state.isMakingRequest}
+					error={this.state.error} 
+					isMakingRequest={this.state.isMakingRequest}
 					/> 
 			</React.Fragment>
 				)	

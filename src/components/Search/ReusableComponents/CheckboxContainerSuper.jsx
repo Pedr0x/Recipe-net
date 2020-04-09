@@ -8,7 +8,11 @@ const CheckboxContainerSuper = (props) => {
 				<h2 className="checkbox-subtitle"> {props.checkboxSuperSubtitle}  </h2>
 				 <div className="checkboxes-container">
 				 {props.checkboxData.map(elem => 
-						<CheckBox key={_.uniqueId()} getCheckBoxData={props.getCheckBoxData} label={elem.label} name={elem.name}/>)}
+						<CheckBox 
+							key={_.uniqueId()} 
+							getCheckBoxData={props.getCheckBoxData} 
+							label={elem.label} 
+							name={elem.name}/>)}
 				</div>
 		</div>
 	)
