@@ -19,7 +19,8 @@ const SearchItemList = (props) => {
 	else{
 		return(
 			<div>
-				<h4> This item doesn´t have any {props.type} labels</h4>
+			<h3 className="card-list-item-subtitle"> {props.labelText}</h3>
+			<h4 className="card-list-item-subtext_no-data"> This item doesn´t have any {props.type} labels</h4>
 		 	</div>
 			)
 	}

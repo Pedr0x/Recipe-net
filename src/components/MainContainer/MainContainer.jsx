@@ -56,7 +56,6 @@ const MainContainer = (props) => {
 								}
 					<div className="connection-problems-info"> 
 						<h1>  Connection problems. Click here after a minute to keep loading recipes</h1>
-						<p> code:{props.error}</p>
 						<button className="btn btn_reload" onClick={props.showMoreResults}> reload</button>
 					</div>
  			</div>	

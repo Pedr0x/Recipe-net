@@ -75,6 +75,10 @@ grid-template-columns: repeat(auto-fill, minmax(125px, 1fr));
 .card-list-item-subtitle{
 padding: 3% 0;
 }
+.card-list-item-subtext_no-data{
+	padding: 3%;
+	text-align: center;
+}
 
 @media only screen and (max-width: 1000px){
 	.search-item-super{

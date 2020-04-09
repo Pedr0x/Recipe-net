@@ -35,7 +35,7 @@ class MainSearch extends React.Component {
 			caloriesMax:null,
 				pageQ: {
 				from:0,
-				to:5
+				to:10
 				},
 			moreResultsAvailable:false,
 			inSpanish:false,
@@ -80,7 +80,7 @@ class MainSearch extends React.Component {
 		const isHighProtein = highProtein ? "&diet=high-protein" : "" ;
 		const pagesToFetch =  `&from=${pageQ.from}&to=${pageQ.to}`;
 		const requestLang = inSpanish ? "https://test-es.edamam.com/search" : "https://api.edamam.com/search";
-		const cuisine = cuisineType ? `&cuisineType=${cuisineType}`: "";
+		const cuisine = cuisineType ? `&cuisineType=${cuisineType}`: ""; 
 		const excludedIngredients = excluded ? ("&" + excluded.split(",").map(elem=>  `excluded=${elem}`).join("&")) : "" ;
 		
 		const urlRequest = `https://cors-anywhere.herokuapp.com/${requestLang}?q=${query}&app_id=8bc00f3b&app_key=b1d9d15dadbddc109d83b189b71e533f${pagesToFetch}${ManyCalories}${isAlcoholFree}${isVegetarian}${isLowFat}${isGlutenFree}${isHighProtein}${isBalanced}${cuisine}${excludedIngredients}`;
@@ -106,19 +106,19 @@ class MainSearch extends React.Component {
 	if(xhr.status === 200){
 					//check if query found any recipes
 					if (xhr.response.hits.length > 0) {
-						receivedData = true
-						error = false
+						receivedData = true;
+						error = false;
 						if (this.state.recipes.lenght !== 0) {
 							recipes = [...this.state.recipes, ...xhr.response.hits]
 						} else {
-							recipes = xhr.response.hits
+							recipes = xhr.response.hits;
 						}
 						//check if there are more recipes
 						if (xhr.response.more == true) {
-							moreResults = true
+							moreResults = true;
 						} else {
 							//no more recipes available
-							moreResults = false
+							moreResults = false;
 						}
 						resolve(xhr.response);
 					} else {
@@ -165,7 +165,7 @@ class MainSearch extends React.Component {
 		
 	componentDidUpdate(){
 		console.count();
-		//the component updates 4 times every render
+		//the component updates 2 times every render
 	}
 	
 	handleChange(e){
@@ -176,7 +176,7 @@ class MainSearch extends React.Component {
 		});
 		//reset the pages request
 		this.queryParameters.pageQ.from = 0;
-		this.queryParameters.pageQ.to = 5;
+		this.queryParameters.pageQ.to = 10;
 
 		this.apiRequest(this.queryParameters);
 	}
@@ -186,8 +186,8 @@ class MainSearch extends React.Component {
 	}
 	
 	showMoreResults(){
-		this.queryParameters.pageQ.from +=25;
-		this.queryParameters.pageQ.to += 25;	
+		this.queryParameters.pageQ.from +=10;
+		this.queryParameters.pageQ.to += 10;	
 		//api will receive stop returning data at 100 hits
 		//I have been testing and I dont think the user will see
 		this.apiRequest(this.queryParameters);
