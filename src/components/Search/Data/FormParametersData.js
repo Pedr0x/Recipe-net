@@ -43,8 +43,8 @@ const formParametersData = {
 							name:"alcoholFree"
 						},
 						{
-							label:"gluten",
-							name:"glutenFree"
+							label:"Gluten Free",
+							name:"gluten"
 						},
 					],
 					 subtitle: "Diet Restrictions"

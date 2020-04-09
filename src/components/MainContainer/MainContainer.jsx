@@ -2,6 +2,8 @@ import React, { useRef,useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import SearchItem from "./SearchItem";
 import Spinner from "./Spinner";
+import ConnectionProblemsInfo from "./ConnectionProblemsInfo";
+
 var _ = require('lodash');
 
 const MainContainer = (props) => {
@@ -54,14 +56,17 @@ const MainContainer = (props) => {
 						/> 
 				)
 								}
-					<div className="connection-problems-info"> 
-						<h1>  Connection problems. Click here after a minute to keep loading recipes</h1>
-						<button className="btn btn_reload" onClick={props.showMoreResults}> reload</button>
-					</div>
+					<ConnectionProblemsInfo showMoreResults={props.showMoreResults}/>
  			</div>	
 		)
+	} if (props.error && !props.data.length){
+		//error starting 
+		return(
+		<ConnectionProblemsInfo showMoreResults={props.showMoreResults}/>
+
+		)
 	}
-	
+
 	else {
 		return(
 			//regular return. XHR code = 200

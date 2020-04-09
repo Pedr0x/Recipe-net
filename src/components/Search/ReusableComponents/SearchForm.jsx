@@ -12,7 +12,7 @@ const SearchForm = React.memo((props) => {
 						searchCallback={props.handleChange}/>
 
 					<FormParameters 
-						callback={props.callback} 
+						callback={props.getValue} 
 						getCheckBoxData={props.getCheckBoxData}/>
 			</form>
 		</div>

@@ -138,7 +138,7 @@ class MainSearch extends React.Component {
 							this.setState({
 							receivedData:false
 						})
-						error = true;
+						receivedData = false;
 						reject("request did not load because of connection problems");
 				}
 					//end of request
@@ -208,7 +208,6 @@ class MainSearch extends React.Component {
 					getValue={this.getValue} 
 					handleChange={this.handleChange} 
 					/>
-					
 				<MainContainer 
 					receivedData={this.state.receivedData}
 					data={this.state.recipes}

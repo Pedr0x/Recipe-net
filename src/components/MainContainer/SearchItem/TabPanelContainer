@@ -1,0 +1,21 @@
+import React from 'react';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+
+
+const SearchForm = React.memo((props) => {
+	return(
+		<Tabs
+					value={value}
+					indicatorColor="primary"
+					textColor="primary"
+					onChange={handleChange}
+				>
+					<Tab label="Ingredients" />
+					<Tab label="Labels" />
+					 <Tab label="Nutrition" />
+				</Tabs>
+	)
+});
+
+export default SearchForm 
