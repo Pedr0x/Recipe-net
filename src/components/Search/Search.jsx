@@ -5,9 +5,9 @@ import SearchIcon from '@material-ui/icons/Search';
 import CheckBox from './CheckBox';
 import MainContainer from "../MainContainer/MainContainer";
 import Input from './InputRange';
-import ToggleItem from './Toggle';
 import Select from './Select';
 
+import SearchForm from "./ReusableComponents/SearchForm"
 import  './input-range.css';
 
 class MainSearch extends React.Component {
@@ -42,8 +42,6 @@ class MainSearch extends React.Component {
 			cuisineType:"",
 			excluded:""
 		};
-		this.isMakingRequest = false;
-		 
 		 //methods
 	    this.handleChange = this.handleChange.bind(this);
 	    this.apiRequest = this.apiRequest.bind(this);
@@ -205,46 +203,7 @@ class MainSearch extends React.Component {
 	render(){
 		return (
 			<React.Fragment> 
-				<div  className="search-form-container-super"> 
-					<form  className="search-form"  noValidate autoComplete="off">
-						 <div className="search-form-container">
-							 <div className="search-form-main-panel">
-								 <h1 className="main-search-title" onClick={() => console.log(this.queryParameters)}> Search for a recipe!</h1>
-								 <div className="input-container">
-									<input name="query" placeholder="Donuts" className="query-input" onChange={this.getValue}/>
-									<button onClick={this.handleChange} className="search-button"> <SearchIcon/> </button>
-								 </div>
-								   <ToggleItem labelText="Buscar en español" callback={this.getCheckBoxData} name="inSpanish"/>
-								</div>
-							 </div>
-							 
-						<div className="form-parameters">
-							<div className="checkboxs-container-super"> 
-								<h2 className="checkbox-subtitle"> Dietary Restrictions  </h2>
-								 <div className="checkboxes-container">
-									<CheckBox  callback={this.getCheckBoxData} label="Alcohol Free" name="alcoholFree"/>
-									<CheckBox  callback={this.getCheckBoxData} label="Vegetarian" name="vegetarian"/>
-									<CheckBox  callback={this.getCheckBoxData} label="Gluten" name="gluten-free"/>
-								</div>
-							</div>
-							
-							<div className="checkboxs-container-super">
-								<h2 className="checkbox-subtitle"> Health restrictions </h2>								
-								<div className="checkboxes-container">
-									<CheckBox  callback={this.getCheckBoxData} label="Balanced" name="balanced"/>
-									<CheckBox  callback={this.getCheckBoxData} label="High Protein" name="highProtein"/>
-									<CheckBox  callback={this.getCheckBoxData} label="Low Fat" name="lowFat"/>
-								</div>
-							</div>
-						<div className="inputs-container">
-							<Input  callback={this.getValue} type="number" labelText="Max Calories" name="caloriesMax"/>
-							<Input callback={this.getValue} labelText="Excluded Ingredients" name="excluded" placeholder="Eg: Pizza"/> 
-						</div>
-							<Select  name="cuisineType" callback={this.getValue}/>
-						</div>
-					</form>
-				</div>
-
+				<SearchForm getCheckBoxData={this.getCheckBoxData} getValue={this.getValue} handleChange={this.handleChange} />
 				<MainContainer 
 					receivedData={this.state.receivedData}
 					data={this.state.recipes}
