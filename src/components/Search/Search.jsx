@@ -1,9 +1,7 @@
 import React from 'react';
 //Material UI Components
-import CheckBox from './CheckBox';
 import MainContainer from "../MainContainer/MainContainer";
 import SearchForm from "./ReusableComponents/SearchForm"
-
 
 class MainSearch extends React.Component {
 	 constructor(props) {
@@ -121,7 +119,6 @@ class MainSearch extends React.Component {
 					reject("request did not load because of connection problems");
 				}
 				//end of request
-				//this can be optimized
 				this.setState({
 					moreResults,
 					receivedData,

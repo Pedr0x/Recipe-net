@@ -5,7 +5,7 @@ const SearchItemGrid = (props) => {
 	if (props.data != false){
 	return(
 		<React.Fragment>
-			{props.labelText}
+			<h2 className="card-list-item-subtitle">  {props.labelText} </h2>
 			<ul className="grid-list card-list-item-total-nutrients-container"> 
 				{props.data.map(elem => 
 					<li key= { _.uniqueId()} >
