@@ -11,11 +11,12 @@ class Checkbox extends React.Component{
 		this.toggle = this.toggle.bind(this);	
 	}
 		toggle(){
-		const {checked} = this.state;
+			const {checked} = this.state;
 			this.setState({
 				checked: !checked
 			})
 		}
+	
 	componentDidUpdate(){
 		//for some reason, the set state callback
 		//started having bugs returning the untoggled 

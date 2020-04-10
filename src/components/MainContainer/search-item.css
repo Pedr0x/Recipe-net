@@ -21,9 +21,10 @@ align-items: center;
 }
 .card-list-item {
 	display: inline;
-	padding: 1% 1.5%;
-	margin: 1%;
-	font-size: 12px;
+padding: 5px 15px;
+margin: 1%;
+font-size: 12px;
+border-radius: 25px;
 }
 
 /*
@@ -55,6 +56,7 @@ color: black;
 font-size: 14px;
 	align-items: center;
 grid-template-columns: repeat(auto-fill, minmax(125px, 1fr));
+	
 }
 
 .card-list-item-total-nutrients-container > li{
@@ -74,15 +76,24 @@ grid-template-columns: repeat(auto-fill, minmax(125px, 1fr));
 
 .card-list-item-subtitle{
 padding: 3% 0;
+	color: #3f51b5;
+	font-weight: 600;
+
 }
 .card-list-item-subtext_no-data{
 	padding: 3%;
 	text-align: center;
 }
 
+.no-results-text{
+	    text-align: center;
+    	padding: 5%;
+    	grid-column: 1/3;
+}
+
 @media only screen and (max-width: 1000px){
 
-	.search-item-container {
+	.search-item-container,.no-results-text {
 	grid-column: 1;
 }
 }

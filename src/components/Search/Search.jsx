@@ -46,7 +46,6 @@ class MainSearch extends React.Component {
 		this.toggleLang = this.toggleLang.bind(this);
 		this.getValue = this.getValue.bind(this);
 	  }
-	
 	apiRequest(queryObj) {
 		const {
 			query,
@@ -112,18 +111,15 @@ class MainSearch extends React.Component {
 						}
 				resolve(xhr.response);
 				} else {
-						this.setState({error: true})
 						error = true;
 						reject("Status code wasn´t 200: " + xhr.status);
 					}
 				
 			//connection problems
 				xhr.onerror = () => {
-					this.setState({receivedData:false})
 					receivedData = false;
 					reject("request did not load because of connection problems");
 				}
-				
 				//end of request
 				//this can be optimized
 				this.setState({
@@ -135,6 +131,11 @@ class MainSearch extends React.Component {
 				})	
 			}					
 				xhr.send();
+			
+			if (this.isRequestCanceled){
+				console.log("aborted request")
+				xhr.abort();
+			}
 		}
 	)
 			getPromise
@@ -148,11 +149,12 @@ class MainSearch extends React.Component {
 	}
 		
 	componentDidUpdate(){
-		console.count();
+		//console.count();
 		//the component updates 2 times every render
 	}
+	
 	componentWillUnmount(){
-		
+		this.isRequestCanceled = true;
 	}
 	
 	handleChange(e){

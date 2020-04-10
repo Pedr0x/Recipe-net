@@ -36,8 +36,8 @@ class MyProvider extends React.Component {
 	deleteFavorite(param) {
 		this.setState({
 			favoriteRecipes: this.state.favoriteRecipes.filter(recipe => recipe.recipeName !== param)
-			})
-			}
+			});
+	}
 	
 	componentDidMount(){
 		//check if the user already has favorites in local storage
@@ -45,7 +45,7 @@ class MyProvider extends React.Component {
 			this.setState({
 				favoriteRecipes:JSON.parse(localStorage.favorites)
 			})
-		}
+		};
 		console.log(this.state.favoriteRecipes);
 	}
 	
@@ -61,7 +61,6 @@ class MyProvider extends React.Component {
 			state:this.state,
 			getFavorite:this.getFavorite,
 			deleteFavorite:this.deleteFavorite
-	
 			}}>
 		{this.props.children}
 		</MyContext.Provider>
