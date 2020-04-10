@@ -83,13 +83,12 @@ const MainContainer = (props) => {
 						dietLabels={elem.recipe.dietLabels}
 						cautions={elem.recipe.cautions}
 						totalNutrients={elem.recipe.totalNutrients}
-						key={elem.recipe.url}
+						key={_.uniqueId()}
 						recipeYield={elem.recipe.yield}
 						url={elem.recipe.url}
 						/> 
 				)
 								}
-					
 					{props.moreResultsAvailable ? 
 					//Check if the response has more data under the same query
 						<div className="spinner-container" ref={ref}> 

@@ -105,56 +105,41 @@ class MainSearch extends React.Component {
 
 				if(xhr.status === 200){
 					
-					//check if query found any recipes
 					if (xhr.response.hits.length > 0) {
 						receivedData = true;
 						error = false;
-						
-						//check if the state already had recipes and update it
-						if (this.state.recipes.lenght !== 0) {
-							recipes = [...this.state.recipes, ...xhr.response.hits]
+						recipes = this.state.recipes.lenght !== 0 ?  [...this.state.recipes, ...xhr.response.hits] : xhr.response.hits 
+						moreResults = xhr.response.more ? true : false
 						} else {
-							recipes = xhr.response.hits;
+							receivedData = false
 						}
-
-						//check if there are more recipes
-						if (xhr.response.more == true) {
-							moreResults = true;
-						} else {
-							//no more recipes available
-							moreResults = false;
-						}
-						}
-					
-					//the request was succesful but didn´t return data
-					else {receivedData = false}
-					resolve(xhr.response);
-					}		
-						//status code not 200
-						else {
-							this.setState({error: true})
-							error = true;
-							reject("Status code wasn´t 200: " + xhr.status);
-							}
+				resolve(xhr.response);
+				} else {
+						this.setState({error: true})
+						error = true;
+						reject("Status code wasn´t 200: " + xhr.status);
+					}
 				
-							//connection problems
-							xhr.onerror = () => {
-								this.setState({receivedData:false})
-								receivedData = false;
-								reject("request did not load because of connection problems");
-							}
-							
-								//end of request
-								//this can be optimized
-								this.setState({
-								moreResults,receivedData,error, recipes,
-								isMakingRequest: false
-								})	
+			//connection problems
+				xhr.onerror = () => {
+					this.setState({receivedData:false})
+					receivedData = false;
+					reject("request did not load because of connection problems");
+				}
+				
+				//end of request
+				//this can be optimized
+				this.setState({
+					moreResults,
+					receivedData,
+					error, 
+					recipes,
+					isMakingRequest: false
+				})	
 			}					
-								xhr.send();
+				xhr.send();
 		}
 	)
-		
 			getPromise
 				.then(res => console.log(res))
 				.catch(err => console.log(err))
