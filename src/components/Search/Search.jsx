@@ -3,7 +3,7 @@ import React from 'react';
 import CheckBox from './CheckBox';
 import MainContainer from "../MainContainer/MainContainer";
 import SearchForm from "./ReusableComponents/SearchForm"
-import  './input-range.css';
+
 
 class MainSearch extends React.Component {
 	 constructor(props) {

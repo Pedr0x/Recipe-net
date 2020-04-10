@@ -1,4 +1,5 @@
 import React from "react";
+import "./input-range.css";
 
 const Input = (props) => {
 	
