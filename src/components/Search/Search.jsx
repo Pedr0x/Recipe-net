@@ -42,6 +42,7 @@ class MainSearch extends React.Component {
 			cuisineType:"",
 			excluded:""
 		};
+		 this.isRequestCanceled = false;
 		 //methods
 	    this.handleChange = this.handleChange.bind(this);
 	    this.apiRequest = this.apiRequest.bind(this);
@@ -83,34 +84,39 @@ class MainSearch extends React.Component {
 		
 		const urlRequest = `https://cors-anywhere.herokuapp.com/${requestLang}?q=${query}&app_id=8bc00f3b&app_key=b1d9d15dadbddc109d83b189b71e533f${pagesToFetch}${ManyCalories}${isAlcoholFree}${isVegetarian}${isLowFat}${isGlutenFree}${isHighProtein}${isBalanced}${cuisine}${excludedIngredients}`;
 
-	let getPromise = new Promise((resolve,reject) => {
-				const xhr = new XMLHttpRequest();
-					xhr.open("GET", urlRequest);
-					xhr.responseType = "json";
-					xhr.onload = () => {
-						this.setState({
-							isMakingRequest:true
-						});
+		let getPromise = new Promise((resolve,reject) => {
+			const xhr = new XMLHttpRequest();
+			xhr.open("GET", urlRequest);
+			xhr.responseType = "json";
+			
+			xhr.onload = () => {
+				this.setState({
+					isMakingRequest:true
+				});
 
+				let responseData = {
+					recipes: [...this.state.recipes],
+					receivedData: this.state.receivedData,
+					error: this.state.error,
+					moreResults: this.state.moreResults
+				};
 						
-	let responseData = {
-		recipes:this.state.recipes,
-		receivedData:this.state.recipes,
-		error:this.state.error,
-		moreResults:this.state.moreResults
-}
-	let { moreResults,error, receivedData, recipes} = responseData;
+				let { moreResults,error, receivedData, recipes} = responseData;
 
-	if(xhr.status === 200){
+				if(xhr.status === 200){
+					
 					//check if query found any recipes
 					if (xhr.response.hits.length > 0) {
 						receivedData = true;
 						error = false;
+						
+						//check if the state already had recipes and update it
 						if (this.state.recipes.lenght !== 0) {
 							recipes = [...this.state.recipes, ...xhr.response.hits]
 						} else {
 							recipes = xhr.response.hits;
 						}
+
 						//check if there are more recipes
 						if (xhr.response.more == true) {
 							moreResults = true;
@@ -118,39 +124,37 @@ class MainSearch extends React.Component {
 							//no more recipes available
 							moreResults = false;
 						}
-						resolve(xhr.response);
-					} else {
-						//the request was succesful but didn´t return data
-						receivedData = false;
-						resolve(xhr.response);
-					}
-					}
-					//status code not 200
-					else {
-						this.setState({
-							error: true
-						})
-						error = true;
-						reject("Status code wasn´t 200: " + xhr.status);
-					}
-						//connection problems
-						xhr.onerror = () => {
-							this.setState({
-							receivedData:false
-						})
-						receivedData = false;
-						reject("request did not load because of connection problems");
-				}
-					//end of request
-						//this can be optimized
-						this.setState({
-						moreResults,receivedData,error, recipes,
-						isMakingRequest: false
-					})	
-					}					
-					xhr.send();
-			}
-			)
+						}
+					
+					//the request was succesful but didn´t return data
+					else {receivedData = false}
+					resolve(xhr.response);
+					}		
+						//status code not 200
+						else {
+							this.setState({error: true})
+							error = true;
+							reject("Status code wasn´t 200: " + xhr.status);
+							}
+				
+							//connection problems
+							xhr.onerror = () => {
+								this.setState({receivedData:false})
+								receivedData = false;
+								reject("request did not load because of connection problems");
+							}
+							
+								//end of request
+								//this can be optimized
+								this.setState({
+								moreResults,receivedData,error, recipes,
+								isMakingRequest: false
+								})	
+			}					
+								xhr.send();
+		}
+	)
+		
 			getPromise
 				.then(res => console.log(res))
 				.catch(err => console.log(err))
@@ -164,6 +168,9 @@ class MainSearch extends React.Component {
 	componentDidUpdate(){
 		console.count();
 		//the component updates 2 times every render
+	}
+	componentWillUnmount(){
+		
 	}
 	
 	handleChange(e){
