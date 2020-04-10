@@ -1,12 +1,7 @@
 import React from 'react';
 //Material UI Components
-import SearchIcon from '@material-ui/icons/Search';
-
 import CheckBox from './CheckBox';
 import MainContainer from "../MainContainer/MainContainer";
-import Input from './InputRange';
-import Select from './Select';
-
 import SearchForm from "./ReusableComponents/SearchForm"
 import  './input-range.css';
 
@@ -108,8 +103,10 @@ class MainSearch extends React.Component {
 					if (xhr.response.hits.length > 0) {
 						receivedData = true;
 						error = false;
-						recipes = this.state.recipes.lenght !== 0 ?  [...this.state.recipes, ...xhr.response.hits] : xhr.response.hits 
 						moreResults = xhr.response.more ? true : false
+						recipes = (this.state.recipes.lenght !== 0   
+											? [...this.state.recipes, ...xhr.response.hits] 
+											: xhr.response.hits) 
 						} else {
 							receivedData = false
 						}

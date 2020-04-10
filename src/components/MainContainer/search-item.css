@@ -81,7 +81,8 @@ padding: 3% 0;
 }
 
 @media only screen and (max-width: 1000px){
-	.search-item-super{
-		grid-column: 1;	
-	}
+
+	.search-item-container {
+	grid-column: 1;
+}
 }

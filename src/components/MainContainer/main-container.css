@@ -36,7 +36,12 @@
 	 .main-search-container{
 		 grid-template-columns: 1fr;
 	 }
+	 
 	 .connection-problems-info{
 		 grid-column: 1;
 	 }
+	 
+	 .spinner-container{
+	grid-column: 1;
+}
 }
