@@ -40,7 +40,7 @@ const SearchItem = React.memo((props) => {
   );
 	}
 		
-	var {
+	const {
 		title,
 		image,
 		calories,
