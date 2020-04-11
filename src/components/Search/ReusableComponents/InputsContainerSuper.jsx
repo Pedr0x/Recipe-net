@@ -13,6 +13,7 @@ const InputsContainerSuper = (props) => {
 			name={elem.name}
 			type={elem.type}
 			key={_.uniqueId()}
+			placeholder={elem.placeholder}
 			/>
 								 ) }
 		</div>

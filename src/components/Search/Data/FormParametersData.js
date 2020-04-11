@@ -11,7 +11,7 @@ const formParametersData = {
 						type:"",
 					labelText:"Excluded Ingredients",
 					name:"excluded",
-					placeholder:"Eg: Pizza"
+					placeholder:"Eg: Pizza, cake"
 				}
 			},
 			 checkboxData : {
