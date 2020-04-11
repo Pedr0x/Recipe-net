@@ -39,21 +39,21 @@ class MyProvider extends React.Component {
 			});
 	}
 	
-	componentDidMount(){
+	componentDidMount() {
 		//check if the user already has favorites in local storage
-		if(localStorage.favorites !== undefined) {
+		if (localStorage.favorites !== undefined) {
 			this.setState({
-				favoriteRecipes:JSON.parse(localStorage.favorites)
+				favoriteRecipes: JSON.parse(localStorage.favorites)
 			})
 		};
 		console.log(this.state.favoriteRecipes);
 	}
 	
-		componentDidUpdate(){
-			if(JSON.parse(localStorage.favorites !== this.state.favoriteRecipes)) {
-			   localStorage.setItem("favorites", JSON.stringify(this.state.favoriteRecipes))
-			   }
+	componentDidUpdate() {
+		if (JSON.parse(localStorage.favorites !== this.state.favoriteRecipes)) {
+			localStorage.setItem("favorites", JSON.stringify(this.state.favoriteRecipes))
 		}
+	}
 	
 	render(){
 		return(

@@ -1,16 +1,18 @@
 import React from 'react';
 import SearchIcon from '@material-ui/icons/Search';
-import ToggleItem from "./Toggle"
+import ToggleItem from "./Toggle";
+import data from "../Data/FormMainInputData";
+
 const SearchFormMainInput = (props) => {
 	return(
 		<div className="search-form-container">
 			 <div className="search-form-main-panel">
-				 <h1 className="main-search-title"> Search for a recipe!</h1>
+				 <h1 className="main-search-title">  {data.mainSearch.mainSearchTitle} </h1>
 				 <div className="input-container">
-					<input name="query" placeholder="Donuts" className="query-input" onChange={props.callback}/>
+					<input name={data.inputName} placeholder={data.mainSearch.placeholder} className="query-input" onChange={props.callback}/>
 					<button onClick={props.searchCallback} className="search-button"> <SearchIcon/> </button>
 				 </div>
-				   <ToggleItem labelText="Buscar en español" callback={props.toggleCallback} name="inSpanish"/>
+				   <ToggleItem labelText={data.toggleItem.text} callback={props.toggleCallback} name={data.toggleItem.name}/>
 			</div>
 	</div>
 	)
