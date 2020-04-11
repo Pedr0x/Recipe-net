@@ -19,6 +19,11 @@ text-align: center;
 
 align-items: center;
 }
+
+.search-item-link{
+	font-family: "Bellota Text";
+
+}
 .card-list-item {
 	display: inline;
 padding: 5px 15px;

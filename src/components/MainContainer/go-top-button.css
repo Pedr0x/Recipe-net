@@ -1,0 +1,32 @@
+.action-btn-container {
+	position: fixed;
+	bottom: 12.5%;
+
+right: 5%;
+
+z-index: 99;
+}
+
+.action-button {
+	background: #f50057;
+	color: white;
+	border: 0;
+	border-radius: 45px;
+	padding: 10px 15px;
+	box-shadow: 3px 10px 20px rgba(0, 0, 0, 0.26), 1px 5px 6px rgba(0, 0, 0, 0.11);
+}
+
+.action-button:hover{
+	background: #e30051;
+	transition: 0.2s;
+	transform: scale((1.1))
+}
+
+.action-btn-icon{
+		transition: 0.1s ease-in;
+
+}
+.action-button:hover .action-btn-icon {
+	transform: translateY(-5px);
+	transition: 0.1s ease-in;
+}

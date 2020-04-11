@@ -3,13 +3,22 @@ import { useInView } from 'react-intersection-observer'
 import SearchItem from "./SearchItem";
 import Spinner from "./Spinner";
 import ConnectionProblemsInfo from "./ConnectionProblemsInfo";
-import SearchItemContainer from "./SearchItemContainer"
+import SearchItemContainer from "./SearchItemContainer";
+import GoTopButton from "./GoTopButton";
 var _ = require('lodash');
+
+const goTop = () => {
+	 window.scrollTo({
+  		top: 10,
+  		behavior: 'smooth',
+	 });
+	}
 
 const MainContainer = (props) => {
 	 const [ref, inView, entry] = useInView({
     threshold: 0.33,
   })
+	 
 	 
 	 if (inView && props.isMakingRequest === false){
 		 //The spinner makes another request on view
@@ -36,6 +45,7 @@ const MainContainer = (props) => {
 		return( 
 			<div className="main-search-container">
 				<SearchItemContainer data={props.data}/>
+				<GoTopButton callback={goTop}/>
 				<ConnectionProblemsInfo showMoreResults={props.showMoreResults}/>
  			</div>	
 		)
@@ -52,13 +62,14 @@ const MainContainer = (props) => {
 		return(
 			//regular return. XHR code = 200
 			<div className="main-search-container">
+				<GoTopButton callback={goTop}/>
 				<SearchItemContainer data={props.data}/>
 				{props.moreResultsAvailable 
 					//Check if the response has more data under the same query
 					? <div className="spinner-container" ref={ref}> 
 							<Spinner/> 
 					  </div> 
-					: <h1 className="no-results-text"> No more results</h1>}
+					: <h1 className="no-results-info"> No more results</h1>}
 
  			</div>	
 		)

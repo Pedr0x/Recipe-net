@@ -81,7 +81,7 @@ const SearchItem = React.memo((props) => {
 										? <FavoriteIcon color="secondary"/> : <FavoriteIcon/> }
 						</IconButton>
 					}
-					title={<a href={url}>  {title}</a>}
+					title={<a className="search-item-link" href={url}>  {title}</a>}
 					subheader={`${parseInt(calories)} cal - ${parseInt(weight)}g  - For ${recipeYield}`}
 				 /> )}
 				</MyContext.Consumer> 

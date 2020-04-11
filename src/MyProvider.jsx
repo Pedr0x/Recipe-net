@@ -14,8 +14,7 @@ class MyProvider extends React.Component {
 	
 	getFavorite(itemValues)  {
 		//this function adds the targeted recipe value and image
-		//and adds it to an array in the state 
-		//or  
+		//and adds or deletes it to an array in the state 
 		console.log(itemValues)
 		const newFavorite = {...itemValues, date: moment().format('MMMM Do')};
 		//check if the state already has that recipe
