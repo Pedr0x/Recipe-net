@@ -9,11 +9,12 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CardHeader from '@material-ui/core/CardHeader';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import IconButton from '@material-ui/core/IconButton';
-import {MyContext} from "../../App";
+import {MyContext} from "../../../App";
 
 import SearchItemList from "./SearchItemList"
 import SearchItemListMeasures from "./SearchItemListMeasures"
 import SearchItemGrid from "./SearchItemGrid"
+import "./search-item.css"
 
 
 const SearchItem = React.memo((props) => {
@@ -75,7 +76,7 @@ const SearchItem = React.memo((props) => {
 				 <CardHeader
 					action={ 
 						<IconButton
-							 onClick={() => context.getFavorite(searchItemData)}
+							 onClick={() => context.updateFavorite(searchItemData)}
 							 aria-label="favorite">
 							{context.state.favoriteRecipes.some(elem => elem.recipeName === title) 
 										? <FavoriteIcon color="secondary"/> : <FavoriteIcon/> }

@@ -1,5 +1,5 @@
 import React from 'react';
-
+import "./no-match-styles.css"
 const NoMatch = () => {
 	return(
 		<div className="no-match-container"> 

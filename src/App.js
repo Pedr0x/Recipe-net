@@ -3,13 +3,6 @@ import React from "react";
 //import  "./pedrox.css"
 //CSS
 import './pedrox.css';
-import './components/MainContainer/main-container.css';
-import './components/MainContainer/search-item.css';
-import './components/Search/search-styles.css';
-import './components/FavoriteRecipes/favorite-styles.css';
-import './components/NavBar/navbar-styles.css';
-import './components/NoMatch/no-match-styles.css';
-
 //React Router
 import {
   BrowserRouter as Router,
@@ -19,7 +12,6 @@ import {
 
 //Components
 import MyProvider from "./MyProvider"
-
 import NavBar from "./components/NavBar/NavBar"
 import MainSearch from "./components/Search/Search"
 import Favorites from './components/FavoriteRecipes/Favorites';

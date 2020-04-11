@@ -2,7 +2,7 @@ import React from 'react';
 //Material UI Components
 import MainContainer from "../MainContainer/MainContainer";
 import SearchForm from "./ReusableComponents/SearchForm"
-
+import "./search-styles.css"
 class MainSearch extends React.Component {
 	 constructor(props) {
     super(props);

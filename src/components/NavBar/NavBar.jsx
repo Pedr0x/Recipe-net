@@ -2,7 +2,7 @@ import React from 'react'
 import AppBar from '@material-ui/core/AppBar';
 import {  Link } from "react-router-dom";
 import Favorites from "./../FavoriteRecipes/Favorites"
-
+import "./navbar-styles.css"
 var NavBar = () => {
 	return(
 	<AppBar color="primary" position="static"> 	

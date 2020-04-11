@@ -1,10 +1,10 @@
 import React, { useRef,useState } from 'react'
 import { useInView } from 'react-intersection-observer'
-import SearchItem from "./SearchItem";
 import Spinner from "./Spinner";
 import ConnectionProblemsInfo from "./ConnectionProblemsInfo";
 import SearchItemContainer from "./SearchItemContainer";
 import GoTopButton from "./GoTopButton";
+import "./main-container.css"
 var _ = require('lodash');
 
 const goTop = () => {
@@ -18,7 +18,6 @@ const MainContainer = (props) => {
 	 const [ref, inView, entry] = useInView({
     threshold: 0.33,
   })
-	 
 	 
 	 if (inView && props.isMakingRequest === false){
 		 //The spinner makes another request on view

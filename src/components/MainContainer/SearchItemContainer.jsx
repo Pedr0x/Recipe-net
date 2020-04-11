@@ -1,7 +1,6 @@
 import React from 'react';
-import SearchItem from "./SearchItem";
+import SearchItem from "./SearchItem/SearchItem";
 var _ = require('lodash');
-
 
 const SearchItemContainer = (props) => {
 	return(

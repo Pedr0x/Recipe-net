@@ -8,11 +8,11 @@ class MyProvider extends React.Component {
 	this.state = {
 		favoriteRecipes:[]
 	};
-		this.getFavorite = this.getFavorite.bind(this);
+		this.updateFavorite = this.updateFavorite.bind(this);
 		this.deleteFavorite = this.deleteFavorite.bind(this);
 	}
 	
-	getFavorite(itemValues)  {
+	updateFavorite(itemValues)  {
 		//this function adds the targeted recipe value and image
 		//and adds or deletes it to an array in the state 
 		console.log(itemValues)
@@ -58,7 +58,7 @@ class MyProvider extends React.Component {
 		return(
 		<MyContext.Provider value={{
 			state:this.state,
-			getFavorite:this.getFavorite,
+			updateFavorite:this.updateFavorite,
 			deleteFavorite:this.deleteFavorite
 			}}>
 		{this.props.children}
