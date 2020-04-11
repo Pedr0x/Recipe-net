@@ -67,7 +67,7 @@ class MainSearch extends React.Component {
 		const isVegetarian = vegetarian  ? '&health=vegetarian' : "";
 		const isLowFat = lowFat ? "&diet=low-fat" : "";
 		const isAlcoholFree = alcoholFree ? "&health=alcohol-free" : "";
-		const isGlutenFree = gluten ? "&health=gluten-free" : "";
+		const isGlutenFree = gluten ? "" : ""; 
 		const isBalanced = balanced ? "&diet=balanced" : "";
 		const isHighProtein = highProtein ? "&diet=high-protein" : "" ;
 		const pagesToFetch =  `&from=${pageQ.from}&to=${pageQ.to}`;
