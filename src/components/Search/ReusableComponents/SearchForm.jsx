@@ -8,11 +8,11 @@ const SearchForm = React.memo((props) => {
 			<form  className="search-form"  noValidate autoComplete="off">
 					<SearchFormMainInput 
 						toggleCallback={props.getCheckBoxData} 
-						callback={props.getValue} 
+						getQueryName={props.getQueryName} 
 						searchCallback={props.handleChange}/>
 
 					<FormParameters 
-						callback={props.getValue} 
+						callback={props.callback} 
 						getCheckBoxData={props.getCheckBoxData}/>
 			</form>
 		</div>

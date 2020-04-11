@@ -42,7 +42,8 @@ class MainSearch extends React.Component {
  		this.getCheckBoxData = this.getCheckBoxData.bind(this);
 		this.showMoreResults = this.showMoreResults.bind(this);
 		this.toggleLang = this.toggleLang.bind(this);
-		this.getValue = this.getValue.bind(this);
+		this.getQueryName = this.getQueryName.bind(this);
+		 this.getValue = this.getValue.bind(this)
 	  }
 	apiRequest(queryObj) {
 		const {
@@ -66,7 +67,7 @@ class MainSearch extends React.Component {
 		const isVegetarian = vegetarian  ? '&health=vegetarian' : "";
 		const isLowFat = lowFat ? "&diet=low-fat" : "";
 		const isAlcoholFree = alcoholFree ? "&health=alcohol-free" : "";
-		const isGlutenFree = gluten ? "&health=glutenFree" : "";
+		const isGlutenFree = gluten ? "&health=gluten-free" : "";
 		const isBalanced = balanced ? "&diet=balanced" : "";
 		const isHighProtein = highProtein ? "&diet=high-protein" : "" ;
 		const pagesToFetch =  `&from=${pageQ.from}&to=${pageQ.to}`;
@@ -175,7 +176,6 @@ class MainSearch extends React.Component {
 		this.queryParameters.pageQ.from +=10;
 		this.queryParameters.pageQ.to += 10;	
 		//api will receive stop returning data at 100 hits
-		//I have been testing and I dont think the user will see
 		this.apiRequest(this.queryParameters);
 	}
 	
@@ -186,6 +186,13 @@ class MainSearch extends React.Component {
 
 	getValue(e){
 		this.queryParameters[e.target.name] = e.target.value;
+		console.log(this.queryParameters[e.target.name] )
+		//console.log(this.queryParameters[e.target.name])
+	}
+	
+	getQueryName(e){
+		this.queryParameters.query = e.target.value;
+
 	}
 	
 	render(){
@@ -193,9 +200,11 @@ class MainSearch extends React.Component {
 			<React.Fragment> 
 				<SearchForm 
 					getCheckBoxData={this.getCheckBoxData} 
-					getValue={this.getValue} 
-					handleChange={this.handleChange} 
+					getQueryName={this.getQueryName} 
+					handleChange={this.handleChange}
+					callback={this.getValue}
 					/>
+					
 				<MainContainer 
 					receivedData={this.state.receivedData}
 					data={this.state.recipes}
