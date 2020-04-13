@@ -35,6 +35,7 @@ class MainSearch extends React.Component {
 			cuisineType:"",
 			excluded:""
 		};
+		 this.lastQuery = "donuts";
 		 this.isRequestCanceled = false;
 		 //methods
 	    this.handleChange = this.handleChange.bind(this);
@@ -67,6 +68,7 @@ class MainSearch extends React.Component {
 		const isVegetarian = vegetarian  ? '&health=vegetarian' : "";
 		const isLowFat = lowFat ? "&diet=low-fat" : "";
 		const isAlcoholFree = alcoholFree ? "&health=alcohol-free" : "";
+		//gluten free has problems with the api. will fix asap.
 		const isGlutenFree = gluten ? "" : ""; 
 		const isBalanced = balanced ? "&diet=balanced" : "";
 		const isHighProtein = highProtein ? "&diet=high-protein" : "" ;
@@ -141,7 +143,16 @@ class MainSearch extends React.Component {
 				.catch(err => console.log(err))
 				}
 
+	getLastQuery() {
+ 		this.lastQuery = this.queryParameters.query;
+		sessionStorage.setItem("lastQuery", `${this.lastQuery}`)
+		
+	}
 	componentDidMount() {  
+		if (sessionStorage.lastQuery){
+			this.queryParameters.query = sessionStorage.lastQuery;
+		}
+		console.log(sessionStorage.lastQuery);
 		//make initial request with sample parameters
 		this.apiRequest(this.queryParameters);
 	}
@@ -161,6 +172,7 @@ class MainSearch extends React.Component {
 		this.setState({
 			recipes: []
 		});
+		this.getLastQuery() 
 		//reset the pages request
 		this.queryParameters.pageQ.from = 0;
 		this.queryParameters.pageQ.to = 10;
