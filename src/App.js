@@ -10,27 +10,37 @@ import {
   Route
 } from "react-router-dom";
 
+
 //Components
 import MyProvider from "./MyProvider"
 import NavBar from "./components/NavBar/NavBar"
 import MainSearch from "./components/Search/Search"
 import Favorites from './components/FavoriteRecipes/Favorites';
 import NoMatch from "./components/NoMatch/NoMatch";
+import Header from "./components/Header/Header";
+import About from "./components/About/About";
 
+
+
+import "./app.css"
 export let MyContext = React.createContext();
 
 var App = () => {
 	return(
-		<MyProvider>
-				<Router>
-				<NavBar/>
-				<Switch> 
-					<Route path="/" exact component={MainSearch}/>
-					<Route path="/Favorites" component={Favorites}/>
-					<Route component={NoMatch}/>
-				</Switch>
-				</Router>
-		</MyProvider>
+		<div className="super-container">
+			<MyProvider>
+					<Router>
+					<Header/>
+					<NavBar/>
+					<Switch> 
+						<Route path="/" exact component={MainSearch}/>
+						<Route path="/Favorites" component={Favorites}/>
+						<Route path="/About" component={About}/>
+						<Route component={NoMatch}/>
+					</Switch>
+					</Router>
+			</MyProvider>
+		 </div>
 	)
 }
 

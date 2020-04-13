@@ -209,7 +209,7 @@ class MainSearch extends React.Component {
 	
 	render(){
 		return (
-			<React.Fragment> 
+			<div> 
 				<SearchForm 
 					getCheckBoxData={this.getCheckBoxData} 
 					getQueryName={this.getQueryName} 
@@ -225,7 +225,7 @@ class MainSearch extends React.Component {
 					error={this.state.error} 
 					isMakingRequest={this.state.isMakingRequest}
 					/> 
-			</React.Fragment>
+			</div>
 				)	
 				}
 	}

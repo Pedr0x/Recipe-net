@@ -1,15 +1,29 @@
 import React from 'react'
 import AppBar from '@material-ui/core/AppBar';
 import {  Link } from "react-router-dom";
-import "./navbar-styles.css"
+import "./navbar-styles.css";
+import SearchIcon from '@material-ui/icons/Search';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import InfoIcon from '@material-ui/icons/Info';
+
+import HelpIcon from '@material-ui/icons/Help';
+
+
 var NavBar = () => {
 	return(
-	<AppBar color="primary" position="static"> 	
-		   	<div className="navbar">
-			   <Link className="navbar-title navbar-title_main" to="/">RecipeFinder</Link>
-              <Link className="navbar-title" to="/favorites">Favorites</Link>
-               </div>
-		</AppBar>
+		<div className="navbar-container"> 
+		<div className="navbar scale-up-hor-left">
+			<Link className="navbar-title navbar-title_main" to="/">
+			<SearchIcon/>
+		   </Link>
+		  <Link className="navbar-title" to="/favorites">
+			<FavoriteIcon/>
+		  </Link>
+		  <Link className="navbar-title" to="/about">
+		  	<HelpIcon/>
+		  </Link>
+		</div>
+		</div>
 	)
 	}
 	

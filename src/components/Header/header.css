@@ -1,0 +1,13 @@
+ @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap&text=RecipeFinder');
+
+
+.header {
+	background: #fdfdfd;
+	color: black;
+	grid-column: 1/3;
+	font-family: "Lobster";
+	font-size: 28px;
+	padding: 1%;
+	text-align: center;
+	color: #0c76d2;
+}

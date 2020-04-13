@@ -1,0 +1,19 @@
+.about-container {
+	height: 100vh;
+padding: 4% 10%;
+		line-height: 2;
+
+	background: #fdfdfd;
+}
+
+.about-title {
+	font-size: 32px;
+	font-family: "Bellota Text";
+	color: #0c76d2;
+}
+
+.about-text{
+	padding: 1% 0;
+	font-size: 18px;
+	color: #666;
+}
