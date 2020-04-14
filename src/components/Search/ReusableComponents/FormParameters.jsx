@@ -17,6 +17,7 @@ const FormParameters = (props) => {
 							checkboxSuperSubtitle={elem.subtitle}
 							checkboxData={elem.mainData}
 							key={_.uniqueId()}
+							field={elem.field}
 							/>
 					)
 				}
@@ -26,3 +27,4 @@ const FormParameters = (props) => {
 	)
 };
 export  default FormParameters
+

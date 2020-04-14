@@ -5,9 +5,17 @@
 	background: #fdfdfd;
 	color: black;
 	grid-column: 1/3;
-	font-family: "Lobster";
 	font-size: 28px;
 	padding: 1%;
 	text-align: center;
+}
+
+.header-logo{
+	color: inherit;
+	text-decoration: none;
+	font-family: "inherit";
+		font-family: "Lobster";
+
 	color: #0c76d2;
+
 }

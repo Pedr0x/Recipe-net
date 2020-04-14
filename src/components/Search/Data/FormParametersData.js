@@ -17,83 +17,65 @@ const formParametersData = {
 			 checkboxData : {
 				 checkboxDataHealth :{
 					 mainData: [
-						{
-							label:"Balanced",
-							name:"balanced"
-						},
-						{
-							label:"High Protein",
-							name:"highProtein"
-						},
-						{
-							label:"Low Fat",
-							name:"lowFat"
-						},
-						 {
-							 label:"Celery-free" ,
-							 name:"celery-free" 
-						 }, 
-						 	 {
-							 label: "Crustcean-free",
-							 name: "crustceanFree" 
-						 }
-						 ,	 {
-							 label: "Dairy Free",
-							 name: "dairyFree"
-						 }
-						 ,	 {
-							 label:"Egg Free" ,
-							 name:"eggFree" 
-						 },
-						 	 {
-							 label:"Fish Free" ,
-							 name: "fishFree"
-						 }
-						 ,
-						 	 {
-							 label:"FODMAP-free" ,
-							 name: "fodmapFree"
-						 },
-						 	 {
-							 label: "Keto" ,
-							 name: "keto"
-						 }
-						 ,	 {
-							 label: "Kidney friendly",
-							 name:"kidneyFriendly" 
-						 }
-						 ,	 {
-							 label:"Kosher",
-							 name: "kosher" 
-						 },
-						 {
-							 label:"Low pottassium",
-							 name:"lowPottassium"
-						 }
-						 , {
-							 label:"Lupine Free" ,
-							 name:"lupineFree"
-						 }
 					
-					],
-					 subtitle:"Health Restrictions"
-				 },
-				 checkboxDataDiet : {
-					mainData: [
 						{
 							label:"Vegetarian",
 							name:"vegetarian"
 						},
+				
 						{
+							label:"Vegan",
+							name:"vegan"
+
+						},
+						 {
 							label:"Alcohol Free",
 							name:"alcoholFree"
 						},
-						{
+						 	{
 							label:"Gluten Free",
 							name:"gluten"
 						},
+						  	{
+							label:"Peanut Free",
+							name:"peanutFree"
+						},
+						  	{
+							label:"Treenut free",
+							name:"treeNutFree"
+						},
+						  	{
+							label:"Sugar Conscious",
+							name:"sugarConscious "
+						},
+						 
+					
 					],
-					 subtitle: "Diet Restrictions"
+					 subtitle:"Health Restrictions",
+					 field:"health"
+				 },
+				 checkboxDataDiet : {
+					mainData: [
+						{
+							label:"Low-Sodium",
+							name:"lowSodium"
+						},
+						
+						{
+							label:"Balanced",
+							name:"balanced"
+						},
+							{
+							label:"Low Carb",
+							name:"lowCarb"
+						},
+							{
+							label:"High Protein",
+							name:"highProtein"
+						},
+					],
+					 subtitle: "Diet Restrictions",
+					 field:"diet"
 				 }
 			 }
 		 };

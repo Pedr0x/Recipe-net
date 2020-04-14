@@ -16,12 +16,20 @@ class Checkbox extends React.Component{
 				checked: !checked
 			})
 		}
+	
+	componentDidMount(){
+		//this wil sync the checkbox value everytime
+		//the parameters open
+		const {name,getCheckBoxData,field} = this.props;
+		getCheckBoxData(this.state.checked,name,field)
+	}
+	
 	componentDidUpdate(){
 		//for some reason, the set state callback
 		//started having bugs returning the untoggled 
 		//value so i´ll start calling the callback here
-		const {name,getCheckBoxData} = this.props;
-		getCheckBoxData(this.state.checked,name)
+		const {name,getCheckBoxData,field} = this.props;
+		getCheckBoxData(this.state.checked,name,field)
 	}
 	
 	render(){

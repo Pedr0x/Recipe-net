@@ -3,6 +3,8 @@ import React from 'react';
 import MainContainer from "../MainContainer/MainContainer";
 import SearchForm from "./ReusableComponents/SearchForm"
 import "./search-styles.css"
+var _ = require('lodash');
+
 class MainSearch extends React.Component {
 	 constructor(props) {
     super(props);
@@ -18,12 +20,7 @@ class MainSearch extends React.Component {
 		//this object contains both the query value and the parameters
 		// for the request
 		this.queryParameters = {
-			query:"donuts",
-			alcoholFree:false,
-			vegetarian:false,
-			lowFat:false,
-			gluten:false,
-			balanced:false,
+			query:"donuts",			
 			highProtein:false,
 			caloriesMax:null,
 				pageQ: {
@@ -34,17 +31,24 @@ class MainSearch extends React.Component {
 			inSpanish:false,
 			cuisineType:"",
 			excluded:"",
-			celeryFree:false,
-			crustceanFree:false,
-			dairyFree:false,
-			eggFree:false,
-			fishFree:false,
-			fodmapFree:false,
-			keto:false,
-			kidneyFriendly:false,
-			kosher:false,
-			lowPottassium:false
-		};
+				health: {
+					alcoholFree:false,
+					vegetarian:false,
+					vegan:false,
+					alcoholFree:false,
+					gluten:false,
+					peanutFree:false,
+					sugarConscious:false,
+					treenutFree:false
+	 		},
+				diet : {
+					highProtein:false,
+					lowCarb:false,
+					balanced:false,
+					lowSodium:false
+				}
+		}; 
+
 		 this.lastQuery = "donuts";
 		 this.isRequestCanceled = false;
 		 //methods
@@ -54,61 +58,42 @@ class MainSearch extends React.Component {
 		this.showMoreResults = this.showMoreResults.bind(this);
 		this.toggleLang = this.toggleLang.bind(this);
 		this.getQueryName = this.getQueryName.bind(this);
-		 this.getValue = this.getValue.bind(this)
+		 this.getValue = this.getValue.bind(this);
+		 this.refactorParameters = this.refactorParameters.bind(this);
+		 
 	  }
+	
 	apiRequest(queryObj) {
 		const {
 			query,
-			alcoholFree,
-			vegetarian,
-			lowFat,
-			gluten,
-			balanced,
-			highProtein,
+			health,
+			diet,
 			caloriesMax,
 			pageQ,
 			inSpanish,
 			cuisineType,
-			excluded,
-			celeryFree,
-			crustceanFree,
-			dairyFree,
-			eggFree,
-			fishFree,
-			fodmapFree,
-			keto,
-			kidneyFriendly,
-			kosher,
-			lowPottassium
+			excluded
 		} = queryObj;		
 		
 		//conditional parameters
 		const ManyCalories = caloriesMax !== false && caloriesMax > 1  
 			?  `&calories=0-${caloriesMax}` : "";
-		const isVegetarian = vegetarian  ? '&health=vegetarian' : "";
-		const isLowFat = lowFat ? "&diet=low-fat" : "";
-		const isAlcoholFree = alcoholFree ? "&health=alcohol-free" : "";
-		//gluten free has problems with the api. will fix asap.
-		const isGlutenFree = gluten ? "" : ""; 
-		const isBalanced = balanced ? "&diet=balanced" : "";
-		const isHighProtein = highProtein ? "&diet=high-protein" : "" ;
+	
 		const pagesToFetch =  `&from=${pageQ.from}&to=${pageQ.to}`;
 		const requestLang = inSpanish ? "https://test-es.edamam.com/search" : "https://api.edamam.com/search";
 		const cuisine = cuisineType ? `&cuisineType=${cuisineType}`: ""; 
 		const excludedIngredients = excluded ? ("&" + excluded.split(",").map(elem=>  `excluded=${elem}`).join("&")) : "" ;
 		
-		const isCeleryFree = celeryFree ? '&health=celery-free' :""
-		const isCrustceanFree = crustceanFree ? '&health=crustacean-free' : "";
-		const isFodmapFree = fodmapFree ? '&health=fodmap-free' : "";
-		const isKeto = keto ? '&health=keto-friendly' : "";
-		const isKidneyFriendly = kidneyFriendly ? '&health=kidney-friendly' : "";
-		const isKosher = kosher ? '&health=kosher' : "";
-		const isLowPottassium = lowPottassium ? '&health=low-pottassium' : "";
-
+		const healthData = (this.refactorParameters(Object.entries(health),"health"))
+		console.log(healthData);
+		
+		const dietData = (this.refactorParameters(Object.entries(diet),"diet"))
+		console.log(dietData);
+		
+		console.log(inSpanish)
 		
 
-		
-		const urlRequest = `https://cors-anywhere.herokuapp.com/${requestLang}?q=${query}&app_id=8bc00f3b&app_key=b1d9d15dadbddc109d83b189b71e533f${pagesToFetch}${ManyCalories}${isAlcoholFree}${isVegetarian}${isLowFat}${isGlutenFree}${isHighProtein}${isBalanced}${cuisine}${isCeleryFree}${isCrustceanFree}${isFodmapFree}${isKeto}${isKidneyFriendly}${isKosher}${isLowPottassium}${excludedIngredients}`;
+		const urlRequest = `https://cors-anywhere.herokuapp.com/${requestLang}?q=${query}&app_id=8bc00f3b&app_key=b1d9d15dadbddc109d83b189b71e533f${pagesToFetch}${ManyCalories}${healthData}${dietData}`;
 
 		let getPromise = new Promise((resolve,reject) => {
 			const xhr = new XMLHttpRequest();
@@ -144,6 +129,7 @@ class MainSearch extends React.Component {
 				resolve(xhr.response);
 				} else {
 						error = true;
+
 						reject("Status code wasn´t 200: " + xhr.status);
 					}
 				
@@ -178,7 +164,20 @@ class MainSearch extends React.Component {
  		this.lastQuery = this.queryParameters.query;
 		sessionStorage.setItem("lastQuery", `${this.lastQuery}`)
 		
-	}
+		}
+	
+	refactorParameters(param,str){
+	//object.entries will return an array where the 
+	//first element is the elements name and the second its 
+	//boolean value
+		return(
+			param
+				.map(elem =>  elem[1]
+					? `&${str}=${_.kebabCase(elem[0])}` 
+					 : "" )
+				.join(""))
+		}
+	
 	componentDidMount() {  
 		if (sessionStorage.lastQuery){
 			this.queryParameters.query = sessionStorage.lastQuery;
@@ -207,12 +206,14 @@ class MainSearch extends React.Component {
 		//reset the pages request
 		this.queryParameters.pageQ.from = 0;
 		this.queryParameters.pageQ.to = 10;
-
 		this.apiRequest(this.queryParameters);
 	}
 	
-	getCheckBoxData(checkBoxState,name){
-		this.queryParameters[name] = checkBoxState;
+	getCheckBoxData(checkBoxState,name,field){
+
+		this.queryParameters[field][name] = checkBoxState;
+		//console.log(this.queryParameters)
+	
 	}
 	
 	showMoreResults(){
@@ -223,8 +224,9 @@ class MainSearch extends React.Component {
 	}
 	
 	toggleLang(e){
-		this.queryParameters.inSpanish = !this.queryParameters.inSpanish;
-		console.log(this.queryParameters.inSpanish);
+			this.queryParameters.inSpanish = !this.queryParameters.inSpanish;
+			console.log(this.queryParameters.inSpanish + "231");
+	
 	}
 
 	getValue(e){
@@ -240,12 +242,13 @@ class MainSearch extends React.Component {
 	
 	render(){
 		return (
-			<div className="search-super" onClick={() => console.log(this.queryParameters)}> 
+			<section className="search-super"> 
 				<SearchForm 
-					getCheckBoxData={this.getCheckBoxData} 
 					getQueryName={this.getQueryName} 
 					handleChange={this.handleChange}
 					callback={this.getValue}
+					getCheckBoxData={this.getCheckBoxData}
+					toggleLang={this.toggleLang} 
 					/>
 					
 				<MainContainer 
@@ -256,7 +259,7 @@ class MainSearch extends React.Component {
 					error={this.state.error} 
 					isMakingRequest={this.state.isMakingRequest}
 					/> 
-			</div>
+			</section>
 				)	
 				}
 	}

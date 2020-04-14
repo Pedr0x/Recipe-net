@@ -12,8 +12,8 @@ const Input = (props) => {
 	} else {
 		return (
 		<div className="input-range-container">
-				<label className="form-subtitle"> {props.labelText}</label>
-				<input className="input-range" onChange={props.callback} name={props.name}  placeholder={props.placeholder} /> 
+			<label className="form-subtitle"> {props.labelText}</label>
+			<input className="input-range" onChange={props.callback} name={props.name}  placeholder={props.placeholder} /> 
 		</div>
 		)
 }

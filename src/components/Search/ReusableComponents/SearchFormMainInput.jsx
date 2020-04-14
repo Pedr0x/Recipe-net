@@ -13,7 +13,9 @@ const SearchFormMainInput = (props) => {
 					
 					<button onClick={props.searchCallback} className="search-button"> <SearchIcon/> </button>
 				 </div>
-				   <ToggleItem labelText={data.toggleItem.text} callback={props.toggleCallback} name={data.toggleItem.name}/>
+			   <div> 
+				   <ToggleItem labelText={data.toggleItem.text} callback={props.toggleLang} name={data.toggleItem.name}/>
+			</div>
 			</div>
 	</div>
 	)

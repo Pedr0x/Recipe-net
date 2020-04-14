@@ -36,7 +36,7 @@ checkbox-item label{
 	}
 
 	.checkboxes-container{
-	grid-template-columns:repeat(auto-fit, minmax(100px, 1fr));
+		grid-template-columns:repeat(auto-fit, minmax(115px, 1fr));
 			display:grid;
 			padding:1% 5%;
 	}
@@ -53,6 +53,8 @@ checkbox-item label{
 	justify-content: center;
 	display: flex;
 	flex-wrap: wrap;
+	padding: 5%;
+text-align: center;
 	flex-direction: column
 }
 
@@ -120,12 +122,15 @@ color: #0c76d2;
 	align-self: center;
 	justify-self: center;
 	background: #f9f9f9e3;
-	
+	width: auto;
 	background: linear-gradient(120deg,#f6fdf4,#f3f4f3);
 	background: linear-gradient(10deg,#edffeb,#fdfdfd);
 	padding: 2%;
 	background: linear-gradient(90deg,#fafcfd,#fafdff);
 	box-shadow: 0px 1px 1px 1px #d5d5d54f;
+	background: #fcfdfd;
+grid-template-columns: 2fr 1fr;
+	display: grid;
 }
 
 .form-subtitle  {
@@ -150,8 +155,11 @@ color: #0c76d2;
 
 .inputs-container {
 	display: grid;
-	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 1fr 1fr;
 	padding: 3% 0;
+	grid-row: 3;
+grid-column: 2;
+	grid-row: 1;
 }
 
 
@@ -200,6 +208,7 @@ color: #0c76d2;
 	background: #3f51b5;
 	color: white;
 	border-radius: 5px;
+	box-shadow: 1px 1px 2px #646363;
 }
 
 
@@ -213,7 +222,7 @@ color: #0c76d2;
 
 @media only screen and (max-width: 1200px){
 
-	.inputs-container{
+	.input-container{
 			grid-template-columns: 1fr ;
 
 	}
@@ -221,6 +230,9 @@ color: #0c76d2;
 
 @media only screen and (max-width: 800px){
 	
+	.input-container{
+		font-size: 28px;
+	}
 	.form-parameters{
 		padding: 3%;
 	}

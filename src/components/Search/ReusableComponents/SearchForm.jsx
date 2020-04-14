@@ -1,31 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import FormParameters from "./FormParameters";
 import SearchFormMainInput from "./SearchFormMainInput";
+import InfoIcon from '@material-ui/icons/Info';
+import CloseIcon from '@material-ui/icons/Close';
+
+
 
 const SearchForm = React.memo((props) => {
-	  const [isActive, setActive] = useState(false);
+	  const [isParamOpen, setParamOpen] = useState(false);
 	
-	function toggle(e){
+	
+	const changeParams = (e) => {
 		e.preventDefault();
-		setActive(!isActive);
-		console.log("toggled")
+		setParamOpen(!isParamOpen)
+		console.log("toggled");
 	}
-	
-	useEffect(() => {
-		console.log("use effect works")
-	})
 	
 	return(
 		<div className="search-form-container-super"> 
 			<form  className="search-form"  noValidate autoComplete="off">
 					<SearchFormMainInput 
-						toggleCallback={props.getCheckBoxData} 
+						toggleLang={props.toggleLang} 
 						getQueryName={props.getQueryName} 
 						searchCallback={props.handleChange}/>
-
-				<button className="search-form-btn" onClick={toggle}> { isActive ? "Less" : "More"}</button>
+						
+					<button className="search-form-btn" onClick={changeParams}> { isParamOpen ? <CloseIcon/> :  <InfoIcon/>}</button>
 				
-					{isActive 
+					{isParamOpen 
 						? <FormParameters 
 						callback={props.callback} 
 						getCheckBoxData={props.getCheckBoxData}/>
