@@ -5,7 +5,7 @@ import "./favorite-styles.css"
 class Favorites extends React.Component {
 	render(props){
 		return(
-		<div className="favorite-recipes-super-container">
+		<section className="favorite-recipes-super-container">
 			<MyContext.Consumer>
 			{(context) =>(
 					<React.Fragment> 
@@ -13,7 +13,7 @@ class Favorites extends React.Component {
 					</React.Fragment>
 								)}
 			</MyContext.Consumer>
-				</div>
+				</section>
 	)
 }
 }

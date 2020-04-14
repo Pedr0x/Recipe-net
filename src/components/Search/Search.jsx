@@ -33,7 +33,17 @@ class MainSearch extends React.Component {
 			moreResultsAvailable:false,
 			inSpanish:false,
 			cuisineType:"",
-			excluded:""
+			excluded:"",
+			celeryFree:false,
+			crustceanFree:false,
+			dairyFree:false,
+			eggFree:false,
+			fishFree:false,
+			fodmapFree:false,
+			keto:false,
+			kidneyFriendly:false,
+			kosher:false,
+			lowPottassium:false
 		};
 		 this.lastQuery = "donuts";
 		 this.isRequestCanceled = false;
@@ -59,7 +69,17 @@ class MainSearch extends React.Component {
 			pageQ,
 			inSpanish,
 			cuisineType,
-			excluded
+			excluded,
+			celeryFree,
+			crustceanFree,
+			dairyFree,
+			eggFree,
+			fishFree,
+			fodmapFree,
+			keto,
+			kidneyFriendly,
+			kosher,
+			lowPottassium
 		} = queryObj;		
 		
 		//conditional parameters
@@ -77,7 +97,18 @@ class MainSearch extends React.Component {
 		const cuisine = cuisineType ? `&cuisineType=${cuisineType}`: ""; 
 		const excludedIngredients = excluded ? ("&" + excluded.split(",").map(elem=>  `excluded=${elem}`).join("&")) : "" ;
 		
-		const urlRequest = `https://cors-anywhere.herokuapp.com/${requestLang}?q=${query}&app_id=8bc00f3b&app_key=b1d9d15dadbddc109d83b189b71e533f${pagesToFetch}${ManyCalories}${isAlcoholFree}${isVegetarian}${isLowFat}${isGlutenFree}${isHighProtein}${isBalanced}${cuisine}${excludedIngredients}`;
+		const isCeleryFree = celeryFree ? '&health=celery-free' :""
+		const isCrustceanFree = crustceanFree ? '&health=crustacean-free' : "";
+		const isFodmapFree = fodmapFree ? '&health=fodmap-free' : "";
+		const isKeto = keto ? '&health=keto-friendly' : "";
+		const isKidneyFriendly = kidneyFriendly ? '&health=kidney-friendly' : "";
+		const isKosher = kosher ? '&health=kosher' : "";
+		const isLowPottassium = lowPottassium ? '&health=low-pottassium' : "";
+
+		
+
+		
+		const urlRequest = `https://cors-anywhere.herokuapp.com/${requestLang}?q=${query}&app_id=8bc00f3b&app_key=b1d9d15dadbddc109d83b189b71e533f${pagesToFetch}${ManyCalories}${isAlcoholFree}${isVegetarian}${isLowFat}${isGlutenFree}${isHighProtein}${isBalanced}${cuisine}${isCeleryFree}${isCrustceanFree}${isFodmapFree}${isKeto}${isKidneyFriendly}${isKosher}${isLowPottassium}${excludedIngredients}`;
 
 		let getPromise = new Promise((resolve,reject) => {
 			const xhr = new XMLHttpRequest();
@@ -209,7 +240,7 @@ class MainSearch extends React.Component {
 	
 	render(){
 		return (
-			<div> 
+			<div className="search-super" onClick={() => console.log(this.queryParameters)}> 
 				<SearchForm 
 					getCheckBoxData={this.getCheckBoxData} 
 					getQueryName={this.getQueryName} 

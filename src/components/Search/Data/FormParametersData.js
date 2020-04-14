@@ -29,6 +29,52 @@ const formParametersData = {
 							label:"Low Fat",
 							name:"lowFat"
 						},
+						 {
+							 label:"Celery-free" ,
+							 name:"celery-free" 
+						 }, 
+						 	 {
+							 label: "Crustcean-free",
+							 name: "crustceanFree" 
+						 }
+						 ,	 {
+							 label: "Dairy Free",
+							 name: "dairyFree"
+						 }
+						 ,	 {
+							 label:"Egg Free" ,
+							 name:"eggFree" 
+						 },
+						 	 {
+							 label:"Fish Free" ,
+							 name: "fishFree"
+						 }
+						 ,
+						 	 {
+							 label:"FODMAP-free" ,
+							 name: "fodmapFree"
+						 },
+						 	 {
+							 label: "Keto" ,
+							 name: "keto"
+						 }
+						 ,	 {
+							 label: "Kidney friendly",
+							 name:"kidneyFriendly" 
+						 }
+						 ,	 {
+							 label:"Kosher",
+							 name: "kosher" 
+						 },
+						 {
+							 label:"Low pottassium",
+							 name:"lowPottassium"
+						 }
+						 , {
+							 label:"Lupine Free" ,
+							 name:"lupineFree"
+						 }
+					
 					],
 					 subtitle:"Health Restrictions"
 				 },

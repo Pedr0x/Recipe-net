@@ -9,7 +9,7 @@ var _ = require('lodash');
 
 const FormParameters = (props) => {
 	return(
-		<div className="form-parameters">
+		<div className="form-parameters scale-in-center">
 				{Object.values(formParametersData.checkboxData)
 					.map(elem => 
 						<CheckboxContainerSuper
