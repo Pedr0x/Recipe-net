@@ -27,9 +27,6 @@ var NavBar = () => {
 			  <a className="navbar-title" href="https://github.com/Pedr0x/Recipe-net/tree/development/src">
 				<GitHubIcon/>
 			  </a>
-			   <Link className="navbar-title monospace" to="/404">
-				404
-			  </Link>
 			</div>
 			</div>
 		</div>

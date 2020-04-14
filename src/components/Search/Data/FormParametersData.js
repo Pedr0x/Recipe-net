@@ -32,10 +32,6 @@ const formParametersData = {
 							label:"Alcohol Free",
 							name:"alcoholFree"
 						},
-						 	{
-							label:"Gluten Free",
-							name:"gluten"
-						},
 						  	{
 							label:"Peanut Free",
 							name:"peanutFree"
@@ -56,10 +52,7 @@ const formParametersData = {
 				 },
 				 checkboxDataDiet : {
 					mainData: [
-						{
-							label:"Low-Sodium",
-							name:"lowSodium"
-						},
+
 						
 						{
 							label:"Balanced",

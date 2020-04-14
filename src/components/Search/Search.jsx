@@ -36,7 +36,6 @@ class MainSearch extends React.Component {
 					vegetarian:false,
 					vegan:false,
 					alcoholFree:false,
-					gluten:false,
 					peanutFree:false,
 					sugarConscious:false,
 					treenutFree:false
@@ -44,8 +43,7 @@ class MainSearch extends React.Component {
 				diet : {
 					highProtein:false,
 					lowCarb:false,
-					balanced:false,
-					lowSodium:false
+					balanced:false
 				}
 		}; 
 
@@ -91,7 +89,6 @@ class MainSearch extends React.Component {
 		console.log(dietData);
 		
 		console.log(inSpanish)
-		
 
 		const urlRequest = `https://cors-anywhere.herokuapp.com/${requestLang}?q=${query}&app_id=8bc00f3b&app_key=b1d9d15dadbddc109d83b189b71e533f${pagesToFetch}${ManyCalories}${healthData}${dietData}`;
 
@@ -187,13 +184,11 @@ class MainSearch extends React.Component {
 		this.apiRequest(this.queryParameters);
 	}
 		
-	componentDidUpdate(){
-		//console.count();
-		//the component updates 2 times every render
-	}
 	
 	componentWillUnmount(){
 		this.isRequestCanceled = true;
+		sessionStorage.setItem("recipes", this.state.recipes);
+		console.log(sessionStorage)
 	}
 	
 	handleChange(e){
@@ -242,7 +237,7 @@ class MainSearch extends React.Component {
 	
 	render(){
 		return (
-			<section className="search-super"> 
+			<section className="search-super" onClick={() => console.log()}> 
 				<SearchForm 
 					getQueryName={this.getQueryName} 
 					handleChange={this.handleChange}

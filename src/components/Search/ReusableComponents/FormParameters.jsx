@@ -9,6 +9,7 @@ var _ = require('lodash');
 
 const FormParameters = (props) => {
 	return(
+		<div className="form-parameters-super">
 		<div className="form-parameters scale-in-center">
 				{Object.values(formParametersData.checkboxData)
 					.map(elem => 
@@ -24,6 +25,7 @@ const FormParameters = (props) => {
 				<InputsContainerSuper callback={props.callback}/>
 				<Select  name="cuisineType" callback={props.callback}/>
 		</div>
+		 </div>
 	)
 };
 export  default FormParameters
