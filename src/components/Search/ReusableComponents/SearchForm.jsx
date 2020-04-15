@@ -1,59 +1,50 @@
 import React, { useState, useEffect } from 'react';
 import FormParameters from "./FormParameters";
 import SearchFormMainInput from "./SearchFormMainInput";
-import InfoIcon from '@material-ui/icons/Info';
 import CloseIcon from '@material-ui/icons/Close';
 import AddIcon from '@material-ui/icons/Add';
+import OpenParamBtn from "./OpenParamBtn";
 
 
 
 
-const SearchForm = React.memo((props) => {
-	  const [isParamOpen, setParamOpen] = useState(false);
+class SearchForm extends React.Component {
+	 constructor(props) {
+    super(props);
+    this.state = {
+	isParamOpen:false
+	};
+	 
+	 	    this.changeParams = this.changeParams.bind(this);
+	 }
 	
+	 changeParams (e) {
+		 e.preventDefault();
+		 this.setState({isParamOpen : !this.state.isParamOpen})
+	 }
 	
-	const changeParams = (e) => {
-		e.preventDefault();
-		setParamOpen(!isParamOpen)
-		console.log("toggled");
-	}
-	
-	
+	render(){
+
 	return(
+		
 		<div className="search-form-container-super"> 
 			<form  className="search-form"  noValidate autoComplete="off">
-			<div> 
-				<button className="search-form-btn" onClick={changeParams}> 
-						{
-							isParamOpen ? 
-							<React.Fragment>
-								<InfoIcon fontSize="medium"/> 
-								
-							</React.Fragment>
-								: <React.Fragment>
-								<InfoIcon fontSize="medium" style={{ color: "#a2a2a2" }} /> 
-								
-								</React.Fragment>
-								}
-								</button>
-								</div>
+				<OpenParamBtn IsParamOpen={this.state.isParamOpen} changeParams={this.changeParams}/>
 					<SearchFormMainInput 
-						toggleLang={props.toggleLang} 
-						getQueryName={props.getQueryName} 
-						searchCallback={props.handleChange}/>
-						
-					
+						toggleLang={this.props.toggleLang} 
+						getQueryName={this.props.getQueryName} 
+						searchCallback={this.props.handleChange}/>
 				
-					{isParamOpen 
+					{this.state.isParamOpen 
 						? <FormParameters 
-						callback={props.callback} 
-						getCheckBoxData={props.getCheckBoxData}/>
+						callback={this.props.callback} 
+						getCheckBoxData={this.props.getCheckBoxData}/>
 						: null
 					}
 			
 			</form>
 		</div>
 	)
-});
+}}
 
 export default SearchForm 

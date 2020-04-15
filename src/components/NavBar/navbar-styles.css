@@ -1,7 +1,15 @@
+
+
 .navbar-container {
-	position: relative;
-background: #fdfdfd;
+	position: fixed;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	background: #fdfdfd;
+
 }
+
+
 .navbar {
 	color: white;
 	display: flex;
@@ -11,7 +19,6 @@ background: #fdfdfd;
 	background: #0c76d2;
 	align-items: center;
 	/* padding: 5%; */
-	position: fixed;
 	width: 70px;
 	top: 50%;
 background: linear-gradient(120deg,#ff8f00,#ffbf00);
@@ -63,18 +70,33 @@ border-radius: 0 5px 5px 0;
 
 @media only screen and (max-width: 550px){
 	
+	
+	.navbar-container {
+	bottom: 0;
+	width: 100%;
+	height: auto;
+		background: none;
+			
+}
 	.navbar{
 width: 100%;
 
 height: 70px;
 
 z-index: 999;
-
+background: linear-gradient(120deg,#ff8f00f0,#ffbf00f0);
 justify-content: space-around;
 		bottom: 0px;
-
+height: auto;
+		padding: 2%;
+		box-shadow: 0 3px 5px 6px #51515185;
 flex-direction: row;
 	top: auto;
+		transition: 0.2s;
+		
+	}
+	.navbar:hover{
+		transition: 0.2s;
 		
 	}
 	.navbar-title{
