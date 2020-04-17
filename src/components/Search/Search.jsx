@@ -211,11 +211,9 @@ class MainSearch extends React.Component {
 	}
 	
 	toggleLang(state,name){
-		if(state && name){
+		console.log(state + " " + name)
 		this.queryParameters[name] = state;
-		} else {
-			console.log(2)
-		}
+		
 		// 15/04
 		//for some reason toggleLang gets called on click
 		//on OpenParamBtn. I´m not sure why yet.
@@ -234,7 +232,7 @@ class MainSearch extends React.Component {
 	
 	render(){
 		return (
-			<section className="search-super" onClick={() => console.log(this.queryParameters.excluded)}> 
+			<section className="search-super"> 
 				<SearchForm 
 					getQueryName={this.getQueryName} 
 					handleChange={this.handleChange}

@@ -27,6 +27,7 @@ class ToggleItem extends React.Component{
 		const {active} = this.state;
 		const {callback,name} = this.props
 		callback(active,name);
+		console.log("toggled" + active)
 	}
 	
 	render(){
