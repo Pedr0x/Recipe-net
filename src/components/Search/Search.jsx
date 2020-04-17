@@ -66,7 +66,6 @@ class MainSearch extends React.Component {
 			query,
 			health,
 			diet,
-			caloriesMax,
 			pageQ,
 			inSpanish,
 			cuisineType,
@@ -74,23 +73,17 @@ class MainSearch extends React.Component {
 		} = queryObj;		
 		
 		//conditional parameters
-		const ManyCalories = caloriesMax !== false && caloriesMax > 1  
-			?  `&calories=0-${caloriesMax}` : "";
 	
 		const pagesToFetch =  `&from=${pageQ.from}&to=${pageQ.to}`;
 		const requestLang = inSpanish ? "https://test-es.edamam.com/search" : "https://api.edamam.com/search";
 		const cuisine = cuisineType ? `&cuisineType=${cuisineType}`: ""; 
 		const excludedIngredients = excluded ? ("&" + excluded.split(",").map(elem=>  `excluded=${elem}`).join("&")) : "" ;
-		
+		console.log(excludedIngredients)
 		const healthData = (this.refactorParameters(Object.entries(health),"health"))
-		console.log(healthData);
 		
 		const dietData = (this.refactorParameters(Object.entries(diet),"diet"))
-		console.log(dietData);
 		
-		console.log(inSpanish)
-
-		const urlRequest = `https://cors-anywhere.herokuapp.com/${requestLang}?q=${query}&app_id=8bc00f3b&app_key=b1d9d15dadbddc109d83b189b71e533f${pagesToFetch}${ManyCalories}${healthData}${dietData}`;
+		const urlRequest = `https://cors-anywhere.herokuapp.com/${requestLang}?q=${query}&app_id=8bc00f3b&app_key=b1d9d15dadbddc109d83b189b71e533f${pagesToFetch}${healthData}${excludedIngredients}${dietData}`;
 
 		let getPromise = new Promise((resolve,reject) => {
 			const xhr = new XMLHttpRequest();
@@ -241,7 +234,7 @@ class MainSearch extends React.Component {
 	
 	render(){
 		return (
-			<section className="search-super"> 
+			<section className="search-super" onClick={() => console.log(this.queryParameters.excluded)}> 
 				<SearchForm 
 					getQueryName={this.getQueryName} 
 					handleChange={this.handleChange}

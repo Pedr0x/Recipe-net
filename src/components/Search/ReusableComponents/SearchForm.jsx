@@ -10,11 +10,11 @@ import OpenParamBtn from "./OpenParamBtn";
 
 class SearchForm extends React.Component {
 	 constructor(props) {
-    super(props);
-    this.state = {
-	isParamOpen:false
-	};
-	 
+		super(props);
+		this.state = {
+		isParamOpen:false
+		};
+	
 	 	    this.changeParams = this.changeParams.bind(this);
 	 }
 	
@@ -23,13 +23,20 @@ class SearchForm extends React.Component {
 		 this.setState({isParamOpen : !this.state.isParamOpen})
 	 }
 	
+	shouldComponentUpdate(nextProps, nextState){
+		if (this.state !== nextState) {
+      return true;
+    } else {
+		return false
+		}
+	}
+	
 	render(){
-
-	return(
-		
+		return(
 		<div className="search-form-container-super"> 
 			<form  className="search-form"  noValidate autoComplete="off">
 				<OpenParamBtn IsParamOpen={this.state.isParamOpen} changeParams={this.changeParams}/>
+				
 					<SearchFormMainInput 
 						toggleLang={this.props.toggleLang} 
 						getQueryName={this.props.getQueryName} 
@@ -41,7 +48,6 @@ class SearchForm extends React.Component {
 						getCheckBoxData={this.props.getCheckBoxData}/>
 						: null
 					}
-			
 			</form>
 		</div>
 	)

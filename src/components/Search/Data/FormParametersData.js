@@ -1,12 +1,7 @@
 const formParametersData = {
 	
 			inputData : {
-				calories : {
-					type:"number",
-					labelText:"Max Calories",
-					name:"caloriesMax",
-					placeholder:""
-				},
+			
 				excludedIngredients : {
 						type:"",
 					labelText:"Excluded Ingredients",

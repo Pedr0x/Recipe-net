@@ -26,10 +26,11 @@ export let MyContext = React.createContext();
 
 var App = () => {
 	return(
-		<div className="super-container">
+		<div className="all-container">
 			<MyProvider>
 					<Router>
 					<Header/>
+		<div className="super-container"> 
 					<NavBar/>
 					<Switch> 
 						<Route path="/" exact component={MainSearch}/>
@@ -37,6 +38,7 @@ var App = () => {
 						<Route path="/About" component={About}/>
 						<Route component={NoMatch}/>
 					</Switch>
+		</div>
 					</Router>
 			</MyProvider>
 		 </div>
