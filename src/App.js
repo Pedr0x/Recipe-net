@@ -28,7 +28,7 @@ var App = () => {
 	return(
 		<div className="all-container">
 			<MyProvider>
-					<Router>
+				<Router>
 					<Header/>
 					<div className="super-container"> 
 						<NavBar/>
@@ -38,7 +38,7 @@ var App = () => {
 							<Route path="/About" component={About}/>
 							<Route component={NoMatch}/>
 					</Switch>
-		</div>
+					</div>
 				</Router>
 			</MyProvider>
 		 </div>

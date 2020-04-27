@@ -5,9 +5,9 @@ import DeleteIcon from '@material-ui/icons/Delete';
 const FavoriteItems = (props) => {
 	const {img, url ,title} = props;
 	const itemData = {
+		recipeName: title,
 		img,
-		url,
-		title
+		url
 	}
 	return (
 		<div className="favorite-recipes-item" style={{background: `url(${props.img})`}}>
@@ -16,7 +16,7 @@ const FavoriteItems = (props) => {
 					<DeleteIcon 
 						className="favorite-item-delete-icon" 
 						onClick={() => 
-							context.deleteFavorite(itemData.title)} 
+							context.deleteFavorite(itemData)} 
 					/>
 				)}
 			</MyContext.Consumer>

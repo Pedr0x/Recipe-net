@@ -74,13 +74,21 @@ const SearchItem = React.memo((props) => {
 				<MyContext.Consumer> 
 			{(context) => (
 				 <CardHeader
-					action={ 
-						<IconButton
-							 onClick={() => context.updateFavorite(searchItemData)}
-							 aria-label="favorite">
-							{context.state.favoriteRecipes.some(elem => elem.recipeName === title) 
-										? <FavoriteIcon color="secondary"/> : <FavoriteIcon/> }
-						</IconButton>
+					action={
+						context.state.favoriteRecipes.some(elem => elem.recipeName === title) 
+							? <IconButton
+									onClick={() => context.deleteFavorite(searchItemData)}
+									aria-label="favorite"
+								>
+									<FavoriteIcon color="secondary"/>
+							</IconButton>
+							: <IconButton
+									onClick={() => context.updateFavorite(searchItemData)}
+									aria-label="favorite"
+								>
+									<FavoriteIcon/>
+							</IconButton>
+
 					}
 					title={<a className="search-item-link" href={url}>  {title}</a>}
 					subheader={`${parseInt(calories)} cal - ${parseInt(weight)}g  - For ${recipeYield}`}

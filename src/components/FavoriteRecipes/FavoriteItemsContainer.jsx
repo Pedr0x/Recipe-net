@@ -22,3 +22,5 @@ var FavoriteItemsContainer = (props) => {
 }
 		
 export default FavoriteItemsContainer
+
+			

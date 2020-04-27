@@ -18,24 +18,18 @@ class MyProvider extends React.Component {
 		console.log(itemValues)
 		const newFavorite = {...itemValues, date: moment().format('MMMM Do')};
 		//check if the state already has that recipe
-		if (this.state.favoriteRecipes.find
-			(elem => elem.recipeName === newFavorite.recipeName)) {
-				this.setState({
-					favoriteRecipes: this.state.favoriteRecipes.filter
-					(elem => elem.recipeName !== newFavorite.recipeName)
-				});
-		}
-			else {
 				this.setState ({
 					favoriteRecipes:[  ...this.state.favoriteRecipes,newFavorite]
 				});
-			}
+	console.log("updated")
+
 	}
 	
 	deleteFavorite(param) {
 		this.setState({
-			favoriteRecipes: this.state.favoriteRecipes.filter(recipe => recipe.recipeName !== param)
+			favoriteRecipes: this.state.favoriteRecipes.filter(recipe => recipe.recipeName !== param.recipeName)
 			});
+		console.log("deleted")
 	}
 	
 	componentDidMount() {
@@ -61,7 +55,7 @@ class MyProvider extends React.Component {
 			updateFavorite:this.updateFavorite,
 			deleteFavorite:this.deleteFavorite
 			}}>
-		{this.props.children}
+			{this.props.children}
 		</MyContext.Provider>
 		)
 	}

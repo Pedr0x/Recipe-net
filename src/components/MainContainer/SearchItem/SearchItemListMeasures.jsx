@@ -6,8 +6,7 @@ const SearchItemListMeasures = (props) => {
 		return(
 			<ul className="block-list"> 
 				{props.data.map(elem => 
-					<li 
-				  		key={ _.uniqueId()} className="block-list-item"> 
+					<li key={ _.uniqueId()} className="block-list-item"> 
 					  {elem.text} {parseInt(elem.weight)}g
 					</li>
 				)}
@@ -17,7 +16,7 @@ const SearchItemListMeasures = (props) => {
 	return(
 		<h1> no data</h1>
 	)
-	}
+}
 }
 
 export  default SearchItemListMeasures;
