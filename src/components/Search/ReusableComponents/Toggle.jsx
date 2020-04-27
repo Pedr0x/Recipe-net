@@ -12,7 +12,6 @@ class ToggleItem extends React.Component{
 		active:false
 	}
 		this.toggle = this.toggle.bind(this);	
-
 		this.name = this.props.name;
 	}
 	
@@ -34,7 +33,8 @@ class ToggleItem extends React.Component{
 		let Info;
 		let Toggle;
 		if(this.state.active){
-			Info = <label className="toggle-subtitle toggle-subtitle_active"> {this.props.labelText}</label>;
+			Info = <label className="toggle-subtitle toggle-subtitle_active"> 					{this.props.labelText}
+						</label>;
 			 Toggle = <ToggleOnIcon color="primary" fontSize="large" /> 
 		} else {
 			Info = <label className="toggle-subtitle"> {this.props.labelText}</label>;

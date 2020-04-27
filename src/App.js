@@ -30,16 +30,16 @@ var App = () => {
 			<MyProvider>
 					<Router>
 					<Header/>
-		<div className="super-container"> 
-					<NavBar/>
-					<Switch> 
-						<Route path="/" exact component={MainSearch}/>
-						<Route path="/Favorites" component={Favorites}/>
-						<Route path="/About" component={About}/>
-						<Route component={NoMatch}/>
+					<div className="super-container"> 
+						<NavBar/>
+						<Switch> 
+							<Route path="/" exact component={MainSearch}/>
+							<Route path="/Favorites" component={Favorites}/>
+							<Route path="/About" component={About}/>
+							<Route component={NoMatch}/>
 					</Switch>
 		</div>
-					</Router>
+				</Router>
 			</MyProvider>
 		 </div>
 	)

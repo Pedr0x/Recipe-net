@@ -1,6 +1,3 @@
-.favorite-recipes{
-	
-}
 
 .favorite-recipes-super-container{
 	display: grid;
@@ -11,6 +8,8 @@ grid-template-columns: repeat( auto-fit, minmax(350px, 1fr) );}
 	text-align: center;
 	color: #7d7d7d;
 	font-family: "Bellota Text";
+	min-height: 100vh;
+	
 }
 
 .favorite-recipes-item-title {

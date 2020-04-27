@@ -5,7 +5,7 @@ var _ = require('lodash');
 const SearchItemContainer = (props) => {
 	return(
 		<React.Fragment> 
-		{props.data.map(elem =>
+			{props.data.map(elem =>
 		 		<SearchItem 
 						title={elem.recipe.label}
 						image={elem.recipe.image}
@@ -22,7 +22,7 @@ const SearchItemContainer = (props) => {
 						url={elem.recipe.url}
 						/> 
 		 	)}
-		 	</React.Fragment>
+		</React.Fragment>
 	)
 }
 

@@ -29,10 +29,8 @@ class MainSearch extends React.Component {
 				},
 			moreResultsAvailable:false,
 			inSpanish:false,
-			cuisineType:"",
 			excluded:"",
 				health: {
-					alcoholFree:false,
 					vegetarian:false,
 					vegan:false,
 					alcoholFree:false,
@@ -68,7 +66,6 @@ class MainSearch extends React.Component {
 			diet,
 			pageQ,
 			inSpanish,
-			cuisineType,
 			excluded
 		} = queryObj;		
 		
@@ -76,9 +73,7 @@ class MainSearch extends React.Component {
 	
 		const pagesToFetch =  `&from=${pageQ.from}&to=${pageQ.to}`;
 		const requestLang = inSpanish ? "https://test-es.edamam.com/search" : "https://api.edamam.com/search";
-		const cuisine = cuisineType ? `&cuisineType=${cuisineType}`: ""; 
 		const excludedIngredients = excluded ? ("&" + excluded.split(",").map(elem=>  `excluded=${elem}`).join("&")) : "" ;
-		console.log(excludedIngredients)
 		const healthData = (this.refactorParameters(Object.entries(health),"health"))
 		
 		const dietData = (this.refactorParameters(Object.entries(diet),"diet"))
@@ -119,7 +114,6 @@ class MainSearch extends React.Component {
 				resolve(xhr.response);
 				} else {
 						error = true;
-
 						reject("Status code wasn´t 200: " + xhr.status);
 					}
 				
@@ -172,7 +166,6 @@ class MainSearch extends React.Component {
 		if (sessionStorage.lastQuery){
 			this.queryParameters.query = sessionStorage.lastQuery;
 		}
-		console.log(sessionStorage.lastQuery);
 		//make initial request with sample parameters
 		this.apiRequest(this.queryParameters);
 	}
@@ -181,7 +174,6 @@ class MainSearch extends React.Component {
 	componentWillUnmount(){
 		this.isRequestCanceled = true;
 		sessionStorage.setItem("recipes", this.state.recipes);
-		console.log(sessionStorage)
 	}
 	
 	handleChange(e){
@@ -211,7 +203,6 @@ class MainSearch extends React.Component {
 	}
 	
 	toggleLang(state,name){
-		console.log(state + " " + name)
 		this.queryParameters[name] = state;
 		
 		// 15/04
@@ -221,7 +212,6 @@ class MainSearch extends React.Component {
 
 	getValue(e){
 		this.queryParameters[e.target.name] = e.target.value;
-		console.log(this.queryParameters[e.target.name] )
 		//console.log(this.queryParameters[e.target.name])
 	}
 	

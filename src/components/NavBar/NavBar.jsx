@@ -1,10 +1,8 @@
 import React from 'react'
-import AppBar from '@material-ui/core/AppBar';
 import {  Link } from "react-router-dom";
 import "./navbar-styles.css";
 import SearchIcon from '@material-ui/icons/Search';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import InfoIcon from '@material-ui/icons/Info';
 import GitHubIcon from '@material-ui/icons/GitHub';
 
 import HelpIcon from '@material-ui/icons/Help';

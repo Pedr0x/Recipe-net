@@ -5,7 +5,6 @@ import ConnectionProblemsInfo from "./ConnectionProblemsInfo";
 import SearchItemContainer from "./SearchItemContainer";
 import GoTopButton from "./GoTopButton";
 import "./main-container.css"
-var _ = require('lodash');
 
 const goTop = () => {
 	 window.scrollTo({
@@ -15,7 +14,7 @@ const goTop = () => {
 	}
 
 const MainContainer = (props) => {
-	 const [ref, inView, entry] = useInView({
+	 const [ref, inView] = useInView({
     threshold: 0.33,
   })
 	 

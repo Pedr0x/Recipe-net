@@ -1,12 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import FormParameters from "./FormParameters";
 import SearchFormMainInput from "./SearchFormMainInput";
-import CloseIcon from '@material-ui/icons/Close';
-import AddIcon from '@material-ui/icons/Add';
 import OpenParamBtn from "./OpenParamBtn";
-
-
-
 
 class SearchForm extends React.Component {
 	 constructor(props) {
