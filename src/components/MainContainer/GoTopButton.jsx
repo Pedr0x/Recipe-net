@@ -4,11 +4,11 @@ import ArrowUpward from '@material-ui/icons/ArrowUpward';
 const GoTopButton = (props) =>{
 	return(
 		<div className="action-btn-container scale-up-center">
-		<button className="action-button" onClick={props.callback}>
-			<ArrowUpward className="action-btn-icon"/>
-		</button>				
+			<button className="action-button" onClick={props.callback}>
+				<ArrowUpward className="action-btn-icon"/>
+			</button>				
 		</div>
-	
 	)
 }
+
 export default GoTopButton

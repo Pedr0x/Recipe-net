@@ -9,6 +9,10 @@ import {
   Switch,
   Route
 } from "react-router-dom";
+import { Provider, connect  } from 'react-redux'
+import { createStore } from 'redux'
+
+
 
 
 //Components
@@ -19,15 +23,21 @@ import Favorites from './components/FavoriteRecipes/Favorites';
 import NoMatch from "./components/NoMatch/NoMatch";
 import Header from "./components/Header/Header";
 import About from "./components/About/About";
-
+import favoritesReducer from "./redux/reducers"
 
 import "./app.css"
 export let MyContext = React.createContext();
 
-var App = () => {
+
+const myStore = createStore(favoritesReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+
+
+
+const App = () => {
 	return(
 		<div className="all-container">
 			<MyProvider>
+			<Provider store={myStore}> 
 				<Router>
 					<Header/>
 					<div className="super-container"> 
@@ -40,6 +50,7 @@ var App = () => {
 					</Switch>
 					</div>
 				</Router>
+			</Provider>
 			</MyProvider>
 		 </div>
 	)

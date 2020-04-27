@@ -9,6 +9,7 @@ const FavoriteItems = (props) => {
 		img,
 		url
 	}
+	
 	return (
 		<div className="favorite-recipes-item" style={{background: `url(${props.img})`}}>
 			<MyContext.Consumer>	
@@ -20,11 +21,11 @@ const FavoriteItems = (props) => {
 					/>
 				)}
 			</MyContext.Consumer>
-		<div  className="favorite-recipes-item-title"> 
-			<a href={props.url} className="favorites-item-link">{props.title} </a>
-			<p  className="favorites-item-date"> Added on: {props.date} </p>
-		</div>		
-	</div>
+			<div  className="favorite-recipes-item-title"> 
+				<a href={props.url} className="favorites-item-link">{props.title} </a>
+				<p  className="favorites-item-date"> Added on: {props.date} </p>
+			</div>		
+		</div>
 		)
 	}
 

@@ -1,11 +1,13 @@
 import React from "react";
 import FavoriteItems from "./FavoriteItems";
-var _ = require('lodash');
+const _ = require('lodash');
 
-var FavoriteItemsContainer = (props) => {
+const FavoriteItemsContainer = (props) => {
 	if (props.data.length === 0){
 		return(
-			<h1 className="favorites-title_no-items">You haven´t added any recipe to favorites yet</h1>
+			<h1 className="favorites-title_no-items">
+				You haven´t added any recipe to favorites yet
+			</h1>
 		)
 	} else {
 		return(
@@ -16,7 +18,8 @@ var FavoriteItemsContainer = (props) => {
 					title={elem.recipeName}
 				  	key={_.uniqueId()}		
 					 date={elem.date}
-					  />	)
+				/>	
+			)
 		)
 	}
 }

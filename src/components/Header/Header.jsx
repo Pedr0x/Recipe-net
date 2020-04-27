@@ -5,11 +5,10 @@ import "./header.css"
 const Header = () => {
 	return(
 		<div className="header">
-		<Link to="/"> 
-			<div className="header-logo">
-				
-				RecipeFinder
-			</div>
+			<Link to="/"> 
+				<div className="header-logo">
+					RecipeFinder
+				</div>
 			</Link>
 		</div>
 	)

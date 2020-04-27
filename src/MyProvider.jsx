@@ -22,7 +22,6 @@ class MyProvider extends React.Component {
 					favoriteRecipes:[  ...this.state.favoriteRecipes,newFavorite]
 				});
 	console.log("updated")
-
 	}
 	
 	deleteFavorite(param) {

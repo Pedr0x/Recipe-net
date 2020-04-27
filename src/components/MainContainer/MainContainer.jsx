@@ -32,12 +32,14 @@ const MainContainer = (props) => {
 			</div>) 
 	}
 	
-	else if (!props.receivedData ){
+	 if (!props.receivedData ){
 		// Query didn´t return any recipe
-		return (<h1> We couldn´t find that recipe</h1>)
+		return (
+			<h1> We couldn´t find that recipe</h1>
+		)
 	}
 	
-	else if (props.data.length >= 1 && props.error){
+	 if (props.data.length >= 1 && props.error){
 		//Query already had  recipes but encountered
 		//an error. Probably 429
 		return( 
@@ -49,13 +51,12 @@ const MainContainer = (props) => {
 		)
 	}
 	
-	else if (props.error && !props.data.length){
+	 if (props.error && !props.data.length){
 		//error starting 
 		return(
-		<ConnectionProblemsInfo showMoreResults={props.showMoreResults}/>
+			<ConnectionProblemsInfo showMoreResults={props.showMoreResults}/>
 		)
 	}
-	
 	else {
 		return(
 			//regular return. XHR code = 200
@@ -68,7 +69,6 @@ const MainContainer = (props) => {
 							<Spinner/> 
 					  </div> 
 					: <h1 className="no-results-info"> No more results</h1>}
-
  			</div>	
 		)
 	}

@@ -10,7 +10,6 @@ import CardHeader from '@material-ui/core/CardHeader';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import IconButton from '@material-ui/core/IconButton';
 import {MyContext} from "../../../App";
-
 import SearchItemList from "./SearchItemList"
 import SearchItemListMeasures from "./SearchItemListMeasures"
 import SearchItemGrid from "./SearchItemGrid"

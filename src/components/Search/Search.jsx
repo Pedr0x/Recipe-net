@@ -7,16 +7,17 @@ var _ = require('lodash');
 
 class MainSearch extends React.Component {
 	 constructor(props) {
-    super(props);
-    this.state = {
-		recipeQueryValue: "",
-		recipes: [],
-		receivedData:true,
-		moreResults:false,
-		error:"",
-		isMakingRequest:false
+		super(props);
+		this.state = {
+			recipeQueryValue: "",
+			recipes: [],
+			receivedData:true,
+			moreResults:false,
+			error:"",
+			isMakingRequest:false
 
-	};
+		};
+		 
 		//this object contains both the query value and the parameters
 		// for the request
 		this.queryParameters = {
@@ -45,17 +46,18 @@ class MainSearch extends React.Component {
 				}
 		}; 
 
-		 this.lastQuery = "donuts";
-		 this.isRequestCanceled = false;
+		this.lastQuery = "donuts";
+		this.isRequestCanceled = false;
+		this.APP_KEY = "app_id=8bc00f3b&app_key=b1d9d15dadbddc109d83b189b71e533f"
 		 //methods
-	    this.handleChange = this.handleChange.bind(this);
-	    this.apiRequest = this.apiRequest.bind(this);
- 		this.getCheckBoxData = this.getCheckBoxData.bind(this);
+		this.handleChange = this.handleChange.bind(this);
+		this.apiRequest = this.apiRequest.bind(this);
+		this.getCheckBoxData = this.getCheckBoxData.bind(this);
 		this.showMoreResults = this.showMoreResults.bind(this);
 		this.toggleLang = this.toggleLang.bind(this);
 		this.getQueryName = this.getQueryName.bind(this);
-		 this.getValue = this.getValue.bind(this);
-		 this.refactorParameters = this.refactorParameters.bind(this);
+		this.getValue = this.getValue.bind(this);
+		this.refactorParameters = this.refactorParameters.bind(this);
 		 
 	  }
 	
@@ -72,13 +74,19 @@ class MainSearch extends React.Component {
 		//conditional parameters
 	
 		const pagesToFetch =  `&from=${pageQ.from}&to=${pageQ.to}`;
-		const requestLang = inSpanish ? "https://test-es.edamam.com/search" : "https://api.edamam.com/search";
-		const excludedIngredients = excluded ? ("&" + excluded.split(",").map(elem=>  `excluded=${elem}`).join("&")) : "" ;
+		const requestLang = 
+			  inSpanish 
+					? "https://test-es.edamam.com/search" 
+					: "https://api.edamam.com/search";
+		
+		const excludedIngredients = 
+			  excluded 
+				? ("&" + excluded.split(",").map(elem=>  `excluded=${elem}`).join("&")) 
+				: "" ;
 		const healthData = (this.refactorParameters(Object.entries(health),"health"))
 		
 		const dietData = (this.refactorParameters(Object.entries(diet),"diet"))
-		
-		const urlRequest = `https://cors-anywhere.herokuapp.com/${requestLang}?q=${query}&app_id=8bc00f3b&app_key=b1d9d15dadbddc109d83b189b71e533f${pagesToFetch}${healthData}${excludedIngredients}${dietData}`;
+		const urlRequest = `https://cors-anywhere.herokuapp.com/${requestLang}?q=${query}&${this.APP_KEY}${pagesToFetch}${healthData}${excludedIngredients}${dietData}`;
 
 		let getPromise = new Promise((resolve,reject) => {
 			const xhr = new XMLHttpRequest();
