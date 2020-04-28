@@ -10,4 +10,4 @@ const formMainInputData = {
 	}
 };
 
-export  default formMainInputData
+export default formMainInputData

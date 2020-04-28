@@ -9,11 +9,8 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-import { Provider, connect  } from 'react-redux'
+import { Provider  } from 'react-redux'
 import { createStore } from 'redux'
-
-
-
 
 //Components
 import MyProvider from "./MyProvider"
@@ -24,14 +21,10 @@ import NoMatch from "./components/NoMatch/NoMatch";
 import Header from "./components/Header/Header";
 import About from "./components/About/About";
 import favoritesReducer from "./redux/reducers"
-
 import "./app.css"
 export let MyContext = React.createContext();
 
-
 const myStore = createStore(favoritesReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
-
-
 
 const App = () => {
 	return(

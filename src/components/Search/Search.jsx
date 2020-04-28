@@ -15,7 +15,6 @@ class MainSearch extends React.Component {
 			moreResults:false,
 			error:"",
 			isMakingRequest:false
-
 		};
 		 
 		//this object contains both the query value and the parameters

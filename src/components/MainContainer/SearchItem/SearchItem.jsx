@@ -9,18 +9,57 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CardHeader from '@material-ui/core/CardHeader';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import IconButton from '@material-ui/core/IconButton';
-import {MyContext} from "../../../App";
-import SearchItemList from "./SearchItemList"
-import SearchItemListMeasures from "./SearchItemListMeasures"
-import SearchItemGrid from "./SearchItemGrid"
-import "./search-item.css"
+import SearchItemList from "./SearchItemList";
+import SearchItemListMeasures from "./SearchItemListMeasures";
+import SearchItemGrid from "./SearchItemGrid";
+import "./search-item.css";
+import { connect } from 'react-redux';
 
+
+const mapDispatchToProps = dispatch => {
+  return {
+    // dispatching plain actions
+    deleteFavorite: (param) => 
+	 	dispatch({ type: 'DELETE_FAVORITE',  param}),
+	 updateFavorite: (itemValues) => 
+	  	dispatch({type: "UPDATE_FAVORITE", itemValues})
+  }
+};
+
+function mapStateToProps(state) {
+  return {
+    globalFavorites: state
+  };
+}
 
 const SearchItem = React.memo((props) => {
 		const [value, setValue] = React.useState(0);
 		const handleChange = (event, newValue) => {
 		setValue(newValue);
 	  };
+	
+	function updateLocalStorage(value, action){
+		if (action == "upd"){
+		const updatedFavorites = [...props.globalFavorites, value];
+		localStorage.setItem("favorites", JSON.stringify([...props.globalFavorites, value]));		
+		//console.log(localStorage.favorites, "local favorites");
+		} else {
+			//const updatedFavorites = props.globalFavorites.filter(recipe => recipe.name !== value);
+			localStorage.setItem("favorites", JSON.stringify(props.globalFavorites.filter(recipe => recipe.name !== value)));
+			console.log(localStorage.favorites);
+
+			}
+	}
+	
+	function cardUpdateFavorites(itemValues) {
+		updateLocalStorage(itemValues, "upd");
+		props.updateFavorite(itemValues)
+	}
+	
+	function cardDeleteFavorites(itemValues) {
+		updateLocalStorage(itemValues,"del");
+		props.deleteFavorite(itemValues)
+	}
 	
 	//this is the TabPanal Component from Material UI
 	function TabPanel(props) {
@@ -70,29 +109,32 @@ const SearchItem = React.memo((props) => {
 					  title={title}
 					>
 				</CardMedia>
-				<MyContext.Consumer> 
-			{(context) => (
 				 <CardHeader
 					action={
-						context.state.favoriteRecipes.some(elem => elem.recipeName === title) 
+						props.globalFavorites.some(elem => elem.recipeName === title) 
 							? <IconButton
-									onClick={() => context.deleteFavorite(searchItemData)}
+									onClick={() => 
+										cardDeleteFavorites(searchItemData)}
 									aria-label="favorite"
 								>
 									<FavoriteIcon color="secondary"/>
 							</IconButton>
 							: <IconButton
-									onClick={() => context.updateFavorite(searchItemData)}
+									onClick={() =>
+										cardUpdateFavorites(searchItemData)}
 									aria-label="favorite"
 								>
 									<FavoriteIcon/>
 							</IconButton>
 
 					}
-					title={<a className="search-item-link" href={url}>  {title}</a>}
+					title={
+						<a className="search-item-link" href={url}>
+						  	{title}
+						  </a>
+					}
 					subheader={`${parseInt(calories)} cal - ${parseInt(weight)}g  - For ${recipeYield}`}
-				 /> )}
-				</MyContext.Consumer> 
+				 /> 
 				<Tabs
 					value={value}
 					indicatorColor="primary"
@@ -104,19 +146,31 @@ const SearchItem = React.memo((props) => {
 					<Tab label="Labels" />
 					 <Tab label="Nutrition" />
 				</Tabs>
+				
 					<TabPanel value={value} index={0}>
 						<SearchItemListMeasures data={ingredients}/>
 					</TabPanel>
 					<TabPanel value={value} index={1}>
-						<SearchItemList type="health" data={healthLabels} labelText=" Health Labels"/>
-						<SearchItemList type="caution" data={cautions} labelText="Cautions"/>
+						<SearchItemList 
+							type="health" 
+							data={healthLabels} 
+							labelText=" Health Labels"
+						/>
+						<SearchItemList 
+							type="caution" 
+							data={cautions} 
+							labelText="Cautions"
+						/>
 					</TabPanel>
 					<TabPanel value={value} index={2}>
-						<SearchItemGrid labelText={"Total Nutrients"} data={Object.entries(totalNutrients)}/>
+						<SearchItemGrid 
+							labelText={"Total Nutrients"} 
+							data={Object.entries(totalNutrients)}
+						/>
 					</TabPanel>
-		</Paper>
+			</Paper>
 		</div>
 		)})
 	
-export  default SearchItem
+export default connect(mapStateToProps , mapDispatchToProps)(SearchItem);
 

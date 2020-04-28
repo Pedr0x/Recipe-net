@@ -1,5 +1,4 @@
 import React from "react";
-import {MyContext} from "../../App";
 import FavoriteItemsContainer from "./FavoriteItemsContainer";
 import "./favorite-styles.css";
 import { connect } from 'react-redux';
