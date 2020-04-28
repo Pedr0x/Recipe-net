@@ -12,3 +12,4 @@ const favoritesReducer = (state = localFavorites, action) => {
 	}
 }
 export default favoritesReducer
+

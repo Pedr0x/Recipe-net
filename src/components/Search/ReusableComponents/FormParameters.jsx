@@ -18,7 +18,7 @@ const FormParameters = (props) => {
 								checkboxData={elem.mainData}
 								key={_.uniqueId()}
 								field={elem.field}
-								/>
+							/>
 						)
 					}
 					<InputsContainerSuper callback={props.callback}/>

@@ -13,7 +13,7 @@ const BlockList = (props) => {
 					<li 
 					  key={ _.uniqueId()} 
 					  className={`card-list-item card-list-item_${props.type}`}
-					 > 
+					> 
 						{elem}
 					</li>
 				)}

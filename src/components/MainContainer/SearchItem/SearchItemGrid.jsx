@@ -9,7 +9,8 @@ const SearchItemGrid = (props) => {
 			<ul className="grid-list card-list-item-total-nutrients-container"> 
 				{props.data.map(elem => 
 					<li key= { _.uniqueId()} >
-						{elem[1].label} {parseInt(elem[1].quantity)}{elem[1].unit} 
+						{elem[1].label} 
+						{parseInt(elem[1].quantity)}{elem[1].unit} 
 					</li>
 						   )}
 			</ul>
