@@ -39,25 +39,26 @@ const SearchItem = React.memo((props) => {
 	  };
 	
 	function updateLocalStorage(value, action){
+		console.log(props.globalFavorites)
 		if (action == "upd"){
-		const updatedFavorites = [...props.globalFavorites, value];
 		localStorage.setItem("favorites", JSON.stringify([...props.globalFavorites, value]));		
 		//console.log(localStorage.favorites, "local favorites");
 		} else {
-			//const updatedFavorites = props.globalFavorites.filter(recipe => recipe.name !== value);
-			localStorage.setItem("favorites", JSON.stringify(props.globalFavorites.filter(recipe => recipe.name !== value)));
-			console.log(localStorage.favorites);
-
-			}
+			console.log(props.globalFavorites, "glb")
+			//const news = JSON.parse(localStorage.favorites).filter(recipe => recipe.recipeName !== value);
+			const news = props.globalFavorites.filter(recipe => recipe.recipeName !== value.recipeName);
+			console.log(news, "news")
+			localStorage.setItem("favorites", JSON.stringify(news));
+		}
 	}
 	
-	function cardUpdateFavorites(itemValues) {
+	 function cardUpdateFavorites(itemValues) {
 		updateLocalStorage(itemValues, "upd");
 		props.updateFavorite(itemValues)
 	}
 	
-	function cardDeleteFavorites(itemValues) {
-		updateLocalStorage(itemValues,"del");
+	 function cardDeleteFavorites(itemValues) {
+		 updateLocalStorage(itemValues,"del");
 		props.deleteFavorite(itemValues)
 	}
 	

@@ -17,17 +17,29 @@ const FavoriteItems = (props) => {
 		img,
 		url
 	}
+	function fdeleteFavorite(value) {
+		const updatedFavorites = JSON.parse(localStorage.favorites)
+			.filter(elem => elem.recipeName !== value.recipeName)
+		console.log(updatedFavorites);
+		localStorage.setItem(
+			"favorites", 
+			JSON.stringify(updatedFavorites)
+		);
+		
+		console.log(localStorage.favorites);
+		props.deleteFavorite(value);
+	}
 	
 	return (
 		<div 
 			className="favorite-recipes-item" 
 			style={{background: `url(${props.img})`}}
 		>
-					<DeleteIcon 
-						className="favorite-item-delete-icon" 
-						onClick={() => 
-							props.deleteFavorite(itemData)} 
-					/>
+			<DeleteIcon 
+				className="favorite-item-delete-icon" 
+				onClick={() => 
+					fdeleteFavorite(itemData)} 
+			/>
 			<div  className="favorite-recipes-item-title"> 
 				<a href={props.url} className="favorites-item-link">
 					{props.title} 
