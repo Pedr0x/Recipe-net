@@ -1,5 +1,4 @@
 import React from "react";
-import {MyContext} from "../../App";
 import DeleteIcon from '@material-ui/icons/Delete';
 import { connect } from 'react-redux';
 

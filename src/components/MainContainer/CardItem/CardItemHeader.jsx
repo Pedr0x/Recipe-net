@@ -20,7 +20,8 @@ function mapStateToProps(state) {
    };
 };
 
-const CardItemHeader = ({url, totalWeight, calories, recipeYield, recipeName, image, globalFavorites, deleteFavorite,  updateLocalStorage, updateFavorite}) => {
+const CardItemHeader = ({url, totalWeight, calories, recipeYield, recipeName, image, globalFavorites, deleteFavorite, updateFavorite}) => {
+	
 	const searchItemData = {
 		image,
 		recipeName,
@@ -28,7 +29,7 @@ const CardItemHeader = ({url, totalWeight, calories, recipeYield, recipeName, im
 	}
 	
 	function updateLocalStorage(value, action){
-		if (action == "upd"){
+		if (action === "upd"){
 		localStorage.setItem("favorites", JSON.stringify([...globalFavorites, value]));		
 		//console.log(localStorage.favorites, "local favorites");
 		} else {
