@@ -14,10 +14,12 @@ const goTop = () => {
 	 });
 	}
 
-  const Componentx = (props) => (
-  <InView as="div" className="spinner-container" onChange={(inView, entry) => props.changeInView(inView) }>
-  	<Spinner/>
-  </InView>
+  const SpinnerContainer = (props) => (
+	  <InView as="div" className="spinner-container" 
+  			onChange={(inView, entry) => props.changeInView(inView) }
+  		>
+  				<Spinner/>
+  	  </InView>
 )
   
 class MainContainer extends Component {
@@ -28,12 +30,13 @@ class MainContainer extends Component {
 		};
 	this.changeInView = this.changeInView.bind(this);
 	}
-	
 	 changeInView(value) {
 		this.setState({
 			isInView : value
 		});
-		console.log(this.state.isInView)
+	}
+	componentDidUpdate(){
+		console.count("a");
 	}
 	
 	 render(){
@@ -90,7 +93,7 @@ class MainContainer extends Component {
 				<SearchItemContainer data={this.props.data}/>
 					{this.props.moreResultsAvailable 
 						//Check if the response has more data under the same query
-						? <Componentx changeInView={this.changeInView}/>
+						? <SpinnerContainer changeInView={this.changeInView}/>
 						: <h1 className="no-results-info"> No more results</h1>
 					}
  			</div>	

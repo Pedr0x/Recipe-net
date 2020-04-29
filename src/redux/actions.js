@@ -1,5 +1,4 @@
 
-
 export const updateFavorite = (itemValues) => {
 		return {type: "UPDATE_FAVORITE", itemValues};
 };

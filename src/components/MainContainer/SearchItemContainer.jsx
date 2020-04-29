@@ -3,7 +3,7 @@ import CardItem from "./CardItem/CardItem";
 const _ = require('lodash');
 
 const SearchItemContainer = (props) => {
-	return(
+	return (
 		<React.Fragment> 
 			{props.data 
 				? props.data.map(elem =>

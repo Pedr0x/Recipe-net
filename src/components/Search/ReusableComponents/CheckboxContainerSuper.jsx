@@ -1,6 +1,6 @@
 import React from 'react';
 import CheckBox from "./CheckBox";
-var _ = require('lodash');
+const _ = require('lodash');
 
 const CheckboxContainerSuper = (props) => {
 	return(

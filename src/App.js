@@ -13,7 +13,6 @@ import { Provider  } from 'react-redux'
 import { createStore } from 'redux'
 
 //Components
-import MyProvider from "./MyProvider"
 import NavBar from "./components/NavBar/NavBar"
 import MainSearch from "./components/Search/Search"
 import Favorites from './components/FavoriteRecipes/Favorites';
@@ -22,14 +21,12 @@ import Header from "./components/Header/Header";
 import About from "./components/About/About";
 import favoritesReducer from "./redux/reducers"
 import "./app.css"
-export let MyContext = React.createContext();
 
 const myStore = createStore(favoritesReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
 const App = () => {
 	return(
 		<div className="all-container">
-			<MyProvider>
 			<Provider store={myStore}> 
 				<Router>
 					<Header/>
@@ -44,7 +41,6 @@ const App = () => {
 					</div>
 				</Router>
 			</Provider>
-			</MyProvider>
 		 </div>
 	)
 }

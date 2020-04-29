@@ -57,7 +57,6 @@ class MainSearch extends React.Component {
 		this.getQueryName = this.getQueryName.bind(this);
 		this.getValue = this.getValue.bind(this);
 		this.refactorParameters = this.refactorParameters.bind(this);
-		 
 	  }
 	
 	apiRequest(queryObj) {
@@ -197,9 +196,7 @@ class MainSearch extends React.Component {
 	}
 	
 	getCheckBoxData(checkBoxState,name,field){
-
 		this.queryParameters[field][name] = checkBoxState;
-		//console.log(this.queryParameters)
 	}
 	
 	showMoreResults(){
@@ -211,14 +208,12 @@ class MainSearch extends React.Component {
 	
 	toggleLang(state,name){
 		this.queryParameters[name] = state;
-		// 15/04
 		//for some reason toggleLang gets called on click
 		//on OpenParamBtn. I´m not sure why yet.
 	}
 
 	getValue(e){
 		this.queryParameters[e.target.name] = e.target.value;
-		//console.log(this.queryParameters[e.target.name])
 	}
 	
 	getQueryName(e){

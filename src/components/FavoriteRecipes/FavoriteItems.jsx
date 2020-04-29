@@ -18,14 +18,11 @@ const FavoriteItems = (props) => {
 	}
 	function fdeleteFavorite(value) {
 		const updatedFavorites = JSON.parse(localStorage.favorites)
-			.filter(elem => elem.recipeName !== value.recipeName)
-		console.log(updatedFavorites);
+			.filter(elem => elem.recipeName !== value.recipeName);
 		localStorage.setItem(
 			"favorites", 
 			JSON.stringify(updatedFavorites)
 		);
-		
-		console.log(localStorage.favorites);
 		props.deleteFavorite(value);
 	}
 	

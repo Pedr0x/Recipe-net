@@ -1,6 +1,5 @@
 const localFavorites =  localStorage.favorites ? JSON.parse(localStorage.favorites) : [];
 
-
 const favoritesReducer = (state = localFavorites, action) => {
 	switch(action.type) {
 		case "UPDATE_FAVORITE" :
@@ -10,6 +9,7 @@ const favoritesReducer = (state = localFavorites, action) => {
 		default:
 			return state
 	}
-}
+};
+
 export default favoritesReducer
 
