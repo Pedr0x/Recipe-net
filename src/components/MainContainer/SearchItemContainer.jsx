@@ -1,10 +1,18 @@
 import React from 'react';
 import SearchItem from "./SearchItem/SearchItem";
+import CardItem from "./CardItem";
+
 var _ = require('lodash');
 
 const SearchItemContainer = (props) => {
 	return(
 		<React.Fragment> 
+		{props.data 
+			? props.data.map(elem =>
+					<CardItem data={elem.recipe}/> 
+				)
+			: null				 }
+				
 			{ props.data 
 				? props.data.map(elem =>
 					<SearchItem 
@@ -21,11 +29,11 @@ const SearchItemContainer = (props) => {
 							key={_.uniqueId()}
 							recipeYield={elem.recipe.yield}
 							url={elem.recipe.url}
-							/> 
-		 			)
+					/> 
+		 		)
 			: null						  
 		}
-		</React.Fragment>
+	</React.Fragment>
 	)
 }
 

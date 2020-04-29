@@ -4,7 +4,9 @@ import Spinner from "./Spinner";
 import ConnectionProblemsInfo from "./ConnectionProblemsInfo";
 import SearchItemContainer from "./SearchItemContainer";
 import GoTopButton from "./GoTopButton";
+import CardItem from "./CardItem";
 import "./main-container.css"
+
 
 const goTop = () => {
 	 window.scrollTo({
@@ -15,7 +17,6 @@ const goTop = () => {
 
   const Componentx = (props) => (
   <InView as="div" className="spinner-container" onChange={(inView, entry) => props.changeInView(inView) }>
-		<Spinner/> 
   </InView>
 )
   
@@ -40,7 +41,6 @@ class MainContainer extends Component {
 		 //The spinner makes another request on view
 		//	so it checks if is already doing a request
 		 this.props.showMoreResults();
-		 console.log("xa")
 		}
 	
 	 if ( this.props.receivedData && this.props.data.length === 0  ){
@@ -48,7 +48,8 @@ class MainContainer extends Component {
 		return (
 			<div className="main-search-container">
 				<Spinner/> 
-			</div>) 
+			</div>
+		) 
 	}
 	
 	 if (!this.props.receivedData ){
@@ -87,11 +88,11 @@ class MainContainer extends Component {
 			<div className="main-search-container">
 				<GoTopButton callback={goTop}/>
 				<SearchItemContainer data={this.props.data}/>
-				{this.props.moreResultsAvailable 
-					//Check if the response has more data under the same query
-					? <Componentx changeInView={this.changeInView}/>
-					: <h1 className="no-results-info"> No more results</h1>
-				}
+					{this.props.moreResultsAvailable 
+						//Check if the response has more data under the same query
+						? <Componentx changeInView={this.changeInView}/>
+						: <h1 className="no-results-info"> No more results</h1>
+					}
  			</div>	
 		)
 	}

@@ -1,0 +1,182 @@
+ @import url('https://fonts.googleapis.com/css2?family=Bellota+Text:wght@700&display=swap');
+
+.main-search-container{
+	background: #fdfdfd;
+}
+
+.MuiCardHeader-title  {
+	font-family: "Bellota Text"
+}
+.MuiCardHeader-title a{
+	text-decoration: none;
+}
+.card-list-item-container{
+	display: flex;
+
+justify-content: space-evenly;
+flex-wrap: wrap;
+text-align: center;
+
+align-items: center;
+}
+
+.search-item-link{
+	font-family: "Bellota Text";
+
+}
+.card-list-item {
+	display: inline;
+padding: 5px 15px;
+margin: 1%;
+font-size: 12px;
+border-radius: 25px;
+}
+.card-item-tab-title-container {
+	display: flex;
+	justify-content: space-around;
+	font-size: 16px;
+	padding: 3% 0;
+	color: rgba(0, 0, 0, 0.54);
+	font-weight: 500;
+	text-transform: uppercase;
+	letter-spacing: 0.15px;
+	font-family: "Roboto";
+}
+
+.card-item-tab-title {
+	display: inline;
+	cursor: pointer;
+}
+
+.card-item-main-container{
+		padding: 5%;
+
+}
+
+.card-header-icon-container {
+	grid-row: 1/3;
+	text-align: end;
+	grid-column: 2;
+}
+
+.card-item-img-container{
+	min-height: 250px;
+	background-size: cover !important;
+	background-repeat: no-repeat;
+	background-position: center center  !important;
+}
+
+.react-tabs__tab--selected{
+		color: #3f51b5;
+
+}
+
+.card-header-title{
+	font-size: 24px;
+	
+}
+
+.card-item-container {
+	background: white;
+	margin: 2%;
+	    box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);
+line-height: 1.5;
+	grid-template-rows: 250px 1fr;
+}
+
+.card-header {
+	display: grid;
+	grid-template-columns: 1fr auto;
+	align-items: center;
+	padding: 2% 0;
+}
+.card-header-subtitle{
+	color: rgba(0, 0, 0, 0.54);
+}
+.card-item-img-container{
+	background-size: cover;
+}
+
+.card-item-ingredients-containe{
+	line-height: 1.5;
+	color: black;
+}
+
+
+
+
+
+
+.search-item-container{
+	padding: 2%;
+}
+.search-item {
+	/* margin: 2%; */
+	height: 100%;
+}
+
+.card-list-item_health {
+color: white;
+	background: #00c853;
+}
+
+.card-list-item_caution {
+background: #ffeb3b;
+color: black;
+
+}
+
+.card-list-item-total-nutrients-container{
+	display: grid;
+font-size: 14px;
+	align-items: center;
+grid-template-columns: repeat(auto-fill, minmax(125px, 1fr));
+	
+}
+
+.card-list-item-total-nutrients-container > li{
+	padding: 2%;
+}
+
+.MuiButtonBase-root > span{
+	pointer-events: none;
+	/* this is extrmely hacky fix later*/
+}
+
+.favorite-recipes{
+	width: 100vh;
+	height: 100vh;
+	background: #f8f8f8;
+}
+
+.card-list-item-subtitle{
+padding: 3% 0;
+	color: #3f51b5;
+	font-weight: 600;
+
+}
+.card-list-item-subtext_no-data{
+	padding: 3%;
+	text-align: center;
+}
+
+.no-results-text{
+	    text-align: center;
+    	padding: 5%;
+    	grid-column: 1/3;
+}
+
+@media only screen and (max-width: 1000px){
+
+	.search-item-container,.no-results-text {
+	grid-column: 1;
+}
+}
+
+
+@media only screen and (max-width: 500px){
+
+	.search-item-container {
+	padding: 4%;
+}
+}

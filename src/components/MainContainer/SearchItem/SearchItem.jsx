@@ -27,19 +27,18 @@ const mapDispatchToProps = dispatch => {
 };
 
 function mapStateToProps(state) {
-  return {
-    globalFavorites: state
-  };
-}
+   return {
+   		globalFavorites: state
+   };
+};
 
 const SearchItem = React.memo((props) => {
-		const [value, setValue] = React.useState(0);
-		const handleChange = (event, newValue) => {
+	const [value, setValue] = React.useState(0);
+	const handleChange = (event, newValue) => {
 		setValue(newValue);
-	  };
+  	};
 	
 	function updateLocalStorage(value, action){
-		console.log(props.globalFavorites)
 		if (action == "upd"){
 		localStorage.setItem("favorites", JSON.stringify([...props.globalFavorites, value]));		
 		//console.log(localStorage.favorites, "local favorites");
@@ -106,7 +105,7 @@ const SearchItem = React.memo((props) => {
 					  height="250"
 					  image={image}
 					  title={title}
-					>
+				>
 				</CardMedia>
 				 <CardHeader
 					action={
@@ -117,7 +116,7 @@ const SearchItem = React.memo((props) => {
 									aria-label="favorite"
 								>
 									<FavoriteIcon color="secondary"/>
-							</IconButton>
+							  </IconButton>
 							: <IconButton
 									onClick={() =>
 										cardUpdateFavorites(searchItemData)}
@@ -125,7 +124,6 @@ const SearchItem = React.memo((props) => {
 								>
 									<FavoriteIcon/>
 							</IconButton>
-
 					}
 					title={
 						<a className="search-item-link" href={url}>
@@ -139,7 +137,6 @@ const SearchItem = React.memo((props) => {
 					indicatorColor="primary"
 					textColor="primary"
 					onChange={handleChange}
-					aria-label="disabled tabs example"
 				>
 					<Tab label="Ingredients" />
 					<Tab label="Labels" />
