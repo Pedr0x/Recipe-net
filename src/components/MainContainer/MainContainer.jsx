@@ -1,5 +1,5 @@
-import React, { useRef,useState, Component } from 'react'
-import { useInView, InView } from 'react-intersection-observer'
+import React, { Component } from 'react'
+import { InView } from 'react-intersection-observer'
 import Spinner from "./Spinner";
 import ConnectionProblemsInfo from "./ConnectionProblemsInfo";
 import SearchItemContainer from "./SearchItemContainer";
@@ -14,8 +14,8 @@ const goTop = () => {
 	}
 
   const Componentx = (props) => (
-  <InView as="div" onChange={(inView, entry) => props.changeInView(inView) }>
-   	  <h2>Plain children are always rendered. Use onChange to monitor state.</h2>
+  <InView as="div" className="spinner-container" onChange={(inView, entry) => props.changeInView(inView) }>
+		<Spinner/> 
   </InView>
 )
   
@@ -90,7 +90,8 @@ class MainContainer extends Component {
 				{this.props.moreResultsAvailable 
 					//Check if the response has more data under the same query
 					? <Componentx changeInView={this.changeInView}/>
-					: <h1 className="no-results-info"> No more results</h1>}
+					: <h1 className="no-results-info"> No more results</h1>
+				}
  			</div>	
 		)
 	}
