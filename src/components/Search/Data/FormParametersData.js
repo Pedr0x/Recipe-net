@@ -1,9 +1,8 @@
 const formParametersData = {
-	
 			inputData : {
 			
 				excludedIngredients : {
-						type:"",
+					type:"",
 					labelText:"Excluded Ingredients",
 					name:"excluded",
 					placeholder:"Eg: Pizza, cake"
@@ -39,16 +38,12 @@ const formParametersData = {
 							label:"Sugar Conscious",
 							name:"sugarConscious "
 						},
-						 
-					
 					],
 					 subtitle:"Health Restrictions",
 					 field:"health"
 				 },
 				 checkboxDataDiet : {
 					mainData: [
-
-						
 						{
 							label:"Balanced",
 							name:"balanced"

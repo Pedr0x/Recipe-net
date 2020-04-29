@@ -9,19 +9,15 @@ function mapStateToProps(state) {
   };
 }
 
-
 const Favorites = (props) => {
 		return(
-			<section className="favorite-recipes-super-container" onClick={() => console.log(props.globalFavorites)}>
+			<section className="favorite-recipes-super-container">
 					<FavoriteItemsContainer
 						data={props.globalFavorites}
 					/>	
 			</section>
 		)
 	}
-
-
-
 
 export default connect(mapStateToProps)(Favorites);
 

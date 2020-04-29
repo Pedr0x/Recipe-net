@@ -25,7 +25,7 @@ class MainSearch extends React.Component {
 			caloriesMax:null,
 				pageQ: {
 				from:0,
-				to:3
+				to:10
 				},
 			moreResultsAvailable:false,
 			inSpanish:false,
@@ -203,8 +203,8 @@ class MainSearch extends React.Component {
 	}
 	
 	showMoreResults(){
-		this.queryParameters.pageQ.from +=3;
-		this.queryParameters.pageQ.to += 3;	
+		this.queryParameters.pageQ.from += 10;
+		this.queryParameters.pageQ.to +=  10;	
 		//api will receive stop returning data at 100 hits
 		this.apiRequest(this.queryParameters);
 	}

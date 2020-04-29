@@ -48,9 +48,15 @@ border-radius: 25px;
 	cursor: pointer;
 }
 
-.card-item-main-container{
-		padding: 5%;
+.card-item-main-container {
+	padding: 1% 4% 5%;
+}
 
+.block-list{
+	line-height: 1.7;
+	list-style-type: disc;
+	padding-left: 3%;
+	
 }
 
 .card-header-icon-container {
@@ -73,7 +79,6 @@ border-radius: 25px;
 
 .card-header-title{
 	font-size: 24px;
-	
 }
 
 .card-item-container {
@@ -102,11 +107,6 @@ line-height: 1.5;
 	color: black;
 }
 
-
-
-
-
-
 .search-item-container{
 	padding: 2%;
 }
@@ -128,10 +128,9 @@ color: black;
 
 .card-list-item-total-nutrients-container{
 	display: grid;
-font-size: 14px;
+	font-size: 14px;
 	align-items: center;
-grid-template-columns: repeat(auto-fill, minmax(125px, 1fr));
-	
+	grid-template-columns: repeat(auto-fill, minmax(125px, 1fr));
 }
 
 .card-list-item-total-nutrients-container > li{

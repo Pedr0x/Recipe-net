@@ -13,11 +13,11 @@ const FavoriteItemsContainer = (props) => {
 		return(
 			props.data.map(elem => 
 				<FavoriteItems
-					 img={elem.image}
-					  url={elem.url}
+					img={elem.image}
+				  	url={elem.url}
 					title={elem.recipeName}
-				  	key={_.uniqueId()}		
-					 date={elem.date}
+					key={_.uniqueId()}		
+				 	date={elem.date}
 				/>	
 			)
 		)

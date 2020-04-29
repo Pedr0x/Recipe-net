@@ -1,5 +1,5 @@
 import React from 'react';
-const _ = require('lodash');
+var _ = require('lodash');
 
 const SearchItemListMeasures = (props) => {
 	if (props.data){

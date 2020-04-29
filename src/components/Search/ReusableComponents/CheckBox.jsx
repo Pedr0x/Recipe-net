@@ -41,11 +41,11 @@ class Checkbox extends React.Component{
 						className="checkbox"
 						type="checkbox"
 						onClick={this.toggle}
-						/>
-
-					{ this.state.checked 
-						?	<CheckBoxIcon color={"primary"}/> 
-						: <CheckBoxOutlineBlankIcon  color={"primary"}/> }  
+					/>
+						{ this.state.checked 
+							?	<CheckBoxIcon color={"primary"}/> 
+							: <CheckBoxOutlineBlankIcon  color={"primary"}/> 
+						}  
 			</div>
 		)
 	}

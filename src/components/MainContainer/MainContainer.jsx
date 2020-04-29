@@ -4,7 +4,6 @@ import Spinner from "./Spinner";
 import ConnectionProblemsInfo from "./ConnectionProblemsInfo";
 import SearchItemContainer from "./SearchItemContainer";
 import GoTopButton from "./GoTopButton";
-import CardItem from "./CardItem";
 import "./main-container.css"
 
 
@@ -17,6 +16,7 @@ const goTop = () => {
 
   const Componentx = (props) => (
   <InView as="div" className="spinner-container" onChange={(inView, entry) => props.changeInView(inView) }>
+  	<Spinner/>
   </InView>
 )
   
