@@ -211,7 +211,6 @@ class MainSearch extends React.Component {
 	
 	toggleLang(state,name){
 		this.queryParameters[name] = state;
-		
 		// 15/04
 		//for some reason toggleLang gets called on click
 		//on OpenParamBtn. I´m not sure why yet.
@@ -224,7 +223,6 @@ class MainSearch extends React.Component {
 	
 	getQueryName(e){
 		this.queryParameters.query = e.target.value;
-
 	}
 	
 	render(){
@@ -236,7 +234,7 @@ class MainSearch extends React.Component {
 					callback={this.getValue}
 					getCheckBoxData={this.getCheckBoxData}
 					toggleLang={this.toggleLang} 
-					/>
+				/>
 					
 				<MainContainer 
 					receivedData={this.state.receivedData}
@@ -245,10 +243,10 @@ class MainSearch extends React.Component {
 					showMoreResults={this.showMoreResults}
 					error={this.state.error} 
 					isMakingRequest={this.state.isMakingRequest}
-					/> 
+				/> 
 			</section>
-				)	
-				}
+		)	
 	}
+}
 
 export  default MainSearch 

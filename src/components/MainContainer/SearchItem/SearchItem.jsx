@@ -44,10 +44,8 @@ const SearchItem = React.memo((props) => {
 		localStorage.setItem("favorites", JSON.stringify([...props.globalFavorites, value]));		
 		//console.log(localStorage.favorites, "local favorites");
 		} else {
-			console.log(props.globalFavorites, "glb")
 			//const news = JSON.parse(localStorage.favorites).filter(recipe => recipe.recipeName !== value);
 			const news = props.globalFavorites.filter(recipe => recipe.recipeName !== value.recipeName);
-			console.log(news, "news")
 			localStorage.setItem("favorites", JSON.stringify(news));
 		}
 	}

@@ -1,5 +1,5 @@
-import React, { useRef,useState } from 'react'
-import { useInView } from 'react-intersection-observer'
+import React, { useRef,useState, Component } from 'react'
+import { useInView, InView } from 'react-intersection-observer'
 import Spinner from "./Spinner";
 import ConnectionProblemsInfo from "./ConnectionProblemsInfo";
 import SearchItemContainer from "./SearchItemContainer";
@@ -13,18 +13,37 @@ const goTop = () => {
 	 });
 	}
 
-const MainContainer = (props) => {
-	 const [ref, inView] = useInView({
-    threshold: 0.33,
-  })
-	 
-	 if (inView && props.isMakingRequest === false){
+  const Componentx = (props) => (
+  <InView as="div" onChange={(inView, entry) => props.changeInView(inView) }>
+   	  <h2>Plain children are always rendered. Use onChange to monitor state.</h2>
+  </InView>
+)
+  
+class MainContainer extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			isInView: false
+		};
+	this.changeInView = this.changeInView.bind(this);
+	}
+	
+	 changeInView(value) {
+		this.setState({
+			isInView : value
+		});
+		console.log(this.state.isInView)
+	}
+	
+	 render(){
+	 if (this.state.isInView && this.props.isMakingRequest === false) {
 		 //The spinner makes another request on view
 		//	so it checks if is already doing a request
-		 props.showMoreResults();
+		 this.props.showMoreResults();
+		 console.log("xa")
 		}
 	
-	 if ( props.receivedData && props.data.length === 0  ){
+	 if ( this.props.receivedData && this.props.data.length === 0  ){
 		//Query is loading
 		return (
 			<div className="main-search-container">
@@ -32,46 +51,50 @@ const MainContainer = (props) => {
 			</div>) 
 	}
 	
-	 if (!props.receivedData ){
+	 if (!this.props.receivedData ){
 		// Query didn´t return any recipe
 		return (
-			<h1> We couldn´t find that recipe</h1>
+			<h1> We couldn´t find that recipe </h1>
 		)
 	}
 	
-	 if (props.data.length >= 1 && props.error){
+	 if (this.props.data.length >= 1 && this.props.error){
 		//Query already had  recipes but encountered
 		//an error. Probably 429
 		return( 
 			<div className="main-search-container">
-				<SearchItemContainer data={props.data}/>
+				<SearchItemContainer data={this.props.data}/>
 				<GoTopButton callback={goTop}/>
-				<ConnectionProblemsInfo showMoreResults={props.showMoreResults}/>
+				<ConnectionProblemsInfo 
+					showMoreResults={this.props.showMoreResults}
+				/>
  			</div>	
 		)
 	}
 	
-	 if (props.error && !props.data.length){
+	 if (this.props.error && !this.props.data.length){
 		//error starting 
 		return(
-			<ConnectionProblemsInfo showMoreResults={props.showMoreResults}/>
+			<ConnectionProblemsInfo 
+				showMoreResults={this.props.showMoreResults}
+			/>
 		)
 	}
+	
 	else {
 		return(
 			//regular return. XHR code = 200
 			<div className="main-search-container">
 				<GoTopButton callback={goTop}/>
-				<SearchItemContainer data={props.data}/>
-				{props.moreResultsAvailable 
+				<SearchItemContainer data={this.props.data}/>
+				{this.props.moreResultsAvailable 
 					//Check if the response has more data under the same query
-					? <div className="spinner-container" ref={ref}> 
-							<Spinner/> 
-					  </div> 
+					? <Componentx changeInView={this.changeInView}/>
 					: <h1 className="no-results-info"> No more results</h1>}
  			</div>	
 		)
 	}
+}
 }
 
 export default MainContainer 
