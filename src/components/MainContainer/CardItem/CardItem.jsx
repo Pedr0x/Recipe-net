@@ -8,7 +8,7 @@ import SearchItemGrid from "./SearchItemGrid";
 import CardItemHeader from "./CardItemHeader";
 
 import "./card-item.css";
-const CardItem = (props) => {
+const CardItem = React.memo((props) => {
 	const {
 			label: recipeName ,
 			image,
@@ -44,13 +44,13 @@ const recipeYield = props.data.yield;
 				  <Tabs>
 						<TabList className="card-item-tab-title-container">
 							  <Tab className="card-item-tab-title">
-							  Ingredients
+							  	Ingredients
 							  </Tab>
 							  <Tab className="card-item-tab-title">
-							  Label 
+							  	Label 
 							  </Tab>
 							  <Tab className="card-item-tab-title">
-							  Nutrition 
+							  	Nutrition 
 							  </Tab>
 						</TabList>
 
@@ -61,7 +61,6 @@ const recipeYield = props.data.yield;
 					/>
 
 				</TabPanel>
-				
 				<TabPanel>
 					<SearchItemList 
 						type="health" 
@@ -80,12 +79,12 @@ const recipeYield = props.data.yield;
 							data={Object.entries(totalNutrients)}
 						/>
 					</TabPanel>
-
 				</Tabs>
 			</div>
-			</div>
 		</div>
+	</div>
 		)
-}
+	}
+)
 
 export default CardItem;

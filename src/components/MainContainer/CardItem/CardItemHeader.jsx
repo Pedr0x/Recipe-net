@@ -4,7 +4,6 @@ import IconButton from '@material-ui/core/IconButton';
 import { connect } from 'react-redux';
 
 const mapDispatchToProps = dispatch => {
-	
   return {
     // dispatching plain actions
     deleteFavorite: (param) => 
@@ -20,7 +19,7 @@ function mapStateToProps(state) {
    };
 };
 
-const CardItemHeader = ({url, totalWeight, calories, recipeYield, recipeName, image, globalFavorites, deleteFavorite, updateFavorite}) => {
+const CardItemHeader = React.memo(({url, totalWeight, calories, recipeYield, recipeName, image, globalFavorites, deleteFavorite, updateFavorite}) => {
 	
 	const searchItemData = {
 		image,
@@ -30,10 +29,8 @@ const CardItemHeader = ({url, totalWeight, calories, recipeYield, recipeName, im
 	
 	function updateLocalStorage(value, action){
 		if (action === "upd"){
-		localStorage.setItem("favorites", JSON.stringify([...globalFavorites, value]));		
-		//console.log(localStorage.favorites, "local favorites");
+			localStorage.setItem("favorites", JSON.stringify([...globalFavorites, value]));		
 		} else {
-			//const news = JSON.parse(localStorage.favorites).filter(recipe => recipe.recipeName !== value);
 			const news = globalFavorites.filter(recipe => recipe.recipeName !== value.recipeName);
 			localStorage.setItem("favorites", JSON.stringify(news));
 		}
@@ -46,14 +43,18 @@ const CardItemHeader = ({url, totalWeight, calories, recipeYield, recipeName, im
 	
 	 function cardDeleteFavorites(itemValues) {
 		 updateLocalStorage(itemValues,"del");
-		deleteFavorite(itemValues)
+		 deleteFavorite(itemValues)
 	}
-	return(
+	
+	const isFavorite = (globalFavorites.some(elem => elem.recipeName === recipeName))
+	return (
 		<div className="card-header">
 			<a className="card-header-title" href={url}> {recipeName}</a>
 				<div className="card-header-icon-container"> 
-				{ (globalFavorites.some(elem => elem.recipeName === recipeName) )
-					? <IconButton onClick={() => cardDeleteFavorites(searchItemData)}>
+				{ isFavorite
+					? <IconButton 
+							onClick={() => cardDeleteFavorites(searchItemData)}
+						>
 							<FavoriteIcon color="secondary"/>
 						</IconButton>
 					: <IconButton
@@ -67,11 +68,11 @@ const CardItemHeader = ({url, totalWeight, calories, recipeYield, recipeName, im
 				</div>
 			
 			<h4 className="card-header-subtitle">
-{				 `${parseInt(calories)} cal - ${parseInt(totalWeight)}g  - For ${recipeYield}`  }
+				{`${parseInt(calories)} cal - ${parseInt(totalWeight)}g  - For ${recipeYield}`}
 			</h4>
-			
-		</div>)
+		</div>
+	)
 }
-
+)
 
 export default connect(mapStateToProps , mapDispatchToProps)(CardItemHeader);

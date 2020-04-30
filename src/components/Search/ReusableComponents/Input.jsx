@@ -14,7 +14,8 @@ const Input = (props) => {
 					name={props.name}  
 					placeholder={props.placeholder}  
 					min="1" max="30000" 
-					type="number"/> 
+					type="number"
+				/> 
 			</div>
 		)
 	} else {

@@ -3,7 +3,7 @@ import React from 'react';
 import MainContainer from "../MainContainer/MainContainer";
 import SearchForm from "./ReusableComponents/SearchForm"
 import "./search-styles.css"
-var _ = require('lodash');
+const _ = require('lodash');
 
 class MainSearch extends React.Component {
 	 constructor(props) {
@@ -24,8 +24,8 @@ class MainSearch extends React.Component {
 			highProtein:false,
 			caloriesMax:null,
 				pageQ: {
-				from:0,
-				to:10
+					from:0,
+					to:10
 				},
 			moreResultsAvailable:false,
 			inSpanish:false,
@@ -175,7 +175,10 @@ class MainSearch extends React.Component {
 		//make initial request with sample parameters
 		this.apiRequest(this.queryParameters);
 	}
-		
+	
+	componentDidUpdate(){
+		console.count("b");
+	}
 	
 	componentWillUnmount(){
 		this.isRequestCanceled = true;
@@ -200,9 +203,9 @@ class MainSearch extends React.Component {
 	}
 	
 	showMoreResults(){
+		//api will receive stop returning data at 100 hits
 		this.queryParameters.pageQ.from += 10;
 		this.queryParameters.pageQ.to +=  10;	
-		//api will receive stop returning data at 100 hits
 		this.apiRequest(this.queryParameters);
 	}
 	

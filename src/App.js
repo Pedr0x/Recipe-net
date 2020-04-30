@@ -11,7 +11,6 @@ import {
 } from "react-router-dom";
 import { Provider  } from 'react-redux'
 import { createStore } from 'redux'
-
 //Components
 import NavBar from "./components/NavBar/NavBar"
 import MainSearch from "./components/Search/Search"

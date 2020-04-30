@@ -11,7 +11,6 @@ const formParametersData = {
 			 checkboxData : {
 				 checkboxDataHealth :{
 					 mainData: [
-					
 						{
 							label:"Vegetarian",
 							name:"vegetarian"
@@ -61,7 +60,7 @@ const formParametersData = {
 					 field:"diet"
 				 }
 			 }
-		 };
+	};
 
 
 export default formParametersData

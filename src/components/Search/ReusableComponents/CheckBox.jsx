@@ -15,7 +15,7 @@ class Checkbox extends React.Component{
 			this.setState({
 				checked: !checked
 			})
-		}
+		};
 	
 	componentDidMount(){
 		//this wil sync the checkbox value everytime
@@ -25,9 +25,6 @@ class Checkbox extends React.Component{
 	}
 	
 	componentDidUpdate(){
-		//for some reason, the set state callback
-		//started having bugs returning the untoggled 
-		//value so i´ll start calling the callback here
 		const {name,getCheckBoxData,field} = this.props;
 		getCheckBoxData(this.state.checked,name,field)
 	}

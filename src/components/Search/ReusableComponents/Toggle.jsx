@@ -17,30 +17,29 @@ class ToggleItem extends React.Component{
 	
 	toggle(){
 		this.setState({
-				active: !this.state.active
-			}	
-					 )
+			active: !this.state.active
+		})
 	}
 	
 	componentDidUpdate(){
 		const {active} = this.state;
 		const {callback,name} = this.props
 		callback(active,name);
-		console.log("toggled" + active)
 	}
 	
 	render(){
 		let Info;
 		let Toggle;
-		if(this.state.active){
-			Info = <label className="toggle-subtitle toggle-subtitle_active"> 					{this.props.labelText}
+		if( this.state.active){
+			Info = <label className="toggle-subtitle toggle-subtitle_active"> 
+							{this.props.labelText}
 						</label>;
+			
 			 Toggle = <ToggleOnIcon color="primary" fontSize="large" /> 
 		} else {
 			Info = <label className="toggle-subtitle"> {this.props.labelText}</label>;
 			Toggle = <ToggleOffIcon fontSize="large"/>
-				
-				}	
+			}	
 	return(
 	
 		 <div className="toggle-item-container" onClick={this.toggle}>

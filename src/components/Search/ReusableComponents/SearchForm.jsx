@@ -9,8 +9,7 @@ class SearchForm extends React.Component {
 		this.state = {
 		isParamOpen:false
 		};
-	
-	 	    this.changeParams = this.changeParams.bind(this);
+	 	this.changeParams = this.changeParams.bind(this);
 	 }
 	
 	 changeParams (e) {
@@ -30,19 +29,21 @@ class SearchForm extends React.Component {
 		return(
 		<div className="search-form-container-super"> 
 			<form  className="search-form"  noValidate autoComplete="off">
-				<OpenParamBtn IsParamOpen={this.state.isParamOpen} changeParams={this.changeParams}/>
-				
-					<SearchFormMainInput 
-						toggleLang={this.props.toggleLang} 
-						getQueryName={this.props.getQueryName} 
-						searchCallback={this.props.handleChange}/>
-				
-					{this.state.isParamOpen 
-						? <FormParameters 
+				<OpenParamBtn 
+					IsParamOpen={this.state.isParamOpen} 
+					changeParams={this.changeParams}
+				/>
+				<SearchFormMainInput 
+					toggleLang={this.props.toggleLang} 
+					getQueryName={this.props.getQueryName} 
+					searchCallback={this.props.handleChange}
+				/>
+				{this.state.isParamOpen 
+					&& <FormParameters 
 						callback={this.props.callback} 
-						getCheckBoxData={this.props.getCheckBoxData}/>
-						: null
-					}
+						getCheckBoxData={this.props.getCheckBoxData}
+						/>
+				}
 			</form>
 		</div>
 	)

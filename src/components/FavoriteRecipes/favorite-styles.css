@@ -26,9 +26,9 @@ grid-template-columns: repeat( auto-fit, minmax(350px, 1fr) );}
 	display: grid;
 	min-height: 210px;
 	grid-template-rows: 2fr 1fr;
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-position: center center;
+	background-size: cover !important;
+	background-repeat: no-repeat !important;
+	background-position: center center !important;
 	box-shadow: 2px 4px 4px #ddd;
 	margin: 2% 3%;
 }

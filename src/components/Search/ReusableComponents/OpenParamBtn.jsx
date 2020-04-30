@@ -2,16 +2,15 @@ import React from "react";
 import InfoIcon from '@material-ui/icons/Info';
 
 const OpenParamBtn = (props) => {
-	
 	const OpenButton = 
-				  <div className="open-param-button_">
-						<InfoIcon/>
-					</div>
+	  <div className="open-param-button_">
+			<InfoIcon/>
+		</div>
 			  
 	const ClosedButton = 
-				  	<div className="open-param-button_closed">
-							<InfoIcon/>
-					</div>
+		<div className="open-param-button_closed">
+				<InfoIcon/>
+		</div>
 
 	return(
 		<div onClick={props.changeParams}> 
@@ -20,8 +19,9 @@ const OpenParamBtn = (props) => {
 				 	? OpenButton
 				 	: ClosedButton
 				}
-							</button>
+				</button>
 		</div>
-	)}
+	)
+}
 
 export default  OpenParamBtn;

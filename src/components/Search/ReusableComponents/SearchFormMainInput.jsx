@@ -7,10 +7,9 @@ import data from "../Data/FormMainInputData";
 const SearchFormMainInput = (props) => {
 	return(
 		<div className="search-form-container">
-		 
 			 <div className="search-form-main-panel">
-				 <h1 className="main-search-title">  
-				 	{data.mainSearch.mainSearchTitle} 
+			 	<h1 className="main-search-title">  
+					{data.mainSearch.mainSearchTitle} 
 				 </h1>
 				 <div className="input-container">
 					<input 
