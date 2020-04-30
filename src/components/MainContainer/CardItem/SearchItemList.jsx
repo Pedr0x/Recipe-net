@@ -10,7 +10,7 @@ const SearchItemList = (props) => {
 		)
 	}
 	
-	if (props.data){
+	if (props.data != false){
 		return(
 			<React.Fragment> 
 				<LabelText/>
