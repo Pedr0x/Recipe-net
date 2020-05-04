@@ -18,7 +18,7 @@ const CheckboxContainerSuper = (props) => {
 							field={props.field}
 							sub={props.checkboxSuperSubtitle}
 						/>
-						)
+					)
 				}
 			  </div>
 		</div>

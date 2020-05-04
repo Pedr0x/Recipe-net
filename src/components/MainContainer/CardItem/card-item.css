@@ -127,6 +127,24 @@ color: black;
 
 }
 
+.card-item-tab-title {
+	background: ;
+	width: 100%;
+	text-align: center;
+	padding: 2% 0%;
+	background: #fff;
+	border-radius: 0;
+	 background: #fdfdfd; 
+}
+
+.react-tabs__tab--selected {
+	color: #3f51b5;
+	background: blue !important;
+	color: white;
+}
+
+
+
 .card-list-item-total-nutrients-container{
 	display: grid;
 	font-size: 14px;

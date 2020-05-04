@@ -46,7 +46,8 @@ class SearchForm extends React.Component {
 				}
 			</form>
 		</div>
-	)
-}}
+		)
+	}
+}
 
 export default SearchForm 
