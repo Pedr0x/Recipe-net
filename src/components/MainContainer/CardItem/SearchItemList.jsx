@@ -1,5 +1,5 @@
 import React from 'react';
-var _ = require('lodash');
+const _ = require('lodash');
 
 const SearchItemList = (props) => {
 	const LabelText = () => {
@@ -10,7 +10,7 @@ const SearchItemList = (props) => {
 		)
 	}
 	
-	if (props.data != false){
+	if (Array.isArray(props.data) && props.data.length >= 1) {
 		return(
 			<React.Fragment> 
 				<LabelText/>

@@ -1,8 +1,8 @@
 import React from 'react';
-var _ = require('lodash');
+const _ = require('lodash');
 
 const BlockList = (props) => {
-	if (props.data != false){
+	if (Array.isArray(props.data) && props.data.length >== 1){
 	return(
 		<ul> 
 		<h3 className="card-list-item-subtitle"> 
@@ -19,7 +19,13 @@ const BlockList = (props) => {
 				)}
 	</ul>
 		)
-	}
+	} else {
+                return(
+                <div>
+                    No data
+                </div>
+                )
+            }
 }
 
 export default BlockList;

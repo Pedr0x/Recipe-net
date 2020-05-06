@@ -2,7 +2,7 @@ import React from 'react';
 const _ = require('lodash');
 
 const SearchItemGrid = (props) => {
-	if (props.data) {
+	if (Array.isArray(props.data) && props.data.length >= 1) {
 		return(
 			<React.Fragment>
 				<h2 className="card-list-item-subtitle">  
@@ -13,8 +13,7 @@ const SearchItemGrid = (props) => {
 				> 
 					{props.data.map(elem => 
 						<li key= { _.uniqueId()}>
-							{elem[1].label} 
-							{parseInt(elem[1].quantity)}{elem[1].unit} 
+							{ ` ${elem[1].label}  ${parseInt(elem[1].quantity)}${elem[1].unit}` }
 						</li>
 						)
 					}

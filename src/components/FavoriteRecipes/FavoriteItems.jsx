@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 const mapDispatchToProps = dispatch => {
   return {
-    deleteFavorite: (param) => dispatch({ type: 'DELETE_FAVORITE',  param})
+    deleteFavorite: (recipeName) => dispatch({ type: 'DELETE_FAVORITE',  recipeName})
   }
 }
 
@@ -16,14 +16,14 @@ const FavoriteItems = (props) => {
 		url
 	}
 	
-	function dispatchDeleteFavorite(value) {
+	function dispatchDeleteFavorite(recipeName) {
 		const updatedFavorites = JSON.parse(localStorage.favorites)
-			.filter(elem => elem.recipeName !== value.recipeName);
+			.filter(elem => elem.recipeName !== recipeName);
 		localStorage.setItem(
 			"favorites", 
 			JSON.stringify(updatedFavorites)
 		);
-		props.deleteFavorite(value);
+		props.deleteFavorite(recipeName);
 	}
 	
 	return (
@@ -34,7 +34,7 @@ const FavoriteItems = (props) => {
 			<DeleteIcon 
 				className="favorite-item-delete-icon" 
 				onClick={() => 
-					dispatchDeleteFavorite(itemData)} 
+					dispatchDeleteFavorite(itemData.recipeName)} 
 			/>
 			<div  className="favorite-recipes-item-title"> 
 				<a href={props.url} className="favorites-item-link">

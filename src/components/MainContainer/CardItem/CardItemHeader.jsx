@@ -6,8 +6,8 @@ import { connect } from 'react-redux';
 const mapDispatchToProps = dispatch => {
   return {
     // dispatching plain actions
-    deleteFavorite: (param) => 
-	 	dispatch({ type: 'DELETE_FAVORITE',  param}),
+    deleteFavorite: (recipeName) => 
+	 	dispatch({ type: 'DELETE_FAVORITE',  recipeName}),
 	 updateFavorite: (itemValues) => 
 	  	dispatch({type: "UPDATE_FAVORITE", itemValues})
   }
@@ -31,7 +31,7 @@ const CardItemHeader = React.memo(({url, totalWeight, calories, recipeYield, rec
 		if (action === "upd"){
 			localStorage.setItem("favorites", JSON.stringify([...globalFavorites, value]));		
 		} else {
-			const news = globalFavorites.filter(recipe => recipe.recipeName !== value.recipeName);
+			const news = globalFavorites.filter(recipe => recipe.recipeName !== value);
 			localStorage.setItem("favorites", JSON.stringify(news));
 		}
 	}
@@ -41,9 +41,9 @@ const CardItemHeader = React.memo(({url, totalWeight, calories, recipeYield, rec
 		updateFavorite(itemValues)
 	}
 	
-	 function cardDeleteFavorites(itemValues) {
-		 updateLocalStorage(itemValues,"del");
-		 deleteFavorite(itemValues)
+	 function cardDeleteFavorites(recipeName) {
+		 updateLocalStorage(recipeName,"del");
+		 deleteFavorite(recipeName)
 	}
 	
 	const isFavorite = (globalFavorites.some(elem => elem.recipeName === recipeName))
@@ -53,7 +53,7 @@ const CardItemHeader = React.memo(({url, totalWeight, calories, recipeYield, rec
 				<div className="card-header-icon-container"> 
 				{ isFavorite
 					? <IconButton 
-							onClick={() => cardDeleteFavorites(searchItemData)}
+							onClick={() => cardDeleteFavorites(recipeName)}
 						>
 							<FavoriteIcon color="secondary"/>
 						</IconButton>
